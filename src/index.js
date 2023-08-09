@@ -7,6 +7,7 @@ import App from './App';
 import './index.scss';
 import AuthContextProvider from './services/context/authContext';
 import { Spin } from 'antd';
+import AppContextProvider from './services/context/appContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <Suspense fallback={<div><Spin /></div>}>
         <AuthContextProvider>
+          <AppContextProvider>
           <App />
+          </AppContextProvider>
         </AuthContextProvider>
       </Suspense>
     </BrowserRouter>
