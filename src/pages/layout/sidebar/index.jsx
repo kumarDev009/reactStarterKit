@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from 'antd';
-import { HomeOutlined, DashboardOutlined, SettingOutlined } from '@ant-design/icons';
+import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH } from '../../../constants';
+import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_PATH } from '../../../constants/route';
 import CustomMenu from '../../../Components/FormFields/CustomMenu';
 
 const { Sider } = Layout;
@@ -29,7 +29,12 @@ export default function CustomSidebar() {
       label: 'Settings',
       key: SETTINGS_PATH,
       icon: <SettingOutlined />
-    }
+    },
+    {
+      label: "KitchenStore",
+      key: KITCHEN_PATH,
+      icon: <AndroidOutlined />
+    },
   ];
 
   useEffect(() => {
