@@ -7,18 +7,18 @@ import { CustomTitle } from "../../Components/FormFields/CustomTitle";
 
 const KitchenSink = () => {
 
-    const [openModal, setOpenModal] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const handleOpenModal = () => {
-        setOpenModal(true)
+        setIsModalOpen(true)
     }
 
     const handleOk = () => {
-        setOpenModal(false)
+        setIsModalOpen(false)
     }
 
     const handleCancel = () => {
-        setOpenModal(false)
+        setIsModalOpen(false)
     }
 
     return (
@@ -47,7 +47,7 @@ const KitchenSink = () => {
                     </Button>
                     <CustomModal
                         title="Sample Modal"
-                        isModalOpen={openModal}
+                        isModalOpen={isModalOpen}
                         handleOk={handleOk}
                         handleCancel={handleCancel}
                     >

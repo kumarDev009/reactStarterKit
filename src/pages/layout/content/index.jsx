@@ -10,7 +10,7 @@ export default function CustomContent() {
   const routeSources = [
     {
       path: HOME_PATH,
-      component: lazy(() => import('../../home/index'))
+      component: lazy(() => import('../../home'))
     },
     {
       path: DASHBOARD_PATH,
@@ -22,7 +22,7 @@ export default function CustomContent() {
     },
     {
       path: KITCHEN_SINK_PATH,
-      component: lazy(() => import('../../KitchenSink/index'))
+      component: lazy(() => import('../../Kitchen-sink'))
     }
   ];
 

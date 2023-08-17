@@ -31,7 +31,7 @@ export default function CustomSidebar() {
       icon: <SettingOutlined />
     },
     {
-            label: "KitchenSink",
+            label: "Kitchen-sink",
             key: KITCHEN_SINK_PATH,
             icon: <AndroidOutlined />
         },
