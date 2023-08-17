@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_PATH } from '../../../constants/route';
+import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from '../../../constants';
 import CustomMenu from '../../../Components/FormFields/CustomMenu';
 
 const { Sider } = Layout;
@@ -31,11 +31,11 @@ export default function CustomSidebar() {
       icon: <SettingOutlined />
     },
     {
-      label: "KitchenStore",
-      key: KITCHEN_PATH,
-      icon: <AndroidOutlined />
-    },
-  ];
+            label: "KitchenSink",
+            key: KITCHEN_SINK_PATH,
+            icon: <AndroidOutlined />
+        },
+    ];
 
   useEffect(() => {
     setCurrentMenu(location.pathname);
