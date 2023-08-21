@@ -15,7 +15,7 @@ export const CustomModal = ({
         <div>
             <Modal
                 title={title}
-                open={true}
+                open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 {...rest}

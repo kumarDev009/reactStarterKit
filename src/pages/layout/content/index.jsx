@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Layout, Spin } from 'antd';
 import { Routes, Route } from 'react-router-dom';
 
-import { DASHBOARD_PATH, HOME_PATH, SETTINGS_PATH } from '../../../constants';
+import { DASHBOARD_PATH, HOME_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from '../../../constants';
 
 const { Content } = Layout;
 
@@ -10,7 +10,7 @@ export default function CustomContent() {
   const routeSources = [
     {
       path: HOME_PATH,
-      component: lazy(() => import('../../home/index'))
+      component: lazy(() => import('../../home'))
     },
     {
       path: DASHBOARD_PATH,
@@ -19,6 +19,10 @@ export default function CustomContent() {
     {
       path: SETTINGS_PATH,
       component: lazy(() => import('../../settings'))
+    },
+    {
+      path: KITCHEN_SINK_PATH,
+      component: lazy(() => import('../../Kitchen-sink'))
     }
   ];
 
