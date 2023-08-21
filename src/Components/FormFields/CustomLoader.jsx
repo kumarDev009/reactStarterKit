@@ -1,0 +1,9 @@
+import { Spin } from 'antd';
+
+export const Loader = ({ loading = false, size = 'small', message = '', children }) => {
+  return (
+    <Spin spinning={loading} size={size} tip={message}>
+      {children}
+    </Spin>
+  );
+};
