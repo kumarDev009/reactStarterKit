@@ -1,12 +1,16 @@
-import { Button, Card, Space } from 'antd';
 import { useState } from 'react';
+import { Button, Card, Space } from 'antd';
+import { SaveOutlined } from '@ant-design/icons';
+
 import { CustomButton } from '../../Components/FormFields/CustomButton';
 import { InputField } from '../../Components/FormFields/CustomInputfield';
 import { CustomModal } from '../../Components/FormFields/CustomModal';
 import { CustomTitle } from '../../Components/FormFields/CustomTitle';
+import { Loader } from '../../Components/FormFields/CustomLoader';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -20,13 +24,29 @@ const KitchenSink = () => {
     setIsModalOpen(false);
   };
 
+  const handleSave = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(prev => !prev);
+    }, 3000);
+  };
+
   return (
     <>
       <Space direction="vertical" size="middle" className="d-flex">
         <Card title="CustomButton" size="small" className="border border-dark">
-          <CustomButton className="px-0" type="link" buttonText={'This is used for link!'} />
-          <CustomButton className="px-0" buttonText={' This is used for button link!'} htmlType="button" type="link" />
-          <CustomButton className={'w-100'} buttonText={'Button'} htmlType="submit" />
+          <Loader loading={loading} message="Saving...">
+            <CustomButton className="px-0" type="link" buttonText={'This is used for link!'} />
+            <CustomButton className="px-0" buttonText={' This is used for button link!'} type="link" />
+            <CustomButton className={'w-100'} buttonText={'Button'} htmlType="submit" />
+            <CustomButton
+              buttonText={loading ? 'Saving' : 'Save'}
+              icon={<SaveOutlined className="d-block" />}
+              loading={loading}
+              title="Save User Info"
+              onClick={handleSave}
+            />
+          </Loader>
         </Card>
         <Card title="CustomInputFiled" size="middle" className="border border-dark">
           <InputField
