@@ -7,6 +7,7 @@ import { InputField } from '../../Components/FormFields/CustomInputfield';
 import { CustomModal } from '../../Components/FormFields/CustomModal';
 import { CustomTitle } from '../../Components/FormFields/CustomTitle';
 import { Loader } from '../../Components/FormFields/CustomLoader';
+import { CustomRichEditor } from '../../Components/FormFields/CustomRichEditor';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -69,6 +70,9 @@ const KitchenSink = () => {
             <p>Modal 2</p>
             <p>Modal 3</p>
           </CustomModal>
+        </Card>
+        <Card title="CustomRichEditor" size="middle" className="border border-dark">
+          <CustomRichEditor label="Desc" />
         </Card>
       </Space>
     </>
