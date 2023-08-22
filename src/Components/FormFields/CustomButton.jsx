@@ -1,28 +1,32 @@
-import { Button, Form } from "antd";
+import { Button, Form, Tooltip } from 'antd';
 
 const { Item: FormItem } = Form;
 
 export const CustomButton = ({
   onClick = () => {},
-  buttonType = "primary",
-  buttonText = "",
-  className = "",
-  htmlType = "",
+  buttonType = 'primary',
+  buttonText = '',
+  className = '',
+  htmlType = 'button',
+  loading = false,
+  title = '',
+  placement = 'top',
   ...rest
 }) => {
   return (
-    <div>
-      <FormItem {...rest}>
+    <FormItem {...rest}>
+      <Tooltip title={title} placement={placement}>
         <Button
           onClick={onClick}
           className={className}
           type={buttonType}
           htmlType={htmlType}
+          loading={loading}
           {...rest}
         >
           {buttonText}
         </Button>
-      </FormItem>
-    </div>
+      </Tooltip>
+    </FormItem>
   );
 };
