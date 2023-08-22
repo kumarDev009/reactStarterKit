@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, Space } from 'antd';
+import { Button, Card, Form, Space } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 
 import { CustomButton } from '../../Components/FormFields/CustomButton';
@@ -30,6 +30,10 @@ const KitchenSink = () => {
     setTimeout(() => {
       setLoading(prev => !prev);
     }, 3000);
+  };
+
+  const onFinish = values => {
+    console.log('values', values);
   };
 
   return (
@@ -72,7 +76,10 @@ const KitchenSink = () => {
           </CustomModal>
         </Card>
         <Card title="CustomRichEditor" size="middle" className="border border-dark">
-          <CustomRichEditor label="Desc" style={{ height: '300px' }} />
+          <Form name="sample_form" onFinish={onFinish}>
+            <CustomRichEditor name="description" />
+            <CustomButton buttonText={'Submit'} htmlType="submit" className="mt-5" />
+          </Form>
         </Card>
       </Space>
     </>
