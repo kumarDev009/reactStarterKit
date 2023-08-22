@@ -72,7 +72,7 @@ const KitchenSink = () => {
           </CustomModal>
         </Card>
         <Card title="CustomRichEditor" size="middle" className="border border-dark">
-          <CustomRichEditor label="Desc" />
+          <CustomRichEditor label="Desc" style={{ height: '300px' }} />
         </Card>
       </Space>
     </>

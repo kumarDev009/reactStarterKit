@@ -37,10 +37,10 @@ const modules = {
   ]
 };
 
-export const CustomRichEditor = ({ label = '', name = '', value = '', onChange = () => {} }) => {
+export const CustomRichEditor = ({ label = '', name = '', value = '', onChange = () => {}, style = {} }) => {
   return (
     <FormItem label={label} name={name}>
-      <ReactQuill value={value} onChange={onChange} modules={modules} style={{ height: '300px' }} />
+      <ReactQuill value={value} onChange={onChange} modules={modules} style={style} />
     </FormItem>
   );
 };
