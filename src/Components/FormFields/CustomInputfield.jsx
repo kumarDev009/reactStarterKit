@@ -1,22 +1,22 @@
-import { Form, Input } from "antd";
+import { Form, Input } from 'antd';
 
 const { Item: FormItem } = Form;
 
 export const InputField = ({
-  name = "",
+  name = '',
   onChange = () => {},
-  placeholder = "",
-  label = "",
+  placeholder = '',
+  label = '',
   max = 0,
   min = 0,
-  type = "",
-  className = "",
+  type = '',
+  className = '',
   ...rest
 }) => {
-  const renderInputField = (type) => {
+  const renderInputField = type => {
     switch (type) {
-      case "password":
-        return <Input.Password placeholder={placeholder} />;
+      case 'password':
+        return <Input.Password placeholder={placeholder} onChange={onChange} min={min} />;
 
       default:
         return (
