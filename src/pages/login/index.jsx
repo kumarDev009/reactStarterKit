@@ -72,7 +72,7 @@ const Login = () => {
               <CheckBoxField name="remember_me" label={'Keep me sign in'} />
             </Col>
             <Col className="d-flex justify-content-end" span={12}>
-              <CustomButton className="px-0" buttonText={' Forgot Password ?'} htmlType="button" type="link" />
+              <CustomButton className="px-0" buttonText={' Forgot Password ?'} type="link" />
             </Col>
           </Row>
           <Row>

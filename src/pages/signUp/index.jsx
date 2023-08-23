@@ -6,25 +6,24 @@ import { CustomButton } from '../../Components/FormFields/CustomButton';
 import { CheckBoxField } from '../../Components/FormFields/CustomCheckBoxField';
 import AuthLayout from '../../Components/Auth';
 import CustomProgressBar from '../../Components/FormFields/CustomProgressBar';
+import CustomPhoneField from '../../Components/FormFields/CustomPhoneField';
 import {
   lowerCaseRegex,
   upperCaseRegex,
   numberRegex,
   specialCharRegex,
   PASSWORD_SUGGESTION_DESCRIPTION
-} from '../../constants/signup';
+} from '../../constants';
 import './index.scss';
-import CustomPhoneField from '../../Components/FormFields/CustomPhoneField';
 
 const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(0);
   const [passwordStatus, setPasswordStatus] = useState({});
   const [isCheckedTerms, setIsCheckedTerms] = useState(false);
 
   const onFinish = values => {
-    console.log('values', { ...values, phoneNumber });
+    console.log('values', { ...values });
   };
 
   const passwordValidator = value => {
@@ -107,8 +106,12 @@ const SignUp = () => {
     return Promise.resolve();
   };
 
-  const handleTermsAndCondition = e => {
-    setIsCheckedTerms(e.target.checked);
+  const handleTermsAndCondition = () => {
+    setIsCheckedTerms(prev => !prev);
+  };
+  const layout = {
+    labelCol: { span: 24 },
+    wrapperCol: { span: 24 }
   };
   return (
     <AuthLayout>
@@ -164,25 +167,23 @@ const SignUp = () => {
           <Row>
             <Col span={24}>
               <div className="input-phone-number">
-                <div className="mb-2">Phone Number</div>
-                <CustomPhoneField onChange={setPhoneNumber} />
+                <CustomPhoneField name="phoneNumber" label="Phone Number" defaultCountry={'in'} layout={layout} />
               </div>
             </Col>
           </Row>
           <Row>
             <Col span={24}>
               <CheckBoxField
-                name="Terms"
+                name="acceptTerms"
                 label="Agree to the Terms and Conditions"
-                type="checkbox"
                 onChange={handleTermsAndCondition}
                 checked={isCheckedTerms}
               />
             </Col>
           </Row>
           <Row>
-            <Col className="w-100" span={24}>
-              <CustomButton className={'w-100'} buttonText={'Sign Up'} htmlType="submit" />
+            <Col span={24}>
+              <CustomButton block buttonText={'Sign Up'} htmlType="submit" />
             </Col>
           </Row>
         </Form>

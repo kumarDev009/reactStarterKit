@@ -11,6 +11,7 @@ export const CustomButton = ({
   loading = false,
   title = '',
   placement = 'top',
+  block = true,
   ...rest
 }) => {
   return (
@@ -22,6 +23,7 @@ export const CustomButton = ({
           type={buttonType}
           htmlType={htmlType}
           loading={loading}
+          block={block}
           {...rest}
         >
           {buttonText}

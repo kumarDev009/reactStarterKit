@@ -1,11 +1,17 @@
+@import '../../variables.scss';
+
 .input-phone-number input:focus {
   box-shadow: none !important;
-  border: 1px solid #4096ff;
+  border: 1px solid $border-color;
 }
 
-.input-phone-number:focus-within .react-tel-input .selected-flag {
-  border: 1px solid #4096ff;
-  outline: 0;
+.input-phone-number:focus-within .react-tel-input {
+  .selected-flag {
+    border: 1px solid $border-color;
+  }
+  .flag-dropdown {
+    border: none !important;
+  }
 }
 
 .sign-up-screen {
