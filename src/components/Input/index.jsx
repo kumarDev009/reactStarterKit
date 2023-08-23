@@ -34,6 +34,7 @@ const Input = ({
   };
   return (
     <div>
+      {/* TODO: Handle this label within form item */}
       <div>{label}</div>
       <FormItem className="mt-2" name={name} {...rest}>
         {renderInputField(type)}
