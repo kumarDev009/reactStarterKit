@@ -5,3 +5,26 @@
     }
   }
 }
+
+.popover-menu-wrapper {
+  .ant-menu-item-selected {
+    background-color: #e6f7ff;
+  }
+  .ant-menu-item {
+    padding: 0 10px !important;
+  }
+
+  .sub-menu-icon {
+    margin-right: 8px;
+    color: black;
+  }
+
+  .right-icon {
+    font-size: '8px';
+    margin-left: 1rem;
+  }
+
+  .sub-menu {
+    min-width: 200px;
+  }
+}

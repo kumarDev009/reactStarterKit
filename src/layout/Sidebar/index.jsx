@@ -10,7 +10,7 @@ import './index.scss';
 
 const { Sider } = Layout;
 
-export default function CustomSidebar() {
+export default function CustomSidebar({ collapsed }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,7 +25,39 @@ export default function CustomSidebar() {
     {
       label: 'Dashboard',
       key: DASHBOARD_PATH,
-      icon: <DashboardOutlined />
+      icon: <DashboardOutlined />,
+      submenu: [
+        {
+          label: 'Submenu 1',
+          key: 'submenu1_path',
+          icon: <DashboardOutlined />,
+          submenu: [
+            {
+              label: 'Sub-submenu 1',
+              key: HOME_PATH,
+              icon: <SettingOutlined />,
+              submenu: [{ label: 'Submenu 1', key: 'submenu1_path', icon: <DashboardOutlined /> }]
+            },
+            {
+              label: 'Sub-submenu 2',
+              key: SETTINGS_PATH,
+              icon: <SettingOutlined />
+            },
+            {
+              label: 'Sub-submenu 3',
+              key: HOME_PATH,
+              icon: <SettingOutlined />
+            }
+            // ... add more nested submenus as needed
+          ]
+        },
+        {
+          label: 'Settings',
+          key: SETTINGS_PATH,
+          icon: <SettingOutlined />
+        }
+        // ... add more submenus as needed
+      ]
     },
     {
       label: 'Settings',
@@ -50,9 +82,10 @@ export default function CustomSidebar() {
 
   return (
     <Sider
+      collapsed={collapsed}
       className="sidebar"
       breakpoint="lg"
-      collapsedWidth="0"
+      collapsedWidth="80"
       onBreakpoint={broken => {
         console.log(broken);
       }}
@@ -60,11 +93,13 @@ export default function CustomSidebar() {
         console.log(collapsed, type);
       }}
     >
-      <div className="home-screen-logo">
-        <img src="/assets/images/logo.png" alt="mainlogo" />
-      </div>
-      <div className="mt-3">
-        <CustomMenu selectedKeys={[currentMenu]} menuItems={sidebarMenu} onClick={handleSidebarMenu} />
+      <div className="hv-100">
+        <CustomMenu
+          collapsed={collapsed}
+          selectedKeys={[currentMenu]}
+          menuItems={sidebarMenu}
+          onClick={handleSidebarMenu}
+        />
       </div>
     </Sider>
   );
