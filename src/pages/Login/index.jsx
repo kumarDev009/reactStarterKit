@@ -9,8 +9,7 @@ import Title from 'components/Title';
 import AuthLayout from 'components/Auth';
 
 import { STATIC_LOGIN_CREDENTIALS } from 'constants/login';
-import { HOME_PATH } from 'constants/route';
-import { SIGNUP_PATH } from 'constants/signup';
+import { HOME_PATH, SIGNUP_PATH } from 'constants/route';
 
 import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';

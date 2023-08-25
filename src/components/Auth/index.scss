@@ -19,6 +19,14 @@
 }
 
 .landing-screen {
+  .ant-form-item-required::before {
+    display: inline-block;
+    margin-inline-end: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    content: '*';
+  }
+
   .parent-container {
     display: flex;
     flex-direction: column;
@@ -54,13 +62,12 @@
       display: block;
       height: 450px;
       padding: 25px 25px 10px 25px;
-      margin-top: 10%;
     }
 
     .official-logo {
       img {
         margin-left: 40%;
-        margin-top: 10px;
+        margin-top: 5%;
       }
     }
     .footer-disclaimer {
@@ -70,14 +77,20 @@
       display: block;
     }
   }
-  @media screen and (max-width: 425px) {
+  @media screen and (max-width: 768px) {
+    .official-logo {
+      img {
+        margin-top: 5%;
+      }
+    }
+  }
+  @media screen and (max-width: 576px) {
     .form-content {
       padding: 20px 20px 10px 20px;
-      margin-top: 30%;
     }
     .official-logo {
       img {
-        margin-left: 24%;
+        margin-left: 25%;
         margin-top: 5%;
       }
     }

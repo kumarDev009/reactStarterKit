@@ -11,12 +11,13 @@ const Input = ({
   min = 0,
   type = '',
   className = '',
+  rules = [],
   ...rest
 }) => {
   const renderInputField = type => {
     switch (type) {
       case 'password':
-        return <AntdInput.Password placeholder={placeholder} />;
+        return <AntdInput.Password placeholder={placeholder} onChange={onChange} {...rest} />;
 
       default:
         return (
@@ -32,11 +33,12 @@ const Input = ({
         );
     }
   };
+  console.log('rules', rules);
   return (
     <div>
       {/* TODO: Handle this label within form item */}
-      <div>{label}</div>
-      <FormItem className="mt-2" name={name} {...rest}>
+      <div className="ant-form-item-required pb-2">{label}</div>
+      <FormItem name={name} rules={rules} {...rest}>
         {renderInputField(type)}
       </FormItem>
     </div>

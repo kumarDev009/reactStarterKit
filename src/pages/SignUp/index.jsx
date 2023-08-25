@@ -1,20 +1,25 @@
 import { useState } from 'react';
-import { Col, Form, Row, Popover } from 'antd';
-import { CustomTitle } from '../../Components/FormFields/CustomTitle';
-import { InputField } from '../../Components/FormFields/CustomInputfield';
-import { CustomButton } from '../../Components/FormFields/CustomButton';
-import { CheckBoxField } from '../../Components/FormFields/CustomCheckBoxField';
-import AuthLayout from '../../components/Auth';
-import CustomProgressBar from '../../Components/FormFields/CustomProgressBar';
-import CustomPhoneField from '../../Components/FormFields/CustomPhoneField';
+import { Col, Form, Row, Popover, Typography } from 'antd';
+
+import Title from 'components/Title';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import CheckBox from 'components/CheckBox';
+import AuthLayout from 'components/Auth';
+import ProgressBar from 'components/ProgressBar';
+import PhoneInputField from 'components/PhoneInput';
+
 import {
   lowerCaseRegex,
   upperCaseRegex,
   numberRegex,
   specialCharRegex,
   PASSWORD_SUGGESTION_DESCRIPTION
-} from '../../constants';
+} from 'constants/signup';
+
 import './index.scss';
+
+const { Link } = Typography;
 
 const SignUp = () => {
   const [password, setPassword] = useState('');
@@ -74,7 +79,7 @@ const SignUp = () => {
   const headerProgressBar = () => {
     return (
       <div style={{ width: '400px' }}>
-        <CustomProgressBar
+        <ProgressBar
           percent={passwordStatus.percent}
           strokeLinecap="square"
           strokeColor={passwordStatus.color}
@@ -118,17 +123,19 @@ const SignUp = () => {
       <div className="sign-up-screen">
         <Row>
           <Col span={24}>
-            <CustomTitle title_text="Sign Up" text_level={3} className="title" />
+            <Title level={3} className="title">
+              Sign Up
+            </Title>
           </Col>
         </Row>
-        <Form name="signUp_form" onFinish={onFinish} className="form">
+        <Form name="signUp_form" onFinish={onFinish} requiredMark={true} className="form">
           <Row>
             <Col span={24}>
-              <InputField
+              <Input
                 name="email"
                 label="Email Address"
                 placeholder="Email"
-                rules={[{ required: true, message: 'Please enter your Email!' }]}
+                rules={[{ type: 'email', required: true, message: 'Please enter your Email!' }]}
                 className={'mb-0'}
               />
             </Col>
@@ -136,7 +143,7 @@ const SignUp = () => {
           <Row>
             <Col span={24}>
               <Popover placement="bottom" trigger="click" content={() => headerProgressBar()}>
-                <InputField
+                <Input
                   name="password"
                   label="Password"
                   type="password"
@@ -150,14 +157,14 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <InputField
+              <Input
                 name="confirmPassword"
                 label="Confirm Password"
                 type="password"
                 placeholder="Confirm Password"
                 min={8}
                 rules={[
-                  { required: true, message: 'Please enter your Password!' },
+                  { required: true, message: 'Please enter your ConfirmPassword!' },
                   { validator: confirmPasswordValidator }
                 ]}
                 onChange={handleConfirmPassword}
@@ -167,15 +174,26 @@ const SignUp = () => {
           <Row>
             <Col span={24}>
               <div className="input-phone-number">
-                <CustomPhoneField name="phoneNumber" label="Phone Number" defaultCountry={'in'} layout={layout} />
+                <PhoneInputField
+                  name="phoneNumber"
+                  label="Phone Number"
+                  defaultCountry={'in'}
+                  layout={layout}
+                  rules={[{ required: true, message: 'Please enter your Phone Number!' }]}
+                />
               </div>
             </Col>
           </Row>
           <Row>
             <Col span={24}>
-              <CheckBoxField
+              <CheckBox
                 name="acceptTerms"
-                label="Agree to the Terms and Conditions"
+                label={
+                  <label>
+                    Agree to the <Link href="https://termsandconditions">Terms and conditions</Link>
+                  </label>
+                }
+                rules={[{ required: true, message: 'Please accept the terms and conditions!' }]}
                 onChange={handleTermsAndCondition}
                 checked={isCheckedTerms}
               />
@@ -183,7 +201,9 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <CustomButton block buttonText={'Sign Up'} htmlType="submit" />
+              <Button block htmlType="submit">
+                Sign Up
+              </Button>
             </Col>
           </Row>
         </Form>

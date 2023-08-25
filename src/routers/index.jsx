@@ -7,6 +7,7 @@ import PublicRoute from 'routers/PublicRoute';
 import { HOME_PATH, INDEX_PATH, LOGIN_PATH, SIGNUP_PATH } from 'constants/route';
 
 const Login = lazy(() => import('pages/Login'));
+const SignUp = lazy(() => import('pages/SignUp'));
 const Layout = lazy(() => import('layout'));
 
 const Routers = () => {

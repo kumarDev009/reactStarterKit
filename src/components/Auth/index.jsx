@@ -1,13 +1,13 @@
 import { Col, Row } from 'antd';
 
-import { LOGIN_FOOTER_DISCLAIMER_TEXT } from '../../constants';
-import { CustomFooterText } from '../FormFields/CustomTitle';
+import { LOGIN_FOOTER_DISCLAIMER_TEXT } from 'constants/login';
+import AuthFooter from 'components/AuthFooter';
 import './index.scss';
 
 const AuthLayout = ({ children }) => {
   const footerAreaText = () => {
     return LOGIN_FOOTER_DISCLAIMER_TEXT.map((val, index) => {
-      return <CustomFooterText className="cursor-pointer" footerLabel={val.label} key={index} />;
+      return <AuthFooter type="text" className="cursor-pointer" footerLabel={val.label} key={index} />;
     });
   };
 
@@ -25,7 +25,7 @@ const AuthLayout = ({ children }) => {
 
           <Row className="footer-disclaimer">
             <Col span={9} className="d-flex justify-content-center">
-              <CustomFooterText isLink={true} footerLabel={'This site is protected by '} linkText="Privacy Policy" />
+              <AuthFooter isLink={true} footerLabel={'This site is protected by '} linkText="Privacy Policy" />
             </Col>
             <Col span={7}></Col>
             <Col span={8} className="d-flex gap-3">
