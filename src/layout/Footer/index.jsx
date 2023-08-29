@@ -1,11 +1,11 @@
-import { Layout } from 'antd';
+import { Layout as AntdLayout } from 'antd';
 
-const { Footer } = Layout;
+const { Footer: AntdFooter } = AntdLayout;
 
 export default function CustomFooter() {
   return (
-    <div>
-      <Footer style={{ textAlign: 'center' }}>{new Date().getFullYear()} © All Right Reserved. MitrahSoft</Footer>
+    <div className="flex-shrink-0 footer">
+      <AntdFooter>{new Date().getFullYear()} © All Right Reserved. MitrahSoft</AntdFooter>
     </div>
   );
 }

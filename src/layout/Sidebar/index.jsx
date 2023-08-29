@@ -10,11 +10,12 @@ import './index.scss';
 
 const { Sider } = Layout;
 
-export default function CustomSidebar({ collapsed }) {
+export default function CustomSidebar() {
+  const [collapsed, setCollapsed] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState('');
+
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [currentMenu, setCurrentMenu] = useState('');
 
   const sidebarMenu = [
     {
@@ -41,7 +42,7 @@ export default function CustomSidebar({ collapsed }) {
             {
               label: 'Sub-submenu 2',
               key: SETTINGS_PATH,
-              icon: <SettingOutlined />
+              icon: <HomeOutlined />
             },
             {
               label: 'Sub-submenu 3',
@@ -82,6 +83,7 @@ export default function CustomSidebar({ collapsed }) {
 
   return (
     <Sider
+      collapsible
       collapsed={collapsed}
       className="sidebar"
       breakpoint="lg"
@@ -89,9 +91,7 @@ export default function CustomSidebar({ collapsed }) {
       onBreakpoint={broken => {
         console.log(broken);
       }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
+      onCollapse={collapsed => setCollapsed(collapsed)}
     >
       <div className="hv-100">
         <CustomMenu

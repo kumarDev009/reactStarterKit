@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Layout } from 'antd';
 
 import Sidebar from 'layout/Sidebar';
@@ -7,18 +6,20 @@ import Content from 'layout/Content';
 import Footer from 'layout/Footer';
 
 export default function LayoutElement() {
-  const [collapsed, setCollapsed] = useState(false);
-
   return (
-    <Layout className="overflow-scroll">
-      <Layout className="d-flex flex-direction-column">
-        <Header collapsed={collapsed} onCollapsed={setCollapsed} />
-        <div className="d-flex">
-          <Sidebar collapsed={collapsed} />
-          <Content />
+    <Layout className="hv-100">
+      <Header />
+      <Layout className="d-flex mt-4">
+        <Sidebar />
+        <div className="d-flex flex-direction-column flex-grow-1">
+          <div className="flex-grow-1 overflow-y-auto">
+            <div style={{ minHeight: '85%' }}>
+              <Content />
+            </div>
+            <Footer />
+          </div>
         </div>
       </Layout>
-      <Footer />
     </Layout>
   );
 }

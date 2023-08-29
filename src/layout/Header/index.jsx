@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { Avatar, Layout, Popover } from 'antd';
-import { LogoutOutlined, UserOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
 import { removeStorage } from 'services/storage/index.js';
 
 const { Header } = Layout;
 
-export default function CustomHeader({ collapsed = false, onCollapsed = () => {} }) {
+export default function CustomHeader() {
   const { setHasStorage } = useContext(AuthContext);
 
   const menuArr = [
@@ -43,17 +43,8 @@ export default function CustomHeader({ collapsed = false, onCollapsed = () => {}
   return (
     <div className="header">
       <Header className="d-flex space-between align-items-center">
-        <div className="d-flex">
-          <div className="sidebar-toggle" onClick={() => onCollapsed(prev => !prev)}>
-            {collapsed ? (
-              <MenuUnfoldOutlined className="menu-fold-icon" />
-            ) : (
-              <MenuFoldOutlined className="menu-fold-icon" />
-            )}
-          </div>
-          <div className="home-screen-logo text-align-center">
-            <img src="/assets/images/logo.png" alt="mainlogo" style={{ width: '60%' }} />
-          </div>
+        <div className="home-screen-logo">
+          <img src="/assets/images/logo.png" alt="mainlogo" style={{ width: '60%', filter: 'brightness(1.5)' }} />
         </div>
         <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
           <Avatar
