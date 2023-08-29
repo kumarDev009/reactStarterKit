@@ -114,10 +114,7 @@ const SignUp = () => {
   const handleTermsAndCondition = () => {
     setIsCheckedTerms(prev => !prev);
   };
-  const layout = {
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 }
-  };
+
   return (
     <AuthLayout>
       <div className="sign-up-screen">
@@ -173,15 +170,7 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <div className="input-phone-number">
-                <PhoneInputField
-                  name="phoneNumber"
-                  label="Phone Number"
-                  defaultCountry={'in'}
-                  layout={layout}
-                  rules={[{ required: true, message: 'Please enter your Phone Number!' }]}
-                />
-              </div>
+              <PhoneInputField name="phoneNumber" label="Phone Number" defaultCountry={'in'} />
             </Col>
           </Row>
           <Row>
@@ -190,7 +179,7 @@ const SignUp = () => {
                 name="acceptTerms"
                 label={
                   <label>
-                    Agree to the <Link href="https://termsandconditions">Terms and conditions</Link>
+                    I have read the <Link href="https://termsandconditions">Terms and conditions</Link>
                   </label>
                 }
                 rules={[{ required: true, message: 'Please accept the terms and conditions!' }]}

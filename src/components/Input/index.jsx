@@ -12,6 +12,8 @@ const Input = ({
   type = '',
   className = '',
   rules = [],
+  isPhone = false,
+  addonBefore = [],
   ...rest
 }) => {
   const renderInputField = type => {
@@ -27,13 +29,13 @@ const Input = ({
             min={min}
             max={max}
             type={type}
+            addonBefore={isPhone && addonBefore}
             placeholder={placeholder}
             {...rest}
           />
         );
     }
   };
-  console.log('rules', rules);
   return (
     <div>
       {/* TODO: Handle this label within form item */}
