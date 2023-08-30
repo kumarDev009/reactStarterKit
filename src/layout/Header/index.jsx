@@ -1,14 +1,16 @@
 import { useContext } from 'react';
-import { Avatar, Layout, Popover } from 'antd';
+import { Avatar, Layout, Popover, Switch, theme } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
+import { ThemeContext } from 'context/themeContext';
 import { removeStorage } from 'services/storage/index.js';
 
 const { Header } = Layout;
 
 export default function CustomHeader() {
   const { setHasStorage } = useContext(AuthContext);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   const menuArr = [
     {
@@ -43,10 +45,17 @@ export default function CustomHeader() {
   return (
     <div className="header">
       <Header className="d-flex justify-content-end align-items-center pe-4">
+        <Switch
+          checkedChildren={<span className="toggle-icon">🌜</span>}
+          unCheckedChildren={<span className="toggle-icon">🌞</span>}
+          checked={isDarkMode}
+          onChange={toggleTheme}
+          className="theme-toggle-switch"
+          style={{ marginRight: '20px' }}
+        />
         <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
           <Avatar
             className="cursor-pointer"
-            style={{ backgroundColor: '#ffffff' }}
             size={40}
             icon={
               <UserOutlined

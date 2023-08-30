@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'antd';
 import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined } from '@ant-design/icons';
 
 import CustomMenu from 'components/Menu';
 import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
-
+import { ThemeContext } from 'context/themeContext';
 import './index.scss';
 
 const { Sider } = Layout;
 
 export default function CustomSidebar() {
+  const [currentMenu, setCurrentMenu] = useState('');
+  const { isDarkMode } = useContext(ThemeContext);
+
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [currentMenu, setCurrentMenu] = useState('');
 
   const sidebarMenu = [
     {
@@ -63,8 +64,13 @@ export default function CustomSidebar() {
       <div className="home-screen-logo">
         <img src="/assets/images/logo.png" alt="mainlogo" />
       </div>
-      <div className="mt-3">
-        <CustomMenu selectedKeys={[currentMenu]} menuItems={sidebarMenu} onClick={handleSidebarMenu} />
+      <div className="mt-3" style={{ height: '100vh' }}>
+        <CustomMenu
+          selectedKeys={[currentMenu]}
+          menuItems={sidebarMenu}
+          onClick={handleSidebarMenu}
+          theme={isDarkMode ? 'dark' : 'light'}
+        />
       </div>
     </Sider>
   );

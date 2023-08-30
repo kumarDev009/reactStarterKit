@@ -1,7 +1,12 @@
+import { Layout, Typography } from 'antd';
+
+const { Content } = Layout;
+const { Title } = Typography;
+
 export default function Settings() {
   return (
-    <div className="d-flex justify-content-between p-5">
-      <h3> Welcome to Settings Page</h3>
-    </div>
+    <Content className="d-flex justify-content-between p-5">
+      <Title> Welcome to Settings Page</Title>
+    </Content>
   );
 }
