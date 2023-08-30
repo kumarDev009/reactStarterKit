@@ -6,17 +6,30 @@ import countryList from 'constants/countryList';
 const { Option } = Select;
 
 const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = {}, rules = [], ...rest }) => {
+  let countryDetails = {
+    countryCode: 'IN-91',
+    isValidPhoneNumber: false,
+    type: '',
+    phoneNumber: 0
+  };
+
   const [countryCode, setCountryCode] = useState(0);
-  const [inputStatus, setInputStatus] = useState({ countryCode: 'IN-91', validPhoneNumber: false, type: '', help: '' });
+  const [inputStatus, setInputStatus] = useState(countryDetails);
 
   const handlePhoneInput = phoneNumber => {
-    const selectedCountry = countryList.find(country => country?.phoneCode === parseInt(countryCode));
+    const selectedCountry = countryList.find(country => country?.phoneCode === parseInt(countryCode)) || countryList[0];
     const phoneNumberWithCountryCode = selectedCountry?.phoneCode + phoneNumber;
     if (!selectedCountry?.regex?.test(phoneNumberWithCountryCode)) {
-      setInputStatus({ ...inputStatus, type: 'error', help: 'Please check the phone number' });
+      countryDetails = { ...countryDetails, type: 'error', phoneNumber };
     } else {
-      setInputStatus({ ...inputStatus, validPhoneNumber: !inputStatus.validPhoneNumber, type: 'success', help: '' });
+      countryDetails = {
+        ...countryDetails,
+        isValidPhoneNumber: !countryDetails.isValidPhoneNumber,
+        type: 'success',
+        phoneNumber
+      };
     }
+    setInputStatus(countryDetails);
   };
 
   const handleCountryCode = value => {
@@ -28,6 +41,13 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
     if (!/^[0-9]+$/.test(e.key) && !['Backspace', 'ArrowLeft', 'ArrowRight', 'Delete'].includes(e.key)) {
       e.preventDefault();
     }
+  };
+
+  const validateInput = () => {
+    if (inputStatus.phoneNumber.length && inputStatus.type === 'error') {
+      return Promise.reject('Please check the phone number');
+    }
+    return Promise.resolve();
   };
 
   const countrySelector = (
@@ -54,10 +74,9 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
       addonBefore={countrySelector}
       onChange={e => handlePhoneInput(e.target.value)}
       status={inputStatus.type}
-      // help={inputStatus.help && inputStatus.help} // need to pass the error message
       isPhone
       onKeyPress={e => handleKeyPress(e)}
-      rules={[{ required: true, message: inputStatus.help ? inputStatus.help : 'Please enter your Phone Number!' }]}
+      rules={[{ required: true, message: 'Please enter your Phone Number!' }, { validator: validateInput }]}
       className={'mb-0'}
       {...rest}
     />

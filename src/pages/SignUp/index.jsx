@@ -132,7 +132,14 @@ const SignUp = () => {
                 name="email"
                 label="Email Address"
                 placeholder="Email"
-                rules={[{ type: 'email', required: true, message: 'Please enter your Email!' }]}
+                autoFocus={true}
+                rules={[
+                  { required: true, message: 'Please enter your Email!' },
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!'
+                  }
+                ]}
                 className={'mb-0'}
               />
             </Col>

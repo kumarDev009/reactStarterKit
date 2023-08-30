@@ -13,6 +13,7 @@ const Input = ({
   className = '',
   rules = [],
   isPhone = false,
+  autoFocus = false,
   addonBefore = [],
   ...rest
 }) => {
@@ -26,6 +27,7 @@ const Input = ({
           <AntdInput
             classNames={className}
             onChange={onChange}
+            autoFocus={autoFocus}
             min={min}
             max={max}
             type={type}
