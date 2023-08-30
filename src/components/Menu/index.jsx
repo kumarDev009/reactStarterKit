@@ -1,4 +1,4 @@
-import { Menu as AntdMenu } from 'antd';
+import { Menu as AntdMenu, Tooltip } from 'antd';
 
 export default function CustomMenu({
   menuItems = [],
@@ -9,25 +9,37 @@ export default function CustomMenu({
   onClick = () => {},
   ...rest
 }) {
-  const renderMenuItems = items => {
+  const renderTooltip = (label, hasSubmenu) => {
+    if (hasSubmenu && !collapsed) {
+      return (
+        <Tooltip title={label} placement="right">
+          <span>{label}</span>
+        </Tooltip>
+      );
+    }
+    return <span>{label}</span>;
+  };
+
+  const renderMenuItems = (items, isNested = false) => {
     return items.map(item => {
-      if (item.submenu && item.submenu.length) {
+      const hasSubmenu = item.submenu && item.submenu.length > 0;
+      if (hasSubmenu) {
         return (
-          <AntdMenu.SubMenu key={item.key} title={item.label} icon={item.icon}>
-            {renderMenuItems(item.submenu)}
+          <AntdMenu.SubMenu key={item.key} title={renderTooltip(item.label, true)} icon={item.icon}>
+            {renderMenuItems(item.submenu, true)}
           </AntdMenu.SubMenu>
         );
       }
       return (
         <AntdMenu.Item key={item.key} icon={item.icon} onClick={() => onClick(item)}>
-          {item.label}
+          {renderTooltip(item.label, isNested)}
         </AntdMenu.Item>
       );
     });
   };
 
   return (
-    <AntdMenu selectedKeys={selectedKeys} theme={theme} mode={mode} {...rest}>
+    <AntdMenu key={collapsed ? 'collpsed' : 'expand'} selectedKeys={selectedKeys} theme={theme} mode={mode} {...rest}>
       {renderMenuItems(menuItems)}
     </AntdMenu>
   );
