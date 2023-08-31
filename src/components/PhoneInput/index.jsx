@@ -19,7 +19,10 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
   const handlePhoneInput = phoneNumber => {
     const selectedCountry = countryList.find(country => country?.phoneCode === parseInt(countryCode)) || countryList[0];
     const phoneNumberWithCountryCode = selectedCountry?.phoneCode + phoneNumber;
-    if (!selectedCountry?.regex?.test(phoneNumberWithCountryCode)) {
+    const isValidPhoneNumberWithCountry = selectedCountry?.regex?.test(phoneNumberWithCountryCode);
+    const isValidPhoneNumber = selectedCountry?.regex?.test(phoneNumber);
+
+    if (!isValidPhoneNumberWithCountry || !isValidPhoneNumber) {
       countryDetails = { ...countryDetails, type: 'error', phoneNumber };
     } else {
       countryDetails = {
