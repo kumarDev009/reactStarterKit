@@ -25,7 +25,6 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordStatus, setPasswordStatus] = useState({});
-  const [isCheckedTerms, setIsCheckedTerms] = useState(false);
 
   const onFinish = values => {
     console.log('values', { ...values });
@@ -111,8 +110,11 @@ const SignUp = () => {
     return Promise.resolve();
   };
 
-  const handleTermsAndCondition = () => {
-    setIsCheckedTerms(prev => !prev);
+  const checkboxValidator = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error('Please accept the terms and conditions!'));
+    }
+    return Promise.resolve();
   };
 
   return (
@@ -185,13 +187,11 @@ const SignUp = () => {
               <CheckBox
                 name="acceptTerms"
                 label={
-                  <label>
+                  <span>
                     I have read the <Link href="https://termsandconditions">Terms and conditions</Link>
-                  </label>
+                  </span>
                 }
-                rules={[{ required: true, message: 'Please accept the terms and conditions!' }]}
-                onChange={handleTermsAndCondition}
-                checked={isCheckedTerms}
+                rules={[{ validator: checkboxValidator }]}
               />
             </Col>
           </Row>
