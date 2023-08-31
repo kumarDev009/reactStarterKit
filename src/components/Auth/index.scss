@@ -19,14 +19,6 @@
 }
 
 .landing-screen {
-  .ant-form-item-required::before {
-    display: inline-block;
-    margin-inline-end: 4px;
-    color: #ff4d4f;
-    font-size: 14px;
-    content: '*';
-  }
-
   .parent-container {
     display: flex;
     flex-direction: column;

@@ -105,7 +105,7 @@ const SignUp = () => {
   };
 
   const confirmPasswordValidator = () => {
-    if (password !== confirmPassword) {
+    if (confirmPassword.length && password !== confirmPassword) {
       return Promise.reject('The new password that you entered do not match!');
     }
     return Promise.resolve();
@@ -125,7 +125,7 @@ const SignUp = () => {
             </Title>
           </Col>
         </Row>
-        <Form name="signUp_form" onFinish={onFinish} requiredMark={true} className="form">
+        <Form name="signUp_form" layout="vertical" onFinish={onFinish} requiredMark={true} className="form">
           <Row>
             <Col span={24}>
               <Input

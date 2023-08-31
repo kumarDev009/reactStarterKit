@@ -39,13 +39,9 @@ const Input = ({
     }
   };
   return (
-    <div>
-      {/* TODO: Handle this label within form item */}
-      <div className="ant-form-item-required pb-2">{label}</div>
-      <FormItem name={name} rules={rules} {...rest}>
-        {renderInputField(type)}
-      </FormItem>
-    </div>
+    <FormItem name={name} label={label} rules={rules} {...rest}>
+      {renderInputField(type)}
+    </FormItem>
   );
 };
 

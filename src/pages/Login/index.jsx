@@ -52,7 +52,7 @@ const Login = () => {
         </Col>
       </Row>
 
-      <Form name="login_form" onFinish={onFinish}>
+      <Form name="login_form" layout="vertical" onFinish={onFinish}>
         <Row>
           <Col span={24}>
             <Input
