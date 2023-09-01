@@ -5,7 +5,7 @@ import { Spin } from 'antd';
 import PrivateRoute from 'routers/PrivateRoute';
 import PublicRoute from 'routers/PublicRoute';
 import { HOME_PATH, INDEX_PATH, LOGIN_PATH } from 'constants/route';
-import NotFound from 'pages/notFound';
+import NotFound from 'pages/NotFound';
 
 const Login = lazy(() => import('pages/Login'));
 const Layout = lazy(() => import('layout'));
