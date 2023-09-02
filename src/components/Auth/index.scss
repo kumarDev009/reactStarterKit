@@ -38,11 +38,10 @@
 
   .container {
     background: #ffffff;
-    max-width: 550px;
-    padding: 40px 40px 25px 40px;
+    max-width: 450px;
+    padding: 1.5rem;
     box-shadow: 1px 1px 4px 1px #ccc;
     border-radius: 5px;
-    width: 100%;
   }
 
   .footer-disclaimer-mob {
@@ -52,7 +51,6 @@
   @media screen and (max-width: 992px) {
     .form-content {
       display: block;
-      height: 450px;
       padding: 25px 25px 10px 25px;
     }
 

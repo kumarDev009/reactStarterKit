@@ -29,27 +29,23 @@ const Login = () => {
       let submittedData = JSON.stringify(values);
       setStorage('username', values.email);
       setHasStorage(submittedData);
-      navigate(HOME_PATH, { replace: true });
+      navigate(HOME_PATH);
     } else {
       alert('Enter the valid email and password');
     }
   };
 
-  const handleLink = () => {
-    navigate(SIGNUP_PATH, { replace: true });
+  const navigateToRegister = () => {
+    navigate(SIGNUP_PATH);
   };
 
   return (
     <AuthLayout>
-      <Row>
-        <Col span={12}>
-          <Title level={3}>Login</Title>
-        </Col>
-        <Col className="d-flex justify-content-end" span={12}>
-          <Button className="px-0" type="link" onClick={handleLink}>
-            Don't have an account?
-          </Button>
-        </Col>
+      <Row justify="space-between">
+        <Title level={3}>Login</Title>
+        <Button className="px-0" type="link" onClick={navigateToRegister}>
+          Don't have an account? Register
+        </Button>
       </Row>
 
       <Form name="login_form" layout="vertical" onFinish={onFinish}>
@@ -57,9 +53,9 @@ const Login = () => {
           <Col span={24}>
             <Input
               name="email"
+              autoFocus={true}
               label="Email Address"
               rules={[{ required: true, message: 'Please enter your Email!' }]}
-              className={'mb-0'}
             />
           </Col>
         </Row>
@@ -74,29 +70,21 @@ const Login = () => {
             />
           </Col>
         </Row>
-        <Row>
-          <Col span={12}>
-            <CheckBox name="remember_me" label={'Keep me sign in'} />
-          </Col>
-          <Col className="d-flex justify-content-end" span={12}>
-            <Button className="px-0" type="link">
-              Forgot Password ?
-            </Button>
-          </Col>
+        <Row justify="space-between">
+          <CheckBox name="remember_me" label={'Keep me sign in'} />
+          <Button className="px-0" type="link">
+            Forgot Password ?
+          </Button>
         </Row>
         <Row>
-          <Col className="w-100" span={24}>
-            <Button className={'w-100'} htmlType="submit">
+          <Col span={24}>
+            <Button block htmlType="submit">
               Login
             </Button>
           </Col>
         </Row>
-        <Row className="mb-2" justify="center">
-          <div className="d-flex align-items-center justify-content-center">
-            <Col span={24} offset={2}>
-              <span>Version {process.env.REACT_APP_VERSION}</span>
-            </Col>
-          </div>
+        <Row justify="center" align={'center'}>
+          Version {process.env.REACT_APP_VERSION}
         </Row>
       </Form>
     </AuthLayout>

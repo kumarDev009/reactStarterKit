@@ -202,6 +202,9 @@ const SignUp = () => {
               </Button>
             </Col>
           </Row>
+          <Row justify="center" align={'center'}>
+            Version {process.env.REACT_APP_VERSION}
+          </Row>
         </Form>
       </div>
     </AuthLayout>
