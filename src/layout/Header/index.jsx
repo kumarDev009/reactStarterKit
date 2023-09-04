@@ -1,18 +1,30 @@
-import { useContext } from 'react';
-import { Avatar, Layout, Popover } from 'antd';
+import { useContext, useState, useEffect } from 'react';
+import { Avatar, Layout, Popover, Select } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
-import { removeStorage } from 'services/storage/index.js';
+import { getStorage, removeStorage, setStorage } from 'services/storage/index.js';
+import i18n from 'i18n';
+import { useTranslation } from 'react-i18next';
 
 const { Header } = Layout;
+const { Option } = Select;
 
 export default function CustomHeader() {
+  let storedLocale = getStorage('locale');
+  const [locale, setLocale] = useState(storedLocale || 'en-US');
   const { setHasStorage } = useContext(AuthContext);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    if (locale) {
+      setStorage('locale', locale);
+    }
+  }, [locale]);
 
   const menuArr = [
     {
-      label: 'Logout',
+      label: t('labels.logOut'),
       icon: LogoutOutlined
     }
   ];
@@ -39,10 +51,24 @@ export default function CustomHeader() {
       </div>
     );
   };
+  const changeLanguage = lng => {
+    setLocale(lng);
+    i18n.changeLanguage(lng.split('-')[0]);
+  };
 
   return (
     <div className="header">
       <Header className="d-flex justify-content-end align-items-center pe-4">
+        <div style={{ marginRight: '1rem' }}>
+          <Select //need to integrate the common component of select box once it's ready.
+            value={locale || 'en-US'}
+            style={{ width: 120 }}
+            onChange={changeLanguage}
+          >
+            <Option value="en-US">English</Option>
+            <Option value="es-ES">Spanish</Option>
+          </Select>
+        </div>
         <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
           <Avatar
             className="cursor-pointer"

@@ -1,0 +1,47 @@
+{
+  "login": {
+    "login": "Login",
+    "version": "Version",
+    "forgotPassword": "Forgot Password?",
+    "dontHaveAccount": "Don't have an account?"
+  },
+  "labels": {
+    "inputLabel": "Input Field",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "keepMeSignedIn": "Keep me signed in",
+    "logOut": "Log Out"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "throwError": "Throw Error",
+    "button": "Button",
+    "save": "Save",
+    "openModal": "Open Modal",
+    "saving": "Saving"
+  },
+  "pages": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "kitchenSink": "Kitchen Sink",
+    "welcomeHome": "Welcome to the Home Page",
+    "welcomeDashboard": "Welcome to the Dashboard Page",
+    "welcomeSettings": "Welcome to the Settings Page"
+  },
+  "components": {
+    "customButton": "Custom Button",
+    "customInputField": "Custom Input Field",
+    "customTitle": "Custom Title",
+    "customModal": "Custom Modal",
+    "customRichEditor": "Custom Rich Editor",
+    "errorBoundary": "Error Boundary"
+  },
+  "links": {
+    "usedForLink": "This is used for link!",
+    "usedForButtonLink": "This is used for button link!"
+  },
+  "footer": {
+    "rightsReserved": "All rights reserved. MitrahSoft"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "login": {
+    "login": "Iniciar sesión",
+    "version": "Versión",
+    "forgotPassword": "Has olvidado tu contraseña ?",
+    "dontHaveAccount": "¿No tienes una cuenta?"
+  },
+  "labels": {
+    "inputLabel": "Campo de entrada",
+    "emailLabel": "Dirección de correo electrónico",
+    "passwordLabel": "Contraseña",
+    "keepMeSignedIn": "Mantenme iniciar sesión",
+    "logOut": "Cerrar sesión"
+  },
+  "buttons": {
+    "submit": "Entregar",
+    "throwError": "Error de lanzamiento",
+    "button": "Botón",
+    "save": "Ahorrar",
+    "openModal": "Modal abierto",
+    "saving": "Ahorro"
+  },
+  "pages": {
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "settings": "Configuraci\u00f3n",
+    "kitchenSink": "Fregadero de cocina",
+    "welcomeHome": "Bienvenida a la pagina de inicio",
+    "welcomeDashboard": "Bienvenido a la página del panel",
+    "welcomeSettings": "Bienvenido a la página de configuración"
+  },
+  "components": {
+    "customButton": "Botón personalizado",
+    "customInputField": "Entrada personalizada presentada",
+    "customTitle": "Título Personalizado",
+    "customModal": "Modal personalizado",
+    "customRichEditor": "Editor rico personalizado",
+    "errorBoundary": "Límite de error"
+  },
+  "links": {
+    "usedForLink": "¡Esto se usa para enlace!",
+    "usedForButtonLink": "¡Esto se usa para el enlace de botones!"
+  },
+  "footer": {
+    "rightsReserved": "Todos los derechos reservados. MitrahSoft"
+  }
+}

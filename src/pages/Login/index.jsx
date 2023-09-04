@@ -15,9 +15,12 @@ import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';
 
 import './index.scss';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const { setHasStorage } = useContext(AuthContext);
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -51,11 +54,11 @@ const Login = () => {
             <div className="login-container">
               <Row>
                 <Col span={12}>
-                  <Title level={3}>Login</Title>
+                  <Title level={3}>{t('login.login')}</Title>
                 </Col>
                 <Col className="d-flex justify-content-end" span={12}>
                   <Button className="px-0" type="link">
-                    Don't have an account?
+                    {t('login.dontHaveAccount')}
                   </Button>
                 </Col>
               </Row>
@@ -64,7 +67,7 @@ const Login = () => {
                   <Col span={24}>
                     <Input
                       name="email"
-                      label="Email Address"
+                      label={t('labels.emailLabel')}
                       rules={[{ required: true, message: 'Please enter your Email!' }]}
                       className={'mb-0'}
                     />
@@ -74,7 +77,7 @@ const Login = () => {
                   <Col span={24}>
                     <Input
                       name="password"
-                      label="Password"
+                      label={t('labels.passwordLabel')}
                       type="password"
                       placeholder="Password"
                       rules={[{ required: true, message: 'Please enter your Password!' }]}
@@ -83,18 +86,18 @@ const Login = () => {
                 </Row>
                 <Row>
                   <Col span={12}>
-                    <CheckBox name="remember_me" label={'Keep me sign in'} />
+                    <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
                   </Col>
                   <Col className="d-flex justify-content-end" span={12}>
                     <Button className="px-0" type="link">
-                      Forgot Password ?
+                      {t('login.forgotPassword')}
                     </Button>
                   </Col>
                 </Row>
                 <Row>
                   <Col className="w-100" span={24}>
                     <Button className={'w-100'} htmlType="submit">
-                      Login
+                      {t('login.login')}
                     </Button>
                   </Col>
                 </Row>

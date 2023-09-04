@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'antd';
 import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 import CustomMenu from 'components/Menu';
 import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
@@ -13,27 +14,28 @@ const { Sider } = Layout;
 export default function CustomSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const [currentMenu, setCurrentMenu] = useState('');
 
   const sidebarMenu = [
     {
-      label: 'Home',
+      label: t('pages.home'),
       key: HOME_PATH,
       icon: <HomeOutlined />
     },
     {
-      label: 'Dashboard',
+      label: t('pages.dashboard'),
       key: DASHBOARD_PATH,
       icon: <DashboardOutlined />
     },
     {
-      label: 'Settings',
+      label: t('pages.settings'),
       key: SETTINGS_PATH,
       icon: <SettingOutlined />
     },
     {
-      label: 'Kitchen Sink',
+      label: t('pages.kitchenSink'),
       key: KITCHEN_SINK_PATH,
       icon: <AndroidOutlined />
     }
