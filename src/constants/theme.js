@@ -1,14 +1,8 @@
-import { theme } from 'antd';
+export const DARK_THEME = 'dark';
+export const LIGHT_THEME = 'light';
 
-const { defaultAlgorithm, darkAlgorithm, compactAlgorithm } = theme;
+export const DARK = '#141414';
+export const LIGHT = '#ffffff';
 
-export const getThemeConfig = isDarkMode => {
-  return {
-    components: {
-      Layout: {
-        colorBgHeader: isDarkMode ? '#141414' : '#ffffff'
-      }
-    },
-    algorithm: [isDarkMode ? darkAlgorithm : defaultAlgorithm, compactAlgorithm]
-  };
-};
+export const DARK_PRIMARY_BG = '#1668dc';
+export const LIGHT_PRIMARY_BG = '#e6f4ff';

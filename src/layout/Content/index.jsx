@@ -1,11 +1,10 @@
 import { Suspense, lazy } from 'react';
-import { Layout, Spin } from 'antd';
+import { Spin } from 'antd';
 import { Routes, Route } from 'react-router-dom';
 
 import { DASHBOARD_PATH, HOME_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
 import ErrorBoundary from 'components/ErrorBoundary';
-
-const { Content } = Layout;
+import Content from 'components/Content';
 
 export default function CustomContent() {
   const routeSources = [

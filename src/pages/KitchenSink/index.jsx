@@ -9,6 +9,7 @@ import Loader from 'components/Loader';
 import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
+import Switch from 'components/Switch';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -89,10 +90,12 @@ const KitchenSink = () => {
       </Card>
       <Card title="CustomRichEditor" size="middle" className="border border-dark">
         <Form name="sample_form" onFinish={onFinish}>
-          <Editor name="description" />
-          <Button htmlType="submit" className="mt-5">
-            Submit
-          </Button>
+          <Space direction="vertical" size="middle">
+            <Editor name="description" />
+            <Button htmlType="submit" className="mt-5">
+              Submit
+            </Button>
+          </Space>
         </Form>
       </Card>
       <Card title="ErrorBoundary" size="middle" className="border border-dark">
@@ -100,6 +103,14 @@ const KitchenSink = () => {
           <Button onClick={handleThrowError}>Throw Error</Button>
           {errorBoudary[0]}
         </ErrorBoundary>
+      </Card>
+      <Card title="CustomSwitch" size="middle" className="border border-dark">
+        <Form name="switch_form" onFinish={onFinish}>
+          <Switch name="toggle" />
+          <Button htmlType="submit" className="mt-3">
+            Submit
+          </Button>
+        </Form>
       </Card>
     </Space>
   );

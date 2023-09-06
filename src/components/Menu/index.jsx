@@ -1,20 +1,27 @@
+import { useEffect, useState } from 'react';
 import { Menu as AntdMenu } from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Menu = ({
-  menuItems = [],
-  mode = 'inline',
-  theme = 'dark',
-  selectedKeys,
-  onClick = () => {},
-  style = {},
-  ...rest
-}) => {
+const Menu = ({ menuItems = [], mode = 'inline', onClick = () => {}, style = {}, ...rest }) => {
+  const [selectedKeys, setSelectedKeys] = useState('');
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setSelectedKeys(location.pathname);
+  }, [location]);
+
+  const handleSidebarMenu = item => {
+    navigate(item.key);
+    setSelectedKeys(item.key);
+  };
+
   return (
     <AntdMenu
       selectedKeys={selectedKeys}
-      theme={theme}
       mode={mode}
-      onClick={onClick}
+      onClick={handleSidebarMenu}
       items={menuItems}
       style={style}
       {...rest}

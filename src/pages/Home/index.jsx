@@ -1,7 +1,5 @@
-import { Layout, Typography } from 'antd';
-
-const { Content } = Layout;
-const { Title } = Typography;
+import Content from 'components/Content';
+import Title from 'components/Title';
 
 const Home = () => {
   return (

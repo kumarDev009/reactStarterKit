@@ -1,22 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'antd';
 import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined } from '@ant-design/icons';
 
-import CustomMenu from 'components/Menu';
+import Menu from 'components/Menu';
 import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
-import { ThemeContext } from 'context/themeContext';
 import './index.scss';
 
 const { Sider } = Layout;
 
 export default function CustomSidebar() {
-  const [currentMenu, setCurrentMenu] = useState('');
-  const { isDarkMode } = useContext(ThemeContext);
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const sidebarMenu = [
     {
       label: 'Home',
@@ -40,15 +31,6 @@ export default function CustomSidebar() {
     }
   ];
 
-  useEffect(() => {
-    setCurrentMenu(location.pathname);
-  }, [location]);
-
-  const handleSidebarMenu = item => {
-    navigate(item.key);
-    setCurrentMenu(item.key);
-  };
-
   return (
     <Sider
       className="sidebar"
@@ -65,12 +47,7 @@ export default function CustomSidebar() {
         <img src="/assets/images/logo.png" alt="mainlogo" />
       </div>
       <div className="mt-3" style={{ height: '100vh' }}>
-        <CustomMenu
-          selectedKeys={[currentMenu]}
-          menuItems={sidebarMenu}
-          onClick={handleSidebarMenu}
-          theme={isDarkMode ? 'dark' : 'light'}
-        />
+        <Menu menuItems={sidebarMenu} />
       </div>
     </Sider>
   );

@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import { Avatar, Layout, Popover, Switch, theme } from 'antd';
+import { Avatar, Layout, Popover } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
 import { ThemeContext } from 'context/themeContext';
 import { removeStorage } from 'services/storage/index.js';
+import Switch from 'components/Switch';
 
 const { Header } = Layout;
 
@@ -50,8 +51,7 @@ export default function CustomHeader() {
           unCheckedChildren={<span className="toggle-icon">🌞</span>}
           checked={isDarkMode}
           onChange={toggleTheme}
-          className="theme-toggle-switch"
-          style={{ marginRight: '20px' }}
+          className="mr-1"
         />
         <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
           <Avatar

@@ -1,18 +1,15 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
+
 import { setStorage, getStorage } from '../services/storage';
+import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
 
 export const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
-  const storedTheme = getStorage('theme');
-  const [isDarkMode, setIsDarkMode] = useState(storedTheme === 'dark');
+  const [isDarkMode, setIsDarkMode] = useState(() => getStorage('theme') === DARK_THEME);
 
   useEffect(() => {
-    if (isDarkMode) {
-      setStorage('theme', 'dark');
-    } else {
-      setStorage('theme', 'light');
-    }
+    setStorage('theme', isDarkMode ? DARK_THEME : LIGHT_THEME);
   }, [isDarkMode]);
 
   const toggleTheme = () => {

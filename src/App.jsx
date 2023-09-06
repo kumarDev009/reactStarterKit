@@ -6,7 +6,7 @@ import Routers from 'routers';
 import AuthContextProvider from 'context/authContext';
 import { ThemeContext } from 'context/themeContext';
 import ErrorBoundary from 'components/ErrorBoundary';
-import { getThemeConfig } from 'constants/theme';
+import { getThemeConfig } from 'constants/themeConfig';
 import './index.scss';
 
 function App() {
