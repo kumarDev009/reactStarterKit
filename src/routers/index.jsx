@@ -4,7 +4,8 @@ import { Spin } from 'antd';
 
 import PrivateRoute from 'routers/PrivateRoute';
 import PublicRoute from 'routers/PublicRoute';
-import { HOME_PATH, INDEX_PATH, LOGIN_PATH, SIGNUP_PATH } from 'constants/route';
+import { HOME_PATH, INDEX_PATH, LOGIN_PATH, SIGNUP_PATH, WILD_CARD_PATH } from 'constants/route';
+import NotFound from 'pages/NotFound';
 
 const Login = lazy(() => import('pages/Login'));
 const SignUp = lazy(() => import('pages/SignUp'));
@@ -18,7 +19,7 @@ const Routers = () => {
         <Route path={SIGNUP_PATH} element={<PublicRoute component={<SignUp />} redirectUrl={LOGIN_PATH} />} />
         <Route path={LOGIN_PATH} element={<PublicRoute component={<Login />} redirectUrl={HOME_PATH} />} />
         <Route path={INDEX_PATH} element={<PrivateRoute component={<Layout />} redirectUrl={LOGIN_PATH} />} />
-        <Route path="*" element={<div className="d-flex justify-content-center mt-5">No Page Found</div>} />
+        <Route path={WILD_CARD_PATH} element={<NotFound />} />
       </Routes>
     </Suspense>
   );

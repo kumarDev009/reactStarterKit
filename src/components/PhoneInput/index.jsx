@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Select } from 'antd';
 import Input from 'components/Input';
-import countryList from 'constants/countryList';
+import countryCodeList from 'constants/countryCodeList';
 
 const { Option } = Select;
 
@@ -17,7 +17,8 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
   const [inputStatus, setInputStatus] = useState(countryDetails);
 
   const handlePhoneInput = phoneNumber => {
-    const selectedCountry = countryList.find(country => country?.phoneCode === parseInt(countryCode)) || countryList[0];
+    const selectedCountry =
+      countryCodeList.find(country => country?.phoneCode === parseInt(countryCode)) || countryCodeList[0];
     const phoneNumberWithCountryCode = selectedCountry?.phoneCode + phoneNumber;
     const isValidPhoneNumberWithCountry = selectedCountry?.regex?.test(phoneNumberWithCountryCode);
     const isValidPhoneNumber = selectedCountry?.regex?.test(phoneNumber);
@@ -36,12 +37,12 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
   };
 
   const handleCountryCode = value => {
-    const countryValues = value.split('-');
-    setCountryCode(countryValues[1]);
+    const [, code] = value.split('-');
+    setCountryCode(code);
   };
 
   const handleKeyPress = e => {
-    if (!/^[0-9]+$/.test(e.key) && !['Backspace', 'ArrowLeft', 'ArrowRight', 'Delete'].includes(e.key)) {
+    if (!/^[0-9]+$/.test(e.key)) {
       e.preventDefault();
     }
   };
@@ -54,16 +55,16 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
   };
 
   const countrySelector = (
-    <Select
+    <Select //TODO: Need to create the CustomSelect component
       showSearch={true}
       onChange={handleCountryCode}
       defaultValue={inputStatus.countryCode}
       style={{ width: 130 }}
     >
-      {countryList?.map((val, i) => {
+      {countryCodeList?.map((val, i) => {
         return (
           <Option value={val.short + '-' + val?.phoneCode} key={i}>
-            {val.emoji} {val.short} +{val.phoneCode}
+            {val.short} + {val.phoneCode}
           </Option>
         );
       })}
@@ -77,7 +78,6 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
       addonBefore={countrySelector}
       onChange={e => handlePhoneInput(e.target.value)}
       status={inputStatus.type}
-      isPhone
       onKeyPress={e => handleKeyPress(e)}
       rules={[{ required: true, message: 'Please enter your Phone Number!' }, { validator: validateInput }]}
       className={'mb-0'}

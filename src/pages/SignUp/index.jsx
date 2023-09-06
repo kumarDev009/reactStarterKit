@@ -22,8 +22,6 @@ import './index.scss';
 const { Link } = Typography;
 
 const SignUp = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordStatus, setPasswordStatus] = useState({});
 
   const onFinish = values => {
@@ -49,7 +47,7 @@ const SignUp = () => {
     if (complexityScore <= 2) {
       status = {
         ...status,
-        type: 'weak',
+        type: 'Weak',
         color: '#ff4d4f'
       };
     } else if (complexityScore <= 4) {
@@ -61,7 +59,7 @@ const SignUp = () => {
     } else if (complexityScore === 5) {
       status = {
         ...status,
-        type: 'strong',
+        type: 'Strong',
         color: '#1ee880'
       };
     }
@@ -70,7 +68,6 @@ const SignUp = () => {
 
   const handlePassword = e => {
     const value = e.target.value;
-    setPassword(value);
     const passwordStrength = passwordValidator(value);
     return setPasswordStatus(passwordStrength);
   };
@@ -78,12 +75,7 @@ const SignUp = () => {
   const headerProgressBar = () => {
     return (
       <div style={{ width: '400px' }}>
-        <ProgressBar
-          percent={passwordStatus.percent}
-          strokeLinecap="square"
-          strokeColor={passwordStatus.color}
-          showInfo={false}
-        />
+        <ProgressBar percent={passwordStatus.percent} strokeColor={passwordStatus.color} showInfo={false} />
         <div>{passwordStatus.type ? passwordStatus.type : 'Enter a password'}</div>
         <h6 className="pt-2 fw-bold">Suggestion</h6>
         <div>
@@ -97,17 +89,6 @@ const SignUp = () => {
         </div>
       </div>
     );
-  };
-
-  const handleConfirmPassword = e => {
-    return setConfirmPassword(e.target.value);
-  };
-
-  const confirmPasswordValidator = () => {
-    if (confirmPassword.length && password !== confirmPassword) {
-      return Promise.reject('The new password that you entered do not match!');
-    }
-    return Promise.resolve();
   };
 
   const checkboxValidator = (_, value) => {
@@ -148,7 +129,7 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <Popover placement="bottom" trigger="click" content={() => headerProgressBar()}>
+              <Popover placement="bottom" trigger="focus" content={() => headerProgressBar()}>
                 <Input
                   name="password"
                   label="Password"
@@ -170,10 +151,16 @@ const SignUp = () => {
                 placeholder="Confirm Password"
                 min={8}
                 rules={[
-                  { required: true, message: 'Please enter your ConfirmPassword!' },
-                  { validator: confirmPasswordValidator }
+                  { required: true, message: 'Please enter your confirm password!' },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (value !== '' && getFieldValue('password') !== value) {
+                        return Promise.reject('The new password that you entered do not match!');
+                      }
+                      return Promise.resolve();
+                    }
+                  })
                 ]}
-                onChange={handleConfirmPassword}
               />
             </Col>
           </Row>

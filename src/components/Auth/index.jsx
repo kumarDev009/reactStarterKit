@@ -1,8 +1,10 @@
-import { Col, Row } from 'antd';
+import { Col, Row, Layout, Card, Image } from 'antd';
 
 import { LOGIN_FOOTER_DISCLAIMER_TEXT } from 'constants/login';
 import AuthFooter from 'components/AuthFooter';
 import './index.scss';
+
+const { Content } = Layout;
 
 const AuthLayout = ({ children }) => {
   const footerAreaText = () => {
@@ -12,29 +14,25 @@ const AuthLayout = ({ children }) => {
   };
 
   return (
-    <>
-      <div className="bg-image"></div>
-      <div>
-        <div className="landing-screen">
-          <div className="official-logo">
-            <img src="/assets/images/logo.png" alt="mainlogo" />
-          </div>
-          <div className="parent-container">
-            <div className="container form-content">{children}</div>
-          </div>
-
-          <Row className="footer-disclaimer">
-            <Col span={9} className="d-flex justify-content-center">
-              <AuthFooter isLink={true} footerLabel={'This site is protected by '} linkText="Privacy Policy" />
-            </Col>
-            <Col span={7}></Col>
-            <Col span={8} className="d-flex gap-3">
-              {footerAreaText()}
-            </Col>
-          </Row>
-        </div>
-      </div>
-    </>
+    <Layout className="bg-image">
+      <Content className="landing-screen">
+        <Row className="official-logo">
+          <Image src="/assets/images/logo.png" alt="mainlogo" preview={false} height={100} />
+        </Row>
+        <Row className="parent-container">
+          <Card className="container form-content">{children}</Card>
+        </Row>
+        <Row className="footer-disclaimer">
+          <Col span={9} className="d-flex justify-content-center">
+            <AuthFooter isLink={true} footerLabel={'This site is protected by '} linkText="Privacy Policy" />
+          </Col>
+          <Col span={7}></Col>
+          <Col span={8} className="d-flex gap-3">
+            {footerAreaText()}
+          </Col>
+        </Row>
+      </Content>
+    </Layout>
   );
 };
 

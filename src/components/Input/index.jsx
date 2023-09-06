@@ -12,9 +12,8 @@ const Input = ({
   type = '',
   className = '',
   rules = [],
-  isPhone = false,
   autoFocus = false,
-  addonBefore = [],
+  addonBefore = null,
   ...rest
 }) => {
   const renderInputField = type => {
@@ -31,7 +30,7 @@ const Input = ({
             min={min}
             max={max}
             type={type}
-            addonBefore={isPhone && addonBefore}
+            addonBefore={addonBefore}
             placeholder={placeholder}
             {...rest}
           />
