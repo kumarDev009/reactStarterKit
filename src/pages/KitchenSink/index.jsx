@@ -9,6 +9,7 @@ import Loader from 'components/Loader';
 import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
+import TextArea from 'components/TextArea';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -100,6 +101,12 @@ const KitchenSink = () => {
           <Button onClick={handleThrowError}>Throw Error</Button>
           {errorBoudary[0]}
         </ErrorBoundary>
+      </Card>
+      <Card title="TextArea" size="middle" className="border border-dark">
+        <Form name="sample_textArea" onFinish={onFinish}>
+          <TextArea name="textArea" showCount rows={6} maxLength={100} />
+          <Button htmlType="submit">Submit</Button>
+        </Form>
       </Card>
     </Space>
   );
