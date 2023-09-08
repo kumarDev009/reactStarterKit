@@ -7,6 +7,7 @@ import CheckBox from 'components/CheckBox';
 import Input from 'components/Input';
 import Title from 'components/Title';
 import AuthFooter from 'components/AuthFooter';
+import PhoneInputField from 'components/PhoneInput';
 
 import { LOGIN_FOOTER_DISCLAIMER_TEXT, STATIC_LOGIN_CREDENTIALS } from 'constants/login';
 import { HOME_PATH } from 'constants/route';
@@ -89,6 +90,11 @@ const Login = () => {
                     <Button className="px-0" type="link">
                       Forgot Password ?
                     </Button>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col span={24}>
+                    <PhoneInputField />
                   </Col>
                 </Row>
                 <Row>

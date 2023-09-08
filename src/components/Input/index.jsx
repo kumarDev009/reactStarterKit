@@ -11,6 +11,7 @@ const Input = ({
   min = 0,
   type = '',
   className = '',
+  addonBefore = [],
   ...rest
 }) => {
   const renderInputField = type => {
@@ -27,6 +28,7 @@ const Input = ({
             max={max}
             type={type}
             placeholder={placeholder}
+            addonBefore={addonBefore}
             {...rest}
           />
         );
