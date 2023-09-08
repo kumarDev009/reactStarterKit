@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Form, Space } from 'antd';
+import { Form, Space } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 
 import Button from 'components/Button';
@@ -9,6 +9,7 @@ import Loader from 'components/Loader';
 import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
+import Card from 'components/Card';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
