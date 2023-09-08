@@ -18,14 +18,14 @@ export default function CustomSidebar() {
 
   const sidebarMenu = [
     {
-      label: 'Home',
-      key: HOME_PATH,
-      icon: <HomeOutlined />
-    },
-    {
       label: 'Dashboard',
       key: DASHBOARD_PATH,
       icon: <DashboardOutlined />
+    },
+    {
+      label: 'Home',
+      key: HOME_PATH,
+      icon: <HomeOutlined />
     },
     {
       label: 'Settings',

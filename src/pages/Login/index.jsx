@@ -9,7 +9,7 @@ import Title from 'components/Title';
 import AuthFooter from 'components/AuthFooter';
 
 import { LOGIN_FOOTER_DISCLAIMER_TEXT, STATIC_LOGIN_CREDENTIALS } from 'constants/login';
-import { HOME_PATH } from 'constants/route';
+import { DASHBOARD_PATH } from 'constants/route';
 
 import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';
@@ -29,7 +29,7 @@ const Login = () => {
       let submittedData = JSON.stringify(values);
       setStorage('username', values.email);
       setHasStorage(submittedData);
-      navigate(HOME_PATH, { replace: true });
+      navigate(DASHBOARD_PATH, { replace: true });
     } else {
       alert('Enter the valid email and password');
     }
