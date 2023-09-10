@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Col, Form, Row, Popover, Typography } from 'antd';
+import { Col, Form, Row, Popover } from 'antd';
 
+import Link from 'components/Link';
 import Title from 'components/Title';
 import Input from 'components/Input';
 import Button from 'components/Button';
@@ -18,8 +19,6 @@ import {
 } from 'constants/signup';
 
 import './index.scss';
-
-const { Link } = Typography;
 
 const SignUp = () => {
   const [passwordStatus, setPasswordStatus] = useState({});

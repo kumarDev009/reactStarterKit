@@ -4,6 +4,7 @@ import { LOGIN_FOOTER_DISCLAIMER_TEXT } from 'constants/login';
 import AuthFooter from 'components/AuthFooter';
 import './index.scss';
 
+// TODO: We need to replace this from components/Content once the other PR merge.
 const { Content } = Layout;
 
 const AuthLayout = ({ children }) => {
@@ -19,7 +20,7 @@ const AuthLayout = ({ children }) => {
         <Row className="official-logo">
           <Image src="/assets/images/logo.png" alt="mainlogo" preview={false} height={100} />
         </Row>
-        <Row className="parent-container">
+        <Row justify={'center'} align={'middle'} className="parent-container">
           <Card className="container form-content">{children}</Card>
         </Row>
         <Row className="footer-disclaimer">
