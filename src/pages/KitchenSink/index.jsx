@@ -92,7 +92,7 @@ const KitchenSink = () => {
         <Form name="sample_form" onFinish={onFinish}>
           <Space direction="vertical" size="middle">
             <Editor name="description" />
-            <Button htmlType="submit" className="mt-5">
+            <Button htmlType="submit" className="mt-3">
               Submit
             </Button>
           </Space>

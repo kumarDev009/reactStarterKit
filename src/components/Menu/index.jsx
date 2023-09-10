@@ -14,7 +14,6 @@ const Menu = ({ menuItems = [], mode = 'inline', onClick = () => {}, style = {},
 
   const handleSidebarMenu = item => {
     navigate(item.key);
-    setSelectedKeys(item.key);
   };
 
   return (

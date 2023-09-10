@@ -12,11 +12,11 @@ const Layout = lazy(() => import('layout'));
 const Routers = () => {
   return (
     // Todo: Need to update this fallback component with our blockUI component once its ready.
-    <Suspense fallback={<div className="d-flex justify-content-center mt-5">{<Spin />}</div>}>
+    <Suspense fallback={<div className="d-flex justify-content-center mt-3">{<Spin />}</div>}>
       <Routes>
         <Route path={LOGIN_PATH} element={<PublicRoute component={<Login />} redirectedUrl={HOME_PATH} />} />
         <Route path={INDEX_PATH} element={<PrivateRoute component={<Layout />} redirectedUrl={LOGIN_PATH} />} />
-        <Route path="*" element={<div className="d-flex justify-content-center mt-5">No Page Found</div>} />
+        <Route path="*" element={<div className="d-flex justify-content-center mt-3">No Page Found</div>} />
       </Routes>
     </Suspense>
   );

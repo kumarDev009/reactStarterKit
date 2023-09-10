@@ -4,12 +4,12 @@ const { Item: FormItem } = Form;
 
 const Switch = ({
   name = '',
-  checkedChildren = '',
-  unCheckedChildren = '',
+  checkedChildren = null,
+  unCheckedChildren = null,
   checked = false,
   onChange = () => {},
   className = '',
-  style = { marginBottom: 0 },
+  style = {},
   ...rest
 }) => {
   return (
