@@ -51,7 +51,7 @@ export default function CustomHeader() {
           unCheckedChildren={<span className="toggle-icon">🌞</span>}
           checked={isDarkMode}
           onChange={toggleTheme}
-          className="mr-3"
+          className="mx-3"
         />
         <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
           <Avatar
