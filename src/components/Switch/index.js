@@ -13,7 +13,7 @@ const Switch = ({
   ...rest
 }) => {
   return (
-    <FormItem name={name} style={style} valuePropName="checked" {...rest}>
+    <FormItem name={name} style={style} {...rest}>
       <AntdSwitch
         checkedChildren={checkedChildren}
         unCheckedChildren={unCheckedChildren}

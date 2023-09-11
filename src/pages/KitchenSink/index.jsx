@@ -15,6 +15,7 @@ const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorBoudary, setErrorBoudary] = useState([]);
+  const [checked, setChecked] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -106,7 +107,7 @@ const KitchenSink = () => {
       </Card>
       <Card title="CustomSwitch" size="middle" className="border border-dark">
         <Form name="switch_form" onFinish={onFinish}>
-          <Switch name="toggle" />
+          <Switch name="toggle" onChange={() => setChecked(prev => !prev)} checked={checked} />
           <Button htmlType="submit" className="mt-3">
             Submit
           </Button>
