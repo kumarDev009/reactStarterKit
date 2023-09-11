@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Avatar, Layout, Popover } from 'antd';
+import { Avatar, Form, Layout, Popover } from 'antd';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
@@ -46,13 +46,15 @@ export default function CustomHeader() {
   return (
     <div className="header">
       <Header className="d-flex justify-content-end align-items-center pe-4">
-        <Switch
-          checkedChildren={<span className="toggle-icon">🌜</span>}
-          unCheckedChildren={<span className="toggle-icon">🌞</span>}
-          checked={isDarkMode}
-          onChange={toggleTheme}
-          className="mx-3 mt-3"
-        />
+        <Form name="theme">
+          <Switch
+            checkedChildren={<span className="toggle-icon">🌜</span>}
+            unCheckedChildren={<span className="toggle-icon">🌞</span>}
+            checked={isDarkMode}
+            onChange={toggleTheme}
+            className="mx-3 mt-3"
+          />
+        </Form>
         <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
           <Avatar
             className="cursor-pointer"
