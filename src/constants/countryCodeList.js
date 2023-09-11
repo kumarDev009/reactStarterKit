@@ -7,8 +7,6 @@ const countryCodeList = [
   {
     phoneCode: 1,
     short: 'CA',
-    label: 'Canada',
-    value: '1',
     regex: /^((\+1|1)?( |-)?)?(\([2-9][0-9]{2}\)|[2-9][0-9]{2})( |-)?([2-9][0-9]{2}( |-)?[0-9]{4})$/
   },
   {
