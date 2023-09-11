@@ -2,8 +2,9 @@ import { Suspense, lazy } from 'react';
 import { Layout, Spin } from 'antd';
 import { Routes, Route } from 'react-router-dom';
 
-import { DASHBOARD_PATH, HOME_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
+import { DASHBOARD_PATH, HOME_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH, WILD_CARD_PATH } from 'constants/route';
 import ErrorBoundary from 'components/ErrorBoundary';
+import NotFound from 'pages/NotFound';
 
 const { Content } = Layout;
 
@@ -36,8 +37,7 @@ export default function CustomContent() {
             {routeSources.map(({ path, component: Component }) => (
               <Route key={path} path={path} element={<Component />} />
             ))}
-            {/* TODO: Design our own or show antd result for not found page */}
-            <Route path={'*'} element={<div>No path found!!</div>} />
+            <Route path={WILD_CARD_PATH} element={<NotFound />} />
           </Routes>
         </Content>
       </Suspense>
