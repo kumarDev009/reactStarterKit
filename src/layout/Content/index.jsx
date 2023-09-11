@@ -7,8 +7,6 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import Content from 'components/Content';
 import NotFound from 'pages/NotFound';
 
-const { Content } = Layout;
-
 export default function CustomContent() {
   const routeSources = [
     {
