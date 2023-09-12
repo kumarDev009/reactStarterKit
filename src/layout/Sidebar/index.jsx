@@ -30,31 +30,31 @@ export default function CustomSidebar() {
       submenu: [
         {
           label: 'Submenu 1',
-          key: 'submenu1_path',
+          key: 'submenu1-path',
           icon: <DashboardOutlined />,
           submenu: [
             {
               label: 'Sub-submenu 1',
-              key: HOME_PATH,
+              key: '/Sub-submenu-1',
               icon: <SettingOutlined />,
-              submenu: [{ label: 'Submenu 1', key: 'submenu1_path', icon: <DashboardOutlined /> }]
+              submenu: [{ label: 'Submenu 1', key: '/submenu1-path', icon: <DashboardOutlined /> }]
             },
             {
               label: 'Sub-submenu 2',
-              key: SETTINGS_PATH,
+              key: '/Sub-submenu-2',
               icon: <HomeOutlined />
             },
             {
               label: 'Sub-submenu 3',
-              key: HOME_PATH,
+              key: '/Sub-submenu-3',
               icon: <SettingOutlined />
             }
             // ... add more nested submenus as needed
           ]
         },
         {
-          label: 'Settings',
-          key: SETTINGS_PATH,
+          label: 'Sub-submenu 4',
+          key: '/Sub-submenu-4',
           icon: <SettingOutlined />
         }
         // ... add more submenus as needed

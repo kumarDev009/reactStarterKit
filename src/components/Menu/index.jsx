@@ -1,3 +1,4 @@
+import { useMemo, useCallback } from 'react';
 import { Menu as AntdMenu, Tooltip } from 'antd';
 
 export default function CustomMenu({
@@ -9,38 +10,55 @@ export default function CustomMenu({
   onClick = () => {},
   ...rest
 }) {
-  const renderTooltip = (label, hasSubmenu) => {
-    if (hasSubmenu && !collapsed) {
-      return (
-        <Tooltip title={label} placement="right">
-          <span>{label}</span>
-        </Tooltip>
-      );
-    }
-    return <span>{label}</span>;
-  };
-
-  const renderMenuItems = (items, isNested = false) => {
-    return items.map(item => {
-      const hasSubmenu = item.submenu && item.submenu.length > 0;
-      if (hasSubmenu) {
+  const renderTooltip = useCallback(
+    (label, hasSubmenu) => {
+      if (!collapsed && hasSubmenu) {
         return (
-          <AntdMenu.SubMenu key={item.key} title={renderTooltip(item.label, true)} icon={item.icon}>
-            {renderMenuItems(item.submenu, true)}
-          </AntdMenu.SubMenu>
+          <Tooltip title={label} placement="right">
+            {label}
+          </Tooltip>
         );
       }
-      return (
-        <AntdMenu.Item key={item.key} icon={item.icon} onClick={() => onClick(item)}>
-          {renderTooltip(item.label, isNested)}
-        </AntdMenu.Item>
-      );
-    });
-  };
+      return label;
+    },
+    [collapsed]
+  );
+
+  const constructMenuItems = useCallback(
+    (items, isNested = false) => {
+      return items.map(({ key, icon, label, submenu }) => {
+        const hasSubmenu = submenu && submenu.length > 0;
+
+        if (hasSubmenu) {
+          return {
+            key,
+            icon,
+            label: renderTooltip(label, isNested),
+            children: constructMenuItems(submenu, true)
+          };
+        }
+
+        return {
+          key,
+          icon,
+          label: renderTooltip(label, isNested)
+        };
+      });
+    },
+    [renderTooltip]
+  );
+
+  const listOfItems = useMemo(() => constructMenuItems(menuItems), [menuItems, constructMenuItems]);
 
   return (
-    <AntdMenu key={collapsed ? 'collpsed' : 'expand'} selectedKeys={selectedKeys} theme={theme} mode={mode} {...rest}>
-      {renderMenuItems(menuItems)}
-    </AntdMenu>
+    <AntdMenu
+      key={collapsed ? 'collapsed' : 'expand'}
+      selectedKeys={selectedKeys}
+      theme={theme}
+      mode={mode}
+      onClick={onClick}
+      items={listOfItems}
+      {...rest}
+    />
   );
 }
