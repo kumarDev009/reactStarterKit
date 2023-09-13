@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Col, Form, Row, Layout } from 'antd';
+import { Col, Form, Row } from 'antd';
 
 import Button from 'components/Button';
 import CheckBox from 'components/CheckBox';
