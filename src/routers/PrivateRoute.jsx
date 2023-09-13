@@ -3,10 +3,10 @@ import { Navigate } from 'react-router-dom';
 
 import { AuthContext } from 'context/authContext';
 
-const PrivateRoute = ({ component, redirectedUrl }) => {
+const PrivateRoute = ({ component, redirectUrl }) => {
   const { hasStorage } = useContext(AuthContext);
   if (!hasStorage) {
-    return <Navigate to={redirectedUrl} />;
+    return <Navigate to={redirectUrl} />;
   }
   return component;
 };
