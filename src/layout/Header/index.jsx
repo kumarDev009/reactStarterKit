@@ -1,21 +1,16 @@
 import { useContext } from 'react';
-import { Avatar, Layout, Popover } from 'antd';
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Layout, Popover, Row, Col } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
 import { removeStorage } from 'services/storage/index.js';
+import { menuArr } from 'constants/Menu';
 
 const { Header } = Layout;
 
 export default function CustomHeader() {
   const { setHasStorage } = useContext(AuthContext);
 
-  const menuArr = [
-    {
-      label: 'Logout',
-      icon: LogoutOutlined
-    }
-  ];
   const headerProfileIcon = () => {
     return (
       <div>
@@ -41,25 +36,21 @@ export default function CustomHeader() {
   };
 
   return (
-    <div className="header">
-      <Header className="d-flex space-between align-items-center">
-        <div className="home-screen-logo">
-          <img src="/assets/images/logo.png" alt="mainlogo" style={{ width: '60%', filter: 'brightness(1.5)' }} />
-        </div>
-        <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
-          <Avatar
-            className="cursor-pointer"
-            style={{ backgroundColor: '#ffffff' }}
-            size={40}
-            icon={
-              <UserOutlined
-                className="d-flex justify-content-center align-items-center h-100"
-                style={{ color: 'black' }}
-              />
-            }
-          />
-        </Popover>
-      </Header>
-    </div>
+    <Row className="header">
+      <Col span={24}>
+        <Header className="d-flex justify-content-between align-items-center p-4">
+          <Row className="home-screen-logo">
+            <img src="/assets/images/logo.png" alt="mainlogo" />
+          </Row>
+          <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
+            <Avatar
+              className="cursor-pointer"
+              size={40}
+              icon={<UserOutlined className="d-flex justify-content-center align-items-center h-100" />}
+            />
+          </Popover>
+        </Header>
+      </Col>
+    </Row>
   );
 }

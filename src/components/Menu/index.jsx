@@ -8,44 +8,36 @@ export default function CustomMenu({
   selectedKeys = [],
   collapsed = false,
   onClick = () => {},
+  placement = 'right',
   ...rest
 }) {
-  const renderTooltip = useCallback(
+  const renderMenuLabel = useCallback(
     (label, hasSubmenu) => {
       if (!collapsed && hasSubmenu) {
         return (
-          <Tooltip title={label} placement="right">
+          <Tooltip title={label} placement={placement}>
             {label}
           </Tooltip>
         );
       }
       return label;
     },
-    [collapsed]
+    [collapsed, placement]
   );
 
   const constructMenuItems = useCallback(
     (items, isNested = false) => {
       return items.map(({ key, icon, label, submenu }) => {
-        const hasSubmenu = submenu && submenu.length > 0;
-
-        if (hasSubmenu) {
-          return {
-            key,
-            icon,
-            label: renderTooltip(label, isNested),
-            children: constructMenuItems(submenu, true)
-          };
-        }
-
+        const hasSubmenu = submenu && submenu?.length;
         return {
           key,
           icon,
-          label: renderTooltip(label, isNested)
+          label: renderMenuLabel(label, isNested),
+          ...(hasSubmenu && { children: constructMenuItems(submenu, true) })
         };
       });
     },
-    [renderTooltip]
+    [renderMenuLabel]
   );
 
   const listOfItems = useMemo(() => constructMenuItems(menuItems), [menuItems, constructMenuItems]);

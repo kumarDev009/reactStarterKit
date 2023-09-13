@@ -1,9 +1,8 @@
 .header {
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-
-  .ant-layout-header {
-    padding: 1rem;
+  .home-screen-logo {
+    img {
+      width: 20%;
+      filter: brightness(1.5);
+    }
   }
 }
