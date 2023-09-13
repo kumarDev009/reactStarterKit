@@ -11,12 +11,21 @@ const Button = ({
   loading = false,
   title = '',
   placement = 'top',
+  block = false,
   ...rest
 }) => {
   return (
     <FormItem {...rest}>
       <Tooltip title={title} placement={placement}>
-        <AntdButton onClick={onClick} className={className} type={type} htmlType={htmlType} loading={loading} {...rest}>
+        <AntdButton
+          onClick={onClick}
+          className={className}
+          type={type}
+          htmlType={htmlType}
+          loading={loading}
+          block={block}
+          {...rest}
+        >
           {children}
         </AntdButton>
       </Tooltip>

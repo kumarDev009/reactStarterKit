@@ -10,6 +10,7 @@ import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Switch from 'components/Switch';
+import ProgressBar from 'components/ProgressBar';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,6 +76,7 @@ const KitchenSink = () => {
           placeholder="Input Field"
           className={'mb-0'}
         />
+        <ProgressBar />
       </Card>
       <Card title="CustomTitle" size="middle" className="border border-dark">
         <Title level={3}>Custom Title</Title>
