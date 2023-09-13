@@ -11,7 +11,6 @@ const Input = ({
   min = 0,
   type = '',
   className = '',
-  addonBefore = [],
   rules = [],
   autoFocus = false,
   addonBefore = null,
