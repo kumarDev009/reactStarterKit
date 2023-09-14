@@ -16,8 +16,8 @@ const Routers = () => {
     // Todo: Need to update this fallback component with our blockUI component once its ready.
     <Suspense fallback={<div className="d-flex justify-content-center mt-5">{<Spin />}</div>}>
       <Routes>
-        <Route path={LOGIN_PATH} element={<PublicRoute component={<Login />} redirectedUrl={DASHBOARD_PATH} />} />
-        <Route path={INDEX_PATH} element={<PrivateRoute component={<Layout />} redirectedUrl={LOGIN_PATH} />} />
+        <Route path={INDEX_PATH} element={<PrivateRoute component={<Layout />} redirectUrl={LOGIN_PATH} />} />
+        <Route path={LOGIN_PATH} element={<PublicRoute component={<Login />} redirectUrl={DASHBOARD_PATH} />} />
         <Route path={SIGNUP_PATH} element={<PublicRoute component={<SignUp />} redirectUrl={LOGIN_PATH} />} />
         <Route path={WILD_CARD_PATH} element={<NotFound />} />
       </Routes>
