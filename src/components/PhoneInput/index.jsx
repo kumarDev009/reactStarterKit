@@ -1,86 +1,50 @@
-import { useState } from 'react';
-import { Select } from 'antd';
+import { useRef } from 'react';
+import Select from 'components/Select';
 import Input from 'components/Input';
 import countryCodeList from 'constants/countryCodeList';
-
-const { Option } = Select;
+import { phoneNumberValidation } from 'utils/phoneNumberValidation';
 
 const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = {}, rules = [], ...rest }) => {
-  let countryDetails = {
-    countryCode: 'IN-91',
-    isValidPhoneNumber: false,
-    type: '',
-    phoneNumber: 0
-  };
-
-  const [countryCode, setCountryCode] = useState(0);
-  const [inputStatus, setInputStatus] = useState(countryDetails);
-
-  const handlePhoneInput = phoneNumber => {
-    const selectedCountry =
-      countryCodeList.find(country => country?.phoneCode === parseInt(countryCode)) || countryCodeList[0];
-    const phoneNumberWithCountryCode = selectedCountry?.phoneCode + phoneNumber;
-    const isValidPhoneNumberWithCountry = selectedCountry?.regex?.test(phoneNumberWithCountryCode);
-    const isValidPhoneNumber = selectedCountry?.regex?.test(phoneNumber);
-
-    if (!isValidPhoneNumberWithCountry || !isValidPhoneNumber) {
-      countryDetails = { ...countryDetails, type: 'error', phoneNumber };
-    } else {
-      countryDetails = {
-        ...countryDetails,
-        isValidPhoneNumber: !countryDetails.isValidPhoneNumber,
-        type: 'success',
-        phoneNumber
-      };
-    }
-    setInputStatus(countryDetails);
-  };
-
-  const handleCountryCode = value => {
-    const [, code] = value.split('-');
-    setCountryCode(code);
-  };
+  const inputRef = useRef();
 
   const handleKeyPress = e => {
-    if (!/^[0-9]+$/.test(e.key)) {
+    if (e.target === inputRef.current && !/^[0-9]+$/.test(e.key)) {
       e.preventDefault();
     }
   };
 
-  const validateInput = () => {
-    if (inputStatus.phoneNumber.length && inputStatus.type === 'error') {
-      return Promise.reject('Please check the phone number');
-    }
-    return Promise.resolve();
-  };
-
   const countrySelector = (
-    <Select //TODO: Need to create the CustomSelect component
-      showSearch={true}
-      onChange={handleCountryCode}
-      defaultValue={inputStatus.countryCode}
-      style={{ width: 130 }}
-    >
-      {countryCodeList?.map((val, i) => {
-        return (
-          <Option value={val.short + '-' + val?.phoneCode} key={i}>
-            {val.short} + {val.phoneCode}
-          </Option>
-        );
-      })}
-    </Select>
+    <Select
+      name="country"
+      showSearch
+      options={countryCodeList}
+      defaultValue="IN +91"
+      noStyle
+      popupClassName="w-auto"
+      optionLabelProp="value"
+    />
   );
 
   return (
     <Input
-      name={name}
-      label={label}
+      name={'phoneNumber'}
+      label={'Phone Number'}
       addonBefore={countrySelector}
-      onChange={e => handlePhoneInput(e.target.value)}
-      status={inputStatus.type}
       onKeyPress={e => handleKeyPress(e)}
-      rules={[{ required: true, message: 'Please enter your Phone Number!' }, { validator: validateInput }]}
-      className={'mb-0'}
+      ref={inputRef}
+      rules={[
+        { required: true, message: 'Please enter your Phone Number!' },
+        ({ getFieldValue }) => ({
+          validator(_, value) {
+            const countryCode = getFieldValue('country') || '';
+            const { isValidPhoneNumber, isValidPhoneNumberWithCountry } = phoneNumberValidation(countryCode, value);
+            if (value?.length && (!isValidPhoneNumberWithCountry || !isValidPhoneNumber)) {
+              return Promise.reject('Please check the phone number!');
+            }
+            return Promise.resolve();
+          }
+        })
+      ]}
       {...rest}
     />
   );
