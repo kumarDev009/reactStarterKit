@@ -11,21 +11,26 @@ const Input = ({
   min = 0,
   type = '',
   className = '',
+  rules = [],
+  autoFocus = false,
+  addonBefore = null,
   ...rest
 }) => {
   const renderInputField = type => {
     switch (type) {
       case 'password':
-        return <AntdInput.Password placeholder={placeholder} />;
+        return <AntdInput.Password placeholder={placeholder} onChange={onChange} {...rest} />;
 
       default:
         return (
           <AntdInput
             classNames={className}
             onChange={onChange}
+            autoFocus={autoFocus}
             min={min}
             max={max}
             type={type}
+            addonBefore={addonBefore}
             placeholder={placeholder}
             {...rest}
           />
@@ -33,13 +38,9 @@ const Input = ({
     }
   };
   return (
-    <div>
-      {/* TODO: Handle this label within form item */}
-      <div>{label}</div>
-      <FormItem className="mt-2" name={name} {...rest}>
-        {renderInputField(type)}
-      </FormItem>
-    </div>
+    <FormItem name={name} label={label} rules={rules} {...rest}>
+      {renderInputField(type)}
+    </FormItem>
   );
 };
 
