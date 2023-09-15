@@ -32,7 +32,7 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
         { required: true, message: 'Please enter your Phone Number!' },
         ({ getFieldValue }) => ({
           validator(_, value) {
-            const countryCode = getFieldValue('country') || '';
+            const countryCode = getFieldValue('country') || 'In +91';
             const { isValidPhoneNumber, isValidPhoneNumberWithCountry } = phoneNumberValidation(countryCode, value);
             if (value?.length && (!isValidPhoneNumberWithCountry || !isValidPhoneNumber)) {
               return Promise.reject('Please check the phone number!');
