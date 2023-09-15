@@ -9,10 +9,18 @@ const Select = ({ name = '', showSearch = false, noStyle = false, onChange = () 
     <FormItem name={name} noStyle={noStyle} {...rest}>
       <AntdSelect showSearch={showSearch} onChange={onChange} {...rest}>
         {options.map((option, index) => {
+          const optionValue = `${option.short} +${option.phoneCode}`;
+          const getLabelValue = () => {
+            return (
+              <>
+                <span className="country-dropdown">{option.short}</span>
+                {` ${option.label} +${option.phoneCode}`}
+              </>
+            );
+          };
           return (
-            <Option key={index} value={`${option.short} +${option.phoneCode}`}>
-              <span className="country-shortCode">{option.short}</span>
-              {` ${option.label} +${option.phoneCode}`}
+            <Option key={index} value={optionValue}>
+              {getLabelValue()}
             </Option>
           );
         })}

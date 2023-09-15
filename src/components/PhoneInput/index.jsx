@@ -1,14 +1,11 @@
-import { useRef } from 'react';
 import Select from 'components/Select';
 import Input from 'components/Input';
 import countryCodeList from 'constants/countryCodeList';
 import { phoneNumberValidation } from 'utils/phoneNumberValidation';
 
 const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = {}, rules = [], ...rest }) => {
-  const inputRef = useRef();
-
   const handleKeyPress = e => {
-    if (e.target === inputRef.current && !/^[0-9]+$/.test(e.key)) {
+    if (e.target.id === 'signUp_form_phoneNumber' && !/^[0-9]+$/.test(e.key)) {
       e.preventDefault();
     }
   };
@@ -30,8 +27,7 @@ const PhoneInputField = ({ name = '', label = '', layout = {}, defaultCountry = 
       name={'phoneNumber'}
       label={'Phone Number'}
       addonBefore={countrySelector}
-      onKeyPress={e => handleKeyPress(e)}
-      ref={inputRef}
+      onKeyPress={handleKeyPress}
       rules={[
         { required: true, message: 'Please enter your Phone Number!' },
         ({ getFieldValue }) => ({
