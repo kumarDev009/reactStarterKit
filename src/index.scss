@@ -1,21 +1,15 @@
+@import 'layout/Header';
+@import 'layout';
+@import 'bootstrap/scss/bootstrap';
 @import './antd-customise.scss';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.d-flex {
-  display: flex;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.align-item-center {
-  align-items: center;
-}
-
-.mt-5 {
-  margin-top: 1rem;
 }
