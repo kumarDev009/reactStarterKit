@@ -8,6 +8,7 @@ import Footer from 'layout/Footer';
 const { Content: AntdContent } = Layout;
 
 export default function LayoutElement() {
+  /* TODO: Later revisit this page for redesign with built-in component. */
   return (
     <Layout className="vh-100 layoutWrapper">
       <Header />

@@ -1,11 +1,11 @@
-import { Layout as AntdLayout } from 'antd';
+import { Layout as AntdLayout, Row } from 'antd';
 
 const { Footer: AntdFooter } = AntdLayout;
 
 export default function CustomFooter() {
   return (
-    <div className="d-flex justify-content-center align-item-center">
+    <Row justify={'center'} align={'middle'}>
       <AntdFooter>{new Date().getFullYear()} © All Right Reserved. MitrahSoft</AntdFooter>
-    </div>
+    </Row>
   );
 }

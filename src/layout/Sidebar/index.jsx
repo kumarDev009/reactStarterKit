@@ -34,7 +34,7 @@ export default function CustomSidebar() {
       onBreakpoint={broken => {
         console.log(broken);
       }}
-      onCollapse={collapsed => setCollapsed(collapsed)}
+      onCollapse={setCollapsed}
     >
       <div className="vh-100">
         <CustomMenu

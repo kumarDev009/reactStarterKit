@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Avatar, Layout, Popover, Row, Col } from 'antd';
+import { Avatar, Layout, Popover, Row } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
@@ -36,21 +36,13 @@ export default function CustomHeader() {
   };
 
   return (
-    <Row className="header">
-      <Col span={24}>
-        <Header className="d-flex justify-content-between align-items-center p-4">
-          <Row className="home-screen-logo">
-            <img src="/assets/images/logo.png" alt="mainlogo" />
-          </Row>
-          <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
-            <Avatar
-              className="cursor-pointer"
-              size={40}
-              icon={<UserOutlined className="d-flex justify-content-center align-items-center h-100" />}
-            />
-          </Popover>
-        </Header>
-      </Col>
-    </Row>
+    <Header className="px-2">
+      <Row justify={'space-between'} align="middle">
+        <img src="/assets/images/logo.png" className="home-screen-logo" alt="mainlogo" />
+        <Popover placement="bottom" content={headerProfileIcon} trigger="click">
+          <Avatar size={40} className="cursor-pointer" icon={<UserOutlined />} />
+        </Popover>
+      </Row>
+    </Header>
   );
 }
