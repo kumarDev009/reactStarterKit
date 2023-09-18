@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 .bg-image {
   width: 100%;
-  height: 100vh;
+  min-height: 100%;
   position: absolute;
   background-image: $bg-image;
   background-attachment: fixed;
@@ -14,18 +14,17 @@
     content: '';
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     backdrop-filter: blur(7px);
   }
 }
 
 .landing-screen {
-  .parent-container {
-    height: 90vh;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .official-logo {
-    height: 5vh;
     display: flex;
     justify-content: flex-start;
   }
@@ -37,20 +36,14 @@
     border-radius: 5px;
   }
 
-  .footer-disclaimer-mob {
-    display: none;
+  .footer-links {
+    text-align: center;
   }
 
   @media screen and (max-width: 992px) {
     .official-logo {
       display: flex;
       justify-content: center;
-    }
-    .footer-disclaimer {
-      display: none;
-    }
-    .footer-disclaimer-mob {
-      display: block;
     }
   }
   @media screen and (max-width: 576px) {

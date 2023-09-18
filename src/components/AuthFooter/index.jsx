@@ -1,14 +1,28 @@
-import { Typography } from 'antd';
+import { Row, Col } from 'antd';
+import Link from 'components/Link';
 
-const { Text, Link } = Typography;
-
-/* TODO: Need to overwrite this with AuthFooter component */
-export const AuthFooter = ({ type = '', footerLabel = '', isLink = false, linkText = '', ...rest }) => {
+const AuthFooter = () => {
   return (
-    <Text type={type} {...rest}>
-      {footerLabel}
-      {isLink ? <Link>{linkText}</Link> : null}
-    </Text>
+    <Row className="mt-4">
+      <Col lg={12} sm={24} xs={24}>
+        <Row className="d-flex mb-4" justify={'center'}>
+          This site is protected by &nbsp;{<Link href="https://privacypolicy">Privacy policy</Link>}
+        </Row>
+      </Col>
+      <Col lg={12} sm={24} xs={24}>
+        <Row justify={'center'}>
+          <Col sm={8} xs={16} className="mb-4 footer-links">
+            <Link href="https://privacypolicy">Privacy policy</Link>
+          </Col>
+          <Col sm={8} xs={16} className="mb-4 footer-links">
+            <Link href="https://termsandconditions">Terms and Conditions</Link>
+          </Col>
+          <Col sm={8} xs={16} className="mb-4 footer-links">
+            <Link href="https://ca-privacynotice">CA Privacy Notice</Link>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
   );
 };
 
