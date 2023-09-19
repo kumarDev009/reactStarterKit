@@ -1,21 +1,16 @@
 import { useContext } from 'react';
-import { Avatar, Layout, Popover } from 'antd';
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Layout, Popover, Row } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 
 import { AuthContext } from 'context/authContext';
 import { removeStorage } from 'services/storage/index.js';
+import { menuArr } from 'constants/Menu';
 
 const { Header } = Layout;
 
 export default function CustomHeader() {
   const { setHasStorage } = useContext(AuthContext);
 
-  const menuArr = [
-    {
-      label: 'Logout',
-      icon: LogoutOutlined
-    }
-  ];
   const headerProfileIcon = () => {
     return (
       <div>
@@ -41,22 +36,13 @@ export default function CustomHeader() {
   };
 
   return (
-    <div className="header">
-      <Header className="d-flex justify-content-end align-items-center pe-4">
-        <Popover placement="bottom" content={() => headerProfileIcon()} trigger="click">
-          <Avatar
-            className="cursor-pointer"
-            style={{ backgroundColor: '#ffffff' }}
-            size={40}
-            icon={
-              <UserOutlined
-                className="d-flex justify-content-center align-items-center h-100"
-                style={{ color: 'black' }}
-              />
-            }
-          />
+    <Header className="px-2">
+      <Row justify={'space-between'} align="middle">
+        <img src="/assets/images/logo.png" className="home-screen-logo" alt="mainlogo" />
+        <Popover placement="bottom" content={headerProfileIcon} trigger="click">
+          <Avatar size={40} className="cursor-pointer" icon={<UserOutlined />} />
         </Popover>
-      </Header>
-    </div>
+      </Row>
+    </Header>
   );
 }
