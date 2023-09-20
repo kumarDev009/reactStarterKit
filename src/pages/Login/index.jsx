@@ -45,9 +45,9 @@ const Login = () => {
   return (
     <AuthLayout>
       <Row justify="space-between">
-        <Title level={3}>Login</Title>
+        <Title level={3}>{t('login.login')}</Title>
         <Button className="px-0" type="link" onClick={navigateToRegister}>
-          Don't have an account? Register
+          {t('login.dontHaveAccount')}
         </Button>
       </Row>
 
@@ -57,7 +57,7 @@ const Login = () => {
             <Input
               name="email"
               autoFocus={true}
-              label="Email Address"
+              label={t('labels.emailLabel')}
               rules={[{ required: true, message: 'Please enter your Email!' }]}
             />
           </Col>
@@ -66,7 +66,7 @@ const Login = () => {
           <Col span={24}>
             <Input
               name="password"
-              label="Password"
+              label={t('labels.passwordLabel')}
               type="password"
               placeholder="Password"
               rules={[{ required: true, message: 'Please enter your Password!' }]}
@@ -74,9 +74,9 @@ const Login = () => {
           </Col>
         </Row>
         <Row justify="space-between">
-          <CheckBox name="remember_me" label={'Keep me sign in'} />
+          <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
           <Button className="px-0" type="link">
-            Forgot Password ?
+            {t('login.forgotPassword')}
           </Button>
         </Row>
         <Row>

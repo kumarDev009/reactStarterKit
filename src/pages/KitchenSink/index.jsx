@@ -10,6 +10,7 @@ import Loader from 'components/Loader';
 import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
+import TextArea from 'components/TextArea';
 import ProgressBar from 'components/ProgressBar';
 
 const KitchenSink = () => {
@@ -105,6 +106,12 @@ const KitchenSink = () => {
           <Button onClick={handleThrowError}>{t('buttons.throwError')}</Button>
           {errorBoudary[0]}
         </ErrorBoundary>
+      </Card>
+      <Card title={t('components.textArea')} size="middle" className="border border-dark">
+        <Form name="sample_textArea" onFinish={onFinish}>
+          <TextArea name="textArea" showCount rows={6} maxLength={100} />
+          <Button htmlType="submit">{t('buttons.submit')}</Button>
+        </Form>
       </Card>
     </Space>
   );

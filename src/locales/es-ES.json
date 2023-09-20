@@ -27,7 +27,12 @@
     "kitchenSink": "Fregadero de cocina",
     "welcomeHome": "Bienvenida a la pagina de inicio",
     "welcomeDashboard": "Bienvenido a la página del panel",
-    "welcomeSettings": "Bienvenido a la página de configuración"
+    "welcomeSettings": "Bienvenido a la página de configuración",
+    "submenu1": "Submenú 1",
+    "sub-submenu1": "Subsubmenú 1",
+    "sub-submenu2": "Subsubmenú 2",
+    "sub-submenu3": "Subsubmenú 3",
+    "sub-submenu4": "Subsubmenú 4"
   },
   "components": {
     "customButton": "Botón personalizado",
@@ -35,7 +40,8 @@
     "customTitle": "Título Personalizado",
     "customModal": "Modal personalizado",
     "customRichEditor": "Editor rico personalizado",
-    "errorBoundary": "Límite de error"
+    "errorBoundary": "Límite de error",
+    "textArea": "Área de texto"
   },
   "links": {
     "usedForLink": "¡Esto se usa para enlace!",

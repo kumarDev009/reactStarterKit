@@ -27,7 +27,12 @@
     "kitchenSink": "Kitchen Sink",
     "welcomeHome": "Welcome to the Home Page",
     "welcomeDashboard": "Welcome to the Dashboard Page",
-    "welcomeSettings": "Welcome to the Settings Page"
+    "welcomeSettings": "Welcome to the Settings Page",
+    "submenu1": "Submenu 1",
+    "sub-submenu1": "Sub-submenu 1",
+    "sub-submenu2": "Sub-submenu 2",
+    "sub-submenu3": "Sub-submenu 3",
+    "sub-submenu4": "Sub-submenu 4"
   },
   "components": {
     "customButton": "Custom Button",
@@ -35,7 +40,8 @@
     "customTitle": "Custom Title",
     "customModal": "Custom Modal",
     "customRichEditor": "Custom Rich Editor",
-    "errorBoundary": "Error Boundary"
+    "errorBoundary": "Error Boundary",
+    "textArea": "TextArea"
   },
   "links": {
     "usedForLink": "This is used for link!",
