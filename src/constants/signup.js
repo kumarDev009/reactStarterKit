@@ -3,7 +3,7 @@ const upperCaseRegex = /[A-Z]/;
 const numberRegex = /\d/;
 const specialCharRegex = /^(?=.*[!@#$%^&*]).*$/;
 
-export const PASSWORD_SUGGESTION_DESCRIPTION = [
+const PASSWORD_SUGGESTION_DESCRIPTION = [
   {
     label: 'Minimum 8 characters',
     key: 0
@@ -26,4 +26,4 @@ export const PASSWORD_SUGGESTION_DESCRIPTION = [
   }
 ];
 
-export { lowerCaseRegex, upperCaseRegex, numberRegex, specialCharRegex };
+export { lowerCaseRegex, upperCaseRegex, numberRegex, specialCharRegex, PASSWORD_SUGGESTION_DESCRIPTION };

@@ -1,0 +1,8 @@
+.des-content {
+  max-width: 400px;
+}
+@media screen and (max-width: 576px) {
+  .des-content {
+    max-width: 300px;
+  }
+}

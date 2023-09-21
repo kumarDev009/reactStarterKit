@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Col, Form, Row, Popover } from 'antd';
+import { Col, Form, Row } from 'antd';
 
 import Link from 'components/Link';
 import Title from 'components/Title';
@@ -7,16 +7,10 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 import CheckBox from 'components/CheckBox';
 import AuthLayout from 'components/Auth';
-import ProgressBar from 'components/ProgressBar';
+import Password from 'components/Password';
 import PhoneInputField from 'components/PhoneInput';
 
-import {
-  lowerCaseRegex,
-  upperCaseRegex,
-  numberRegex,
-  specialCharRegex,
-  PASSWORD_SUGGESTION_DESCRIPTION
-} from 'constants/signup';
+import { passwordValidator } from 'utils/passwordValidation';
 
 import './index.scss';
 
@@ -27,67 +21,9 @@ const SignUp = () => {
     console.log('values', { ...values });
   };
 
-  const passwordValidator = value => {
-    const lengthScore = value.length;
-    const complexityScore =
-      lowerCaseRegex.test(value) +
-      upperCaseRegex.test(value) +
-      numberRegex.test(value) +
-      specialCharRegex.test(value) +
-      (lengthScore >= 8 ? 1 : 0);
-
-    const complexityPercentage = lengthScore > 0 ? (complexityScore / 5) * 100 : 0;
-
-    let status = {
-      type: '',
-      color: '',
-      percent: complexityPercentage
-    };
-    if (complexityScore <= 2) {
-      status = {
-        ...status,
-        type: 'Weak',
-        color: '#ff4d4f'
-      };
-    } else if (complexityScore <= 4) {
-      status = {
-        ...status,
-        type: 'Medium',
-        color: '#e89b1e'
-      };
-    } else if (complexityScore === 5) {
-      status = {
-        ...status,
-        type: 'Strong',
-        color: '#1ee880'
-      };
-    }
-    return status;
-  };
-
   const handlePassword = e => {
-    const value = e.target.value;
-    const passwordStrength = passwordValidator(value);
+    const passwordStrength = passwordValidator(e.target.value);
     return setPasswordStatus(passwordStrength);
-  };
-
-  const headerProgressBar = () => {
-    return (
-      <div style={{ width: '400px' }}>
-        <ProgressBar percent={passwordStatus.percent} strokeColor={passwordStatus.color} showInfo={false} />
-        <div>{passwordStatus.type ? passwordStatus.type : 'Enter a password'}</div>
-        <h6 className="pt-2 fw-bold">Suggestion</h6>
-        <div>
-          {PASSWORD_SUGGESTION_DESCRIPTION.map((description, index) => {
-            return (
-              <ul key={index}>
-                <li>{description.label}</li>
-              </ul>
-            );
-          })}
-        </div>
-      </div>
-    );
   };
 
   const checkboxValidator = (_, value) => {
@@ -128,17 +64,15 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <Popover placement="bottom" trigger="focus" content={() => headerProgressBar()}>
-                <Input
-                  name="password"
-                  label="Password"
-                  type="password"
-                  placeholder="Password"
-                  min={8}
-                  rules={[{ required: true, message: 'Please enter your Password!' }]}
-                  onChange={handlePassword}
-                />
-              </Popover>
+              <Password
+                name="password"
+                label="Password"
+                type="password"
+                placeholder="Password"
+                rules={[{ required: true, message: 'Please enter your Password!' }]}
+                onChange={handlePassword}
+                passwordStatus={passwordStatus}
+              />
             </Col>
           </Row>
           <Row>
