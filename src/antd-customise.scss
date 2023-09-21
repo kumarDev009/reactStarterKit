@@ -16,3 +16,13 @@
   @extend .align-items-center;
   @extend .h-100;
 }
+
+.menuWrapper {
+  .ant-menu.ant-menu-inline-collapsed {
+    width: 80% !important;
+  }
+
+  .ant-menu.ant-menu-inline {
+    width: 200px !important;
+  }
+}

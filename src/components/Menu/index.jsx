@@ -8,21 +8,21 @@ export default function CustomMenu({
   selectedKeys = [],
   collapsed = false,
   onClick = () => {},
-  placement = 'right',
+  menuPlacement = 'right',
   ...rest
 }) {
   const renderMenuLabel = useCallback(
     (label, hasSubmenu) => {
       if (!collapsed && hasSubmenu) {
         return (
-          <Tooltip title={label} placement={placement}>
+          <Tooltip title={label} placement={menuPlacement}>
             {label}
           </Tooltip>
         );
       }
       return label;
     },
-    [collapsed, placement]
+    [collapsed, menuPlacement]
   );
 
   const constructMenuItems = useCallback(
