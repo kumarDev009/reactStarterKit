@@ -17,6 +17,7 @@ import {
   specialCharRegex,
   PASSWORD_SUGGESTION_DESCRIPTION
 } from 'constants/signup';
+import { LOGIN_PATH } from 'constants/route';
 
 import './index.scss';
 
@@ -187,6 +188,9 @@ const SignUp = () => {
                 Sign Up
               </Button>
             </Col>
+          </Row>
+          <Row justify="center" align={'center'} className="mb-2">
+            Already have an account? &nbsp;<Link href={LOGIN_PATH}> Login </Link>
           </Row>
           <Row justify="center" align={'center'}>
             Version {process.env.REACT_APP_VERSION}
