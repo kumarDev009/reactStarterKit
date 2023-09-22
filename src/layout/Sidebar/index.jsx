@@ -1,71 +1,50 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'antd';
-import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined } from '@ant-design/icons';
 
 import CustomMenu from 'components/Menu';
-import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
-
+import { sidebarMenu } from 'constants/Menu';
 import './index.scss';
 
-const { Sider } = Layout;
+const { Sider: AntdSider } = Layout;
 
 export default function CustomSidebar() {
+  const [collapsed, setCollapsed] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState([]);
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [currentMenu, setCurrentMenu] = useState('');
-
-  const sidebarMenu = [
-    {
-      label: 'Home',
-      key: HOME_PATH,
-      icon: <HomeOutlined />
-    },
-    {
-      label: 'Dashboard',
-      key: DASHBOARD_PATH,
-      icon: <DashboardOutlined />
-    },
-    {
-      label: 'Settings',
-      key: SETTINGS_PATH,
-      icon: <SettingOutlined />
-    },
-    {
-      label: 'Kitchen Sink',
-      key: KITCHEN_SINK_PATH,
-      icon: <AndroidOutlined />
-    }
-  ];
-
   useEffect(() => {
-    setCurrentMenu(location.pathname);
+    setCurrentMenu([location.pathname]);
   }, [location]);
 
   const handleSidebarMenu = item => {
     navigate(item.key);
-    setCurrentMenu(item.key);
+    setCurrentMenu([item.key]);
   };
 
   return (
-    <Sider
+    <AntdSider
+      collapsible
+      collapsed={collapsed}
       className="sidebar"
       breakpoint="lg"
-      collapsedWidth="0"
+      collapsedWidth="80"
       onBreakpoint={broken => {
         console.log(broken);
       }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
+      onCollapse={setCollapsed}
     >
-      <div className="home-screen-logo">
-        <img src="/assets/images/logo.png" alt="mainlogo" />
+      <div className="vh-100">
+        <CustomMenu
+          collapsed={collapsed}
+          selectedKeys={currentMenu}
+          menuItems={sidebarMenu}
+          onClick={handleSidebarMenu}
+          placement="right"
+        />
       </div>
-      <div className="mt-3">
-        <CustomMenu selectedKeys={[currentMenu]} menuItems={sidebarMenu} onClick={handleSidebarMenu} />
-      </div>
-    </Sider>
+    </AntdSider>
   );
 }
