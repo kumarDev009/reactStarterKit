@@ -31,7 +31,7 @@ export default function CustomContent() {
     <ErrorBoundary>
       {/* TODO: Need to update this fallback component with our blockUI component once its ready. */}
       <Suspense fallback={<div className="d-flex justify-content-center mt-3">{<Spin />}</div>}>
-        <Content style={{ margin: '24px 16px 0' }}>
+        <Content className="mt-4 me-4 mx-4">
           <Routes>
             {routeSources.map(({ path, component: Component }) => (
               <Route key={path} path={path} element={<Component />} />

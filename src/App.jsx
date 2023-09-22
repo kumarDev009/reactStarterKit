@@ -6,6 +6,7 @@ import Routers from 'routers';
 import AuthContextProvider from 'context/authContext';
 import { ThemeContext } from 'context/themeContext';
 import { getThemeConfig } from 'constants/themeConfig';
+
 import './index.scss';
 
 function App() {

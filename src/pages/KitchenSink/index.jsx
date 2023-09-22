@@ -10,13 +10,13 @@ import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
 import Switch from 'components/Switch';
+import TextArea from 'components/TextArea';
 import ProgressBar from 'components/ProgressBar';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorBoudary, setErrorBoudary] = useState([]);
-  const [checked, setChecked] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -93,7 +93,7 @@ const KitchenSink = () => {
       </Card>
       <Card title="CustomRichEditor" size="middle" className="border border-dark">
         <Form name="sample_form" onFinish={onFinish}>
-          <Space direction="vertical" size="middle">
+          <Space className="w-100" direction="vertical" size="middle">
             <Editor name="description" />
             <Button htmlType="submit" className="mt-3">
               Submit
@@ -109,10 +109,16 @@ const KitchenSink = () => {
       </Card>
       <Card title="CustomSwitch" size="middle" className="border border-dark">
         <Form name="switch_form" onFinish={onFinish}>
-          <Switch name="toggle" onChange={() => setChecked(prev => !prev)} checked={checked} />
+          <Switch name="toggle" valuePropName="checked" />
           <Button htmlType="submit" className="mt-3">
             Submit
           </Button>
+        </Form>
+      </Card>
+      <Card title="TextArea" size="middle" className="border border-dark">
+        <Form name="sample_textArea" onFinish={onFinish}>
+          <TextArea name="textArea" showCount rows={6} maxLength={100} />
+          <Button htmlType="submit">Submit</Button>
         </Form>
       </Card>
     </Space>

@@ -10,14 +10,14 @@ const Switch = ({
   onChange = () => {},
   className = '',
   style = {},
+  valuePropName = 'checked',
   ...rest
 }) => {
   return (
-    <FormItem name={name} style={style} {...rest}>
+    <FormItem name={name} style={style} valuePropName={valuePropName} {...rest}>
       <AntdSwitch
         checkedChildren={checkedChildren}
         unCheckedChildren={unCheckedChildren}
-        checked={checked}
         onChange={onChange}
         className={className}
         {...rest}
