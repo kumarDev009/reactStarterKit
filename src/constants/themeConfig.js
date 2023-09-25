@@ -14,7 +14,11 @@ export const getThemeConfig = isDarkMode => {
         colorPrimary: isDarkMode ? LIGHT : DARK
       },
       Layout: {
-        colorBgHeader: isDarkMode ? DARK : LIGHT
+        colorBgHeader: isDarkMode ? DARK : LIGHT,
+        colorTextLightSolid: isDarkMode ? LIGHT : DARK
+      },
+      Button: {
+        colorLinkHover: DARK_PRIMARY_BG
       }
     },
     algorithm: [isDarkMode ? darkAlgorithm : defaultAlgorithm, compactAlgorithm]
