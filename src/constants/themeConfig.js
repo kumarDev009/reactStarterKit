@@ -1,6 +1,6 @@
 import { theme } from 'antd';
 
-import { DARK, DARK_PRIMARY_BG, LIGHT, LIGHT_PRIMARY_BG } from './theme';
+import { DARK, DARK_PRIMARY_BG, DARK_THEME, LIGHT, LIGHT_PRIMARY_BG, LIGHT_THEME } from './theme';
 
 const { defaultAlgorithm, darkAlgorithm, compactAlgorithm } = theme;
 
@@ -36,7 +36,7 @@ const mappedConfig = (obj, mode) => {
 };
 
 export const getThemeConfig = isDarkMode => {
-  const mode = isDarkMode ? 'DARK' : 'LIGHT';
+  const mode = isDarkMode ? DARK_THEME : LIGHT_THEME;
   const mappedTheme = mappedConfig(THEME_CONFIG, mode);
   mappedTheme.algorithm = [mappedTheme.algorithm, compactAlgorithm];
   return mappedTheme;

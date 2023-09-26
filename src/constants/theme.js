@@ -1,5 +1,5 @@
-export const DARK_THEME = 'dark';
-export const LIGHT_THEME = 'light';
+export const DARK_THEME = 'DARK';
+export const LIGHT_THEME = 'LIGHT';
 
 export const DARK = '#141414';
 export const LIGHT = '#ffffff';
