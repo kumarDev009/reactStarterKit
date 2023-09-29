@@ -1,10 +1,9 @@
 import { notification } from 'antd';
 
-const OpenNotification = ({ type = 'info', message = '', description = '', duration = 4 }) => {
+const OpenNotification = ({ type = 'info', message = '', description = '' }) => {
   notification[type]({
     message: message,
-    description: description,
-    duration: duration
+    description: description
   });
 };
 
