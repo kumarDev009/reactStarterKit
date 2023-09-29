@@ -1,11 +1,17 @@
 import { useTranslation } from 'react-i18next';
+import { Row } from 'antd';
+
+import Content from 'components/Content';
+import Title from 'components/Title';
 
 export default function Dashboard() {
   const { t } = useTranslation();
 
   return (
-    <div className="d-flex justify-content-between p-5">
-      <h3> {t('pages.welcomeDashboard')}</h3>
-    </div>
+    <Row>
+      <Content>
+        <Title>{t('pages.welcomeDashboard')}</Title>
+      </Content>
+    </Row>
   );
 }
