@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Typography, Avatar, Progress, Row, Col, Divider } from 'antd';
+import React, { useState } from 'react';
+import { Card, Typography, Avatar, Progress, Row, Col, Divider, Button } from 'antd';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,9 +12,11 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 import CustomTitle from 'components/Title';
 import { cards, chartComponents, chartData, chartOptions } from 'constants/dashboard';
+import NivoChart from './Charts/NivoCharts';
 
 const { Text } = Typography;
 
@@ -27,7 +29,8 @@ ChartJS.register(
   ArcElement,
   ChartTitle,
   Tooltip,
-  Legend
+  Legend,
+  zoomPlugin
 );
 
 const ProgressBarSection = ({ icon, platform, percentage, color }) => (
@@ -66,6 +69,35 @@ const ProgressCard = ({ name, role, progressData }) => (
 );
 
 export default function Dashboard() {
+  const [hiddenData, setHiddenData] = useState({ line: [], bar: [] });
+
+  const barChartRef = React.useRef();
+  const lineChartRef = React.useRef();
+  const pieChartRef = React.useRef();
+  const doughnutChartRef = React.useRef();
+
+  const resetZoom = chartRef => {
+    if (chartRef && chartRef.current) {
+      chartRef.current.resetZoom();
+    }
+  };
+
+  const handleLegendClick = (type, id) => {
+    setHiddenData(prevData => {
+      if (prevData[type].includes(id)) {
+        return {
+          ...prevData,
+          [type]: prevData[type].filter(currentId => currentId !== id)
+        };
+      } else {
+        return {
+          ...prevData,
+          [type]: [...prevData[type], id]
+        };
+      }
+    });
+  };
+
   return (
     <div className="p-3">
       <CustomTitle level={3}>Progress Bars</CustomTitle>
@@ -79,11 +111,66 @@ export default function Dashboard() {
       <Row gutter={[16, 16]} className="mt-4">
         {chartComponents.map((chart, idx) => (
           <Col key={idx} xs={24} sm={12}>
-            <Card title={<CustomTitle level={4}>{chart.title}</CustomTitle>} className="shadow-1 mb-2">
-              <chart.component data={chartData} options={chartOptions} />
+            <Card
+              title={<CustomTitle level={4}>{chart.title}</CustomTitle>}
+              className="shadow-1 mb-2"
+              extra={
+                <Button
+                  onClick={() => {
+                    switch (chart.title) {
+                      case 'Vertical Bar Chart':
+                        resetZoom(barChartRef);
+                        break;
+                      case 'Line Chart':
+                        resetZoom(lineChartRef);
+                        break;
+                      default:
+                        break;
+                    }
+                  }}
+                >
+                  Reset Zoom
+                </Button>
+              }
+            >
+              <chart.component
+                ref={
+                  chart.title === 'Vertical Bar Chart'
+                    ? barChartRef
+                    : chart.title === 'Line Chart'
+                    ? lineChartRef
+                    : chart.title === 'Pie Chart'
+                    ? pieChartRef
+                    : doughnutChartRef
+                }
+                data={chartData}
+                options={
+                  chart.title === 'Pie Chart'
+                    ? chartOptions.pie
+                    : chart.title === 'Doughnut Chart'
+                    ? chartOptions.doughnut
+                    : chartOptions.default
+                }
+              />
             </Card>
           </Col>
         ))}
+      </Row>
+      <Row gutter={[16, 16]} className="mt-3 nivoChart">
+        <Col span={12}>
+          <Card title={<CustomTitle level={4}>Nivo Line Chart</CustomTitle>} className="shadow-1 mb-2">
+            <div style={{ height: '400px' }}>
+              <NivoChart type="line" hiddenData={hiddenData} handleLegendClick={handleLegendClick} />
+            </div>
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card title={<CustomTitle level={4}>Nivo Bar Chart</CustomTitle>} className="shadow-1 mb-2">
+            <div style={{ height: '400px' }}>
+              <NivoChart type="bar" hiddenData={hiddenData} handleLegendClick={handleLegendClick} />
+            </div>
+          </Card>
+        </Col>
       </Row>
     </div>
   );
