@@ -1,15 +1,23 @@
-import { useContext } from 'react';
-import { Avatar, Layout, Popover, Row } from 'antd';
+import { useContext, useState } from 'react';
+import { Avatar, Layout, Popover, Select, Row, Col, Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 import { AuthContext } from 'context/authContext';
-import { removeStorage } from 'services/storage/index.js';
-import { menuArr } from 'constants/Menu';
+import { getStorage, removeStorage, setStorage } from 'services/storage/index.js';
+import i18n from 'i18n';
+import { getMenuArr } from 'constants/Menu';
+import { EN_US, ES_ES } from 'constants/locale';
 
 const { Header } = Layout;
+const { Option } = Select;
 
 export default function CustomHeader() {
+  const [locale, setLocale] = useState(() => getStorage('locale') || EN_US);
   const { setHasStorage } = useContext(AuthContext);
+  const { t } = useTranslation();
+
+  const menuArr = getMenuArr(t);
 
   const headerProfileIcon = () => {
     return (
@@ -35,13 +43,36 @@ export default function CustomHeader() {
     );
   };
 
+  const changeLanguage = lng => {
+    setStorage('locale', lng);
+    setLocale(lng);
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <Header className="px-2">
       <Row justify={'space-between'} align="middle">
         <img src="/assets/images/logo.png" className="home-screen-logo" alt="mainlogo" />
-        <Popover placement="bottom" content={headerProfileIcon} trigger="click">
-          <Avatar size={40} className="cursor-pointer" icon={<UserOutlined />} />
-        </Popover>
+        <Row align="middle" gutter={[16, 0]}>
+          <Col>
+            <Form initialValues={{ locale }} name="form_select">
+              <Select //Todo: need to integrate the common component of select box once it's ready.
+                name="locale"
+                defaultValue={locale}
+                style={{ width: 120 }}
+                onChange={changeLanguage}
+              >
+                <Option value={EN_US}>English</Option>
+                <Option value={ES_ES}>Spanish</Option>
+              </Select>
+            </Form>
+          </Col>
+          <Col>
+            <Popover placement="bottom" content={headerProfileIcon} trigger="click">
+              <Avatar size={40} className="cursor-pointer" icon={<UserOutlined />} />
+            </Popover>
+          </Col>
+        </Row>
       </Row>
     </Header>
   );
