@@ -1,11 +1,16 @@
-import { Layout } from 'antd';
+import { Layout as AntdLayout, Row } from 'antd';
+import { useTranslation } from 'react-i18next';
 
-const { Footer } = Layout;
+const { Footer: AntdFooter } = AntdLayout;
 
 export default function CustomFooter() {
+  const { t } = useTranslation();
+
   return (
-    <div>
-      <Footer style={{ textAlign: 'center' }}>{new Date().getFullYear()} © All Right Reserved. MitrahSoft</Footer>
-    </div>
+    <Row justify={'center'} align={'middle'}>
+      <AntdFooter>
+        {new Date().getFullYear()}©{t('footer.rightsReserved')}
+      </AntdFooter>
+    </Row>
   );
 }
