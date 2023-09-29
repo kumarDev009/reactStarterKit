@@ -9,7 +9,7 @@ import Title from 'components/Title';
 import AuthLayout from 'components/Auth';
 
 import { STATIC_LOGIN_CREDENTIALS } from 'constants/login';
-import { HOME_PATH, SIGNUP_PATH } from 'constants/route';
+import { HOME_PATH, SIGNUP_PATH, FORGOT_PASSWORD_PATH } from 'constants/route';
 
 import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';
@@ -40,6 +40,10 @@ const Login = () => {
 
   const navigateToRegister = () => {
     navigate(SIGNUP_PATH);
+  };
+
+  const handleForgot = () => {
+    navigate(FORGOT_PASSWORD_PATH);
   };
 
   return (
@@ -75,7 +79,7 @@ const Login = () => {
         </Row>
         <Row justify="space-between">
           <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
-          <Button className="px-0" type="link">
+          <Button className="px-0" type="link" onClick={handleForgot}>
             {t('login.forgotPassword')}
           </Button>
         </Row>
