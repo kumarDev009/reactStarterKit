@@ -43,9 +43,6 @@ const Login = () => {
     <AuthLayout>
       <Row justify="space-between">
         <Title level={3}>{t('login.login')}</Title>
-        <Button className="px-0" type="link" onClick={navigateToRegister}>
-          {t('login.dontHaveAccount')}
-        </Button>
       </Row>
 
       <Form name="login_form" layout="vertical" onFinish={onFinish}>
@@ -84,7 +81,7 @@ const Login = () => {
           </Col>
         </Row>
         <Row justify="center" align={'center'} className="mb-2">
-          Don't have an account? &nbsp;<Link href={SIGNUP_PATH}>Register</Link>
+          {t('login.dontHaveAccount')} &nbsp;<Link href={SIGNUP_PATH}>Register</Link>
         </Row>
         <Row justify="center" align={'center'}>
           Version {process.env.REACT_APP_VERSION}
