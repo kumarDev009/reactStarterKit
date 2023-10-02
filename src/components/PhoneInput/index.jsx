@@ -1,51 +1,49 @@
+import { useMemo } from 'react';
+
 import Select from 'components/Select';
 import Input from 'components/Input';
-
 import countryCodeList from 'constants/countryCodeList';
-
 import { phoneNumberValidation } from 'utils/phoneNumberValidation';
 
 import './index.scss';
 
-const PhoneInputField = ({ name = '', label = '', ...rest }) => {
+const PhoneInputField = ({ phoneName = '', countryName = '', label = '', optionLabelProp = 'value', ...rest }) => {
   const handleKeyPress = e => {
-    if (e.target.id === 'signUp_form_phoneNumber' && !/^[0-9]+$/.test(e.key)) {
+    if (e.target.id.endsWith(`_${phoneName}`) && !/^[0-9]+$/.test(e.key)) {
       e.preventDefault();
     }
   };
 
-  const filterSelectedCountry = () => {
+  const countries = useMemo(() => {
     const updatedCountryList = countryCodeList.map(country => {
       const getShortName = () => {
         return (
           <>
-            <span className="country-shortName">{country.short}</span>
+            <span className="country-short-name">{country.short}</span>
             {` ${country.label} +${country.phoneCode}`}
           </>
         );
       };
-      const optionValue = `${country.short} +${country.phoneCode}`;
-      const optionLabel = getShortName();
       return {
-        label: optionLabel,
-        value: optionValue
+        label: getShortName(),
+        value: `${country.short} +${country.phoneCode}`
       };
     });
     return updatedCountryList;
-  };
+  }, []);
 
   return (
     <Input
-      name={'phoneNumber'}
-      label={'Phone Number'}
+      name={phoneName}
+      label={label}
       addonBefore={
         <Select
-          name="country"
+          name={countryName}
           showSearch
-          options={filterSelectedCountry()}
+          options={countries}
           noStyle
           popupClassName="w-auto"
-          optionLabelProp="value"
+          optionLabelProp={optionLabelProp}
         />
       }
       onKeyPress={handleKeyPress}
@@ -53,7 +51,7 @@ const PhoneInputField = ({ name = '', label = '', ...rest }) => {
         { required: true, message: 'Please enter your Phone Number!' },
         ({ getFieldValue }) => ({
           validator(_, value) {
-            const countryCode = getFieldValue('country');
+            const countryCode = getFieldValue(countryName);
             const { isValidPhoneNumber, isValidPhoneNumberWithCountry } = phoneNumberValidation(countryCode, value);
             if (value?.length && (!isValidPhoneNumberWithCountry || !isValidPhoneNumber)) {
               return Promise.reject('Please check the phone number!');

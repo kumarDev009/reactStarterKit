@@ -172,7 +172,7 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <PhoneInputField name="phoneNumber" label="Phone Number" />
+              <PhoneInputField phoneName="phoneNumber" countryName="country" label="Phone Number" />
             </Col>
           </Row>
           <Row>
