@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import CustomMenu from 'components/Menu';
-import { sidebarMenu } from 'constants/Menu';
+import { getSidebarMenu } from 'constants/Menu';
 import './index.scss';
 
 const { Sider: AntdSider } = Layout;
@@ -14,6 +15,10 @@ export default function CustomSidebar() {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { t } = useTranslation();
+
+  const sidebarMenu = getSidebarMenu(t);
 
   useEffect(() => {
     setCurrentMenu([location.pathname]);

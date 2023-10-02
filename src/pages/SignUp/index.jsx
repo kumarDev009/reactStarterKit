@@ -107,7 +107,14 @@ const SignUp = () => {
             </Title>
           </Col>
         </Row>
-        <Form name="signUp_form" layout="vertical" onFinish={onFinish} requiredMark={true} className="form">
+        <Form
+          name="signUp_form"
+          layout="vertical"
+          onFinish={onFinish}
+          requiredMark={true}
+          className="form"
+          initialValues={{ country: 'IN +91' }}
+        >
           <Row>
             <Col span={24}>
               <Input
@@ -165,7 +172,7 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <PhoneInputField name="phoneNumber" label="Phone Number" defaultCountry={'in'} />
+              <PhoneInputField phoneName="phoneNumber" countryName="country" label="Phone Number" />
             </Col>
           </Row>
           <Row>
