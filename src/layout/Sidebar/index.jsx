@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import CustomMenu from 'components/Menu';
+import Menu from 'components/Menu';
 import { getSidebarMenu } from 'constants/Menu';
 import './index.scss';
 
@@ -41,8 +41,8 @@ export default function CustomSidebar() {
       }}
       onCollapse={setCollapsed}
     >
-      <div className="menuWrapper position-fixed">
-        <CustomMenu
+      <div className="menu-wrapper position-fixed">
+        <Menu
           collapsed={collapsed}
           selectedKeys={currentMenu}
           menuItems={sidebarMenu}
