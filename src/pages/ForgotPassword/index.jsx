@@ -60,7 +60,7 @@ const ForgotPassword = () => {
             </Row>
           </Form>
         </>
-      ) : otpStatus.code === 200 && !isVerify ? (
+      ) : otpStatus.code === 200 && !isVerify ? ( //TODO: Need to update this condition when integrating the API.
         <VerifyOtp otpVerification={setIsVerify} />
       ) : (
         isVerify && <ResetPassword />

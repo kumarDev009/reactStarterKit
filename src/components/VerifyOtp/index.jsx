@@ -5,19 +5,15 @@ import Input from 'components/Input';
 import Title from 'components/Title';
 import Button from 'components/Button';
 import useTimer from 'customHooks/useTimer';
-import { SECONDS } from '../../constants/forgot_password';
+import { OTP_RESEND_TIMER_IN_SECS } from 'constants/forgot_password';
 
 const VerifyOtp = ({ otpVerification = () => {} }) => {
   const [otpValue, setOtpValue] = useState();
 
+  const { timeInSeconds, countDown, handleResetCounter } = useTimer(OTP_RESEND_TIMER_IN_SECS);
+
   const handleOtpValue = e => {
     setOtpValue(e.target.value);
-  };
-
-  const handleOtpVerification = () => {
-    if (otpValue.length >= 2) {
-      return otpVerification(true);
-    }
   };
 
   const handleKeyPress = e => {
@@ -25,18 +21,22 @@ const VerifyOtp = ({ otpVerification = () => {} }) => {
       e.preventDefault();
     }
   };
-
-  const { timeInSeconds, countDown, handleResetCounter } = useTimer(SECONDS);
-
+  const onFinish = values => {
+    console.log('values', values);
+    if (otpValue.length >= 2) {
+      return otpVerification(true);
+    }
+  };
   return (
     <>
       <Row>
         <Title level={3}>OTP Verification</Title>
       </Row>
-      <Form name="otpVerification_form" layout="vertical">
+      <Form name="otpVerification_form" layout="vertical" onFinish={onFinish}>
         <>
           <Col span={24}>
             <Input
+              name="Otp"
               label="Enter your OTP value"
               placeholder="Enter OTP value"
               onChange={handleOtpValue}
@@ -57,7 +57,7 @@ const VerifyOtp = ({ otpVerification = () => {} }) => {
           </Row>
           <Row>
             <Col span={24} className="mt-2">
-              <Button block disabled={!otpValue} onClick={handleOtpVerification}>
+              <Button block disabled={!otpValue}>
                 Verify OTP
               </Button>
             </Col>
