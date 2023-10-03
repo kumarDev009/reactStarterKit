@@ -1,38 +1,34 @@
+import { useState } from 'react';
 import { Popover } from 'antd';
 
 import Input from 'components/Input';
 import ProgressBar from 'components/ProgressBar';
 
-import {
-  PASSWORD_SUGGESTION_DESCRIPTION,
-  lowerCaseRegex,
-  upperCaseRegex,
-  specialCharRegex,
-  numberRegex
-} from 'constants/signup';
+import { PASSWORD_SUGGESTION_DESCRIPTION } from 'constants/signup';
 
+import { passwordValidator } from 'utils/passwordValidation';
 import './index.scss';
 
-const Password = ({ name = '', label = '', type = '', passwordStatus = {}, ...rest }) => {
+const Password = ({ name = '', label = '', type = '', onChange = () => {}, ...rest }) => {
+  const [passwordStatus, setPasswordStatus] = useState({});
+  const handlePassword = e => {
+    const passwordStrength = passwordValidator(e.target.value);
+    setPasswordStatus(passwordStrength);
+    onChange(e);
+  };
+
   const { value, percent, color, progressType } = passwordStatus;
-  const headerProgressBar = (
-    <div className="des-content">
+
+  const renderProgressBar = (
+    <div className="password-description">
       <ProgressBar percent={percent} strokeColor={color} showInfo={false} />
       <div className="text-center">{!value ? 'Enter a password' : progressType}</div>
       <div>
         {PASSWORD_SUGGESTION_DESCRIPTION.map((description, index) => {
-          const { label, key } = description;
+          const { label, regex } = description;
           let isSatisfied = false;
-          if (value && key === 0) {
-            isSatisfied = value?.length >= 8;
-          } else if (value && key === 1) {
-            isSatisfied = upperCaseRegex.test(value);
-          } else if (value && key === 2) {
-            isSatisfied = lowerCaseRegex.test(value);
-          } else if (value && key === 3) {
-            isSatisfied = numberRegex.test(value);
-          } else if (value && key === 4) {
-            isSatisfied = specialCharRegex.test(value);
+          if (value) {
+            isSatisfied = regex.test(value);
           }
 
           return (
@@ -46,8 +42,8 @@ const Password = ({ name = '', label = '', type = '', passwordStatus = {}, ...re
   );
 
   return (
-    <Popover placement="bottom" trigger="focus" content={() => headerProgressBar} className="password">
-      <Input name={name} label={label} type={type} {...rest} />
+    <Popover placement="bottom" trigger="focus" content={() => renderProgressBar} className="password">
+      <Input name={name} label={label} type={type} onChange={handlePassword} {...rest} />
     </Popover>
   );
 };

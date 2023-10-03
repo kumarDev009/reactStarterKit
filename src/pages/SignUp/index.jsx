@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Col, Form, Row } from 'antd';
 
 import Link from 'components/Link';
@@ -9,21 +8,13 @@ import CheckBox from 'components/CheckBox';
 import AuthLayout from 'components/Auth';
 import Password from 'components/Password';
 import PhoneInputField from 'components/PhoneInput';
-
-import { passwordValidator } from 'utils/passwordValidation';
+import { LOGIN_PATH } from 'constants/route';
 
 import './index.scss';
 
 const SignUp = () => {
-  const [passwordStatus, setPasswordStatus] = useState({});
-
   const onFinish = values => {
     console.log('values', { ...values });
-  };
-
-  const handlePassword = e => {
-    const passwordStrength = passwordValidator(e.target.value);
-    return setPasswordStatus(passwordStrength);
   };
 
   const checkboxValidator = (_, value) => {
@@ -77,8 +68,6 @@ const SignUp = () => {
                 type="password"
                 placeholder="Password"
                 rules={[{ required: true, message: 'Please enter your Password!' }]}
-                onChange={handlePassword}
-                passwordStatus={passwordStatus}
               />
             </Col>
           </Row>

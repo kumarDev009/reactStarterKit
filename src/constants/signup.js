@@ -1,28 +1,29 @@
 const lowerCaseRegex = /[a-z]/;
 const upperCaseRegex = /[A-Z]/;
 const numberRegex = /\d/;
+const lengthRegex = /[0-9a-zA-Z!@#$%^&*]{8,}/;
 const specialCharRegex = /^(?=.*[!@#$%^&*]).*$/;
 
 const PASSWORD_SUGGESTION_DESCRIPTION = [
   {
     label: 'Minimum 8 characters',
-    key: 0
+    regex: lengthRegex
   },
   {
     label: 'Contain one or more uppercase characters',
-    key: 1
+    regex: upperCaseRegex
   },
   {
     label: 'Contain one or more lowercase characters',
-    key: 2
+    regex: lowerCaseRegex
   },
   {
     label: 'Contain one or more numbers',
-    key: 3
+    regex: numberRegex
   },
   {
     label: 'Contain one or more of the following special characters (!@#$%^&*)',
-    key: 4
+    regex: specialCharRegex
   }
 ];
 
