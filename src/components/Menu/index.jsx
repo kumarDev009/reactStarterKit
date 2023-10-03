@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from 'react';
 import { Menu as AntdMenu, Tooltip } from 'antd';
 
-export default function CustomMenu({
+export default function Menu({
   menuItems = [],
   mode = 'inline',
   theme = 'dark',

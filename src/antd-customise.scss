@@ -1,5 +1,7 @@
 /* For customize the ANTD library inbuilt CSS */
-
+.ant-select-selector {
+  cursor: pointer !important;
+}
 // .header {
 // .anticon-user {
 //   color: #000000;
@@ -17,7 +19,7 @@
   @extend .h-100;
 }
 
-.menuWrapper {
+.menu-wrapper {
   .ant-menu.ant-menu-inline-collapsed {
     width: 80% !important;
   }
