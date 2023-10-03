@@ -7,6 +7,7 @@ import CheckBox from 'components/CheckBox';
 import Input from 'components/Input';
 import Title from 'components/Title';
 import AuthLayout from 'components/Auth';
+import Link from 'components/Link';
 
 import { STATIC_LOGIN_CREDENTIALS } from 'constants/login';
 import { HOME_PATH, SIGNUP_PATH } from 'constants/route';
@@ -15,9 +16,12 @@ import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';
 
 import './index.scss';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const { setHasStorage } = useContext(AuthContext);
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -35,17 +39,10 @@ const Login = () => {
     }
   };
 
-  const navigateToRegister = () => {
-    navigate(SIGNUP_PATH);
-  };
-
   return (
     <AuthLayout>
       <Row justify="space-between">
-        <Title level={3}>Login</Title>
-        <Button className="px-0" type="link" onClick={navigateToRegister}>
-          Don't have an account? Register
-        </Button>
+        <Title level={3}>{t('login.login')}</Title>
       </Row>
 
       <Form name="login_form" layout="vertical" onFinish={onFinish}>
@@ -54,7 +51,7 @@ const Login = () => {
             <Input
               name="email"
               autoFocus={true}
-              label="Email Address"
+              label={t('labels.emailLabel')}
               rules={[{ required: true, message: 'Please enter your Email!' }]}
             />
           </Col>
@@ -63,7 +60,7 @@ const Login = () => {
           <Col span={24}>
             <Input
               name="password"
-              label="Password"
+              label={t('labels.passwordLabel')}
               type="password"
               placeholder="Password"
               rules={[{ required: true, message: 'Please enter your Password!' }]}
@@ -71,9 +68,9 @@ const Login = () => {
           </Col>
         </Row>
         <Row justify="space-between">
-          <CheckBox name="remember_me" label={'Keep me sign in'} />
+          <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
           <Button className="px-0" type="link">
-            Forgot Password ?
+            {t('login.forgotPassword')}
           </Button>
         </Row>
         <Row>
@@ -82,6 +79,9 @@ const Login = () => {
               Login
             </Button>
           </Col>
+        </Row>
+        <Row justify="center" align={'center'} className="mb-2">
+          {t('login.dontHaveAccount')} &nbsp;<Link href={SIGNUP_PATH}>Register</Link>
         </Row>
         <Row justify="center" align={'center'}>
           Version {process.env.REACT_APP_VERSION}

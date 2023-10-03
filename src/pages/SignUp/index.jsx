@@ -43,7 +43,14 @@ const SignUp = () => {
             </Title>
           </Col>
         </Row>
-        <Form name="signUp_form" layout="vertical" onFinish={onFinish} requiredMark={true} className="form">
+        <Form
+          name="signUp_form"
+          layout="vertical"
+          onFinish={onFinish}
+          requiredMark={true}
+          className="form"
+          initialValues={{ country: 'IN +91' }}
+        >
           <Row>
             <Col span={24}>
               <Input
@@ -99,7 +106,7 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <PhoneInputField name="phoneNumber" label="Phone Number" defaultCountry={'in'} />
+              <PhoneInputField phoneName="phoneNumber" countryName="country" label="Phone Number" />
             </Col>
           </Row>
           <Row>
@@ -121,6 +128,9 @@ const SignUp = () => {
                 Sign Up
               </Button>
             </Col>
+          </Row>
+          <Row justify="center" align={'center'} className="mb-2">
+            Already have an account? &nbsp;<Link href={LOGIN_PATH}> Login </Link>
           </Row>
           <Row justify="center" align={'center'}>
             Version {process.env.REACT_APP_VERSION}
