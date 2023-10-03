@@ -10,7 +10,7 @@ import AuthLayout from 'components/Auth';
 import Link from 'components/Link';
 
 import { STATIC_LOGIN_CREDENTIALS } from 'constants/login';
-import { HOME_PATH, SIGNUP_PATH } from 'constants/route';
+import { HOME_PATH, SIGNUP_PATH, FORGOT_PASSWORD_PATH } from 'constants/route';
 
 import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';
@@ -69,9 +69,7 @@ const Login = () => {
         </Row>
         <Row justify="space-between">
           <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
-          <Button className="px-0" type="link">
-            {t('login.forgotPassword')}
-          </Button>
+          <Link href={FORGOT_PASSWORD_PATH}>{t('login.forgotPassword')}</Link>
         </Row>
         <Row>
           <Col span={24}>
