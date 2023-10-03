@@ -71,10 +71,24 @@ const ProgressCard = ({ name, role, progressData }) => (
 export default function Dashboard() {
   const [hiddenData, setHiddenData] = useState({ line: [], bar: [] });
 
-  const barChartRef = React.useRef();
-  const lineChartRef = React.useRef();
-  const pieChartRef = React.useRef();
-  const doughnutChartRef = React.useRef();
+  const chartConfigs = {
+    'Vertical Bar Chart': {
+      ref: React.useRef(),
+      options: chartOptions.default
+    },
+    'Line Chart': {
+      ref: React.useRef(),
+      options: chartOptions.default
+    },
+    'Pie Chart': {
+      ref: React.useRef(),
+      options: chartOptions.pie
+    },
+    'Doughnut Chart': {
+      ref: React.useRef(),
+      options: chartOptions.doughnut
+    }
+  };
 
   const resetZoom = chartRef => {
     if (chartRef && chartRef.current) {
@@ -115,42 +129,15 @@ export default function Dashboard() {
               title={<CustomTitle level={4}>{chart.title}</CustomTitle>}
               className="shadow-1 mb-2"
               extra={
-                <Button
-                  onClick={() => {
-                    switch (chart.title) {
-                      case 'Vertical Bar Chart':
-                        resetZoom(barChartRef);
-                        break;
-                      case 'Line Chart':
-                        resetZoom(lineChartRef);
-                        break;
-                      default:
-                        break;
-                    }
-                  }}
-                >
-                  Reset Zoom
-                </Button>
+                ['Vertical Bar Chart', 'Line Chart'].includes(chart.title) && (
+                  <Button onClick={() => resetZoom(chartConfigs[chart.title].ref)}>Reset Zoom</Button>
+                )
               }
             >
               <chart.component
-                ref={
-                  chart.title === 'Vertical Bar Chart'
-                    ? barChartRef
-                    : chart.title === 'Line Chart'
-                    ? lineChartRef
-                    : chart.title === 'Pie Chart'
-                    ? pieChartRef
-                    : doughnutChartRef
-                }
+                ref={chartConfigs[chart.title].ref}
                 data={chartData}
-                options={
-                  chart.title === 'Pie Chart'
-                    ? chartOptions.pie
-                    : chart.title === 'Doughnut Chart'
-                    ? chartOptions.doughnut
-                    : chartOptions.default
-                }
+                options={chartConfigs[chart.title].options}
               />
             </Card>
           </Col>

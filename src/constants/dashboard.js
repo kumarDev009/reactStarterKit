@@ -76,7 +76,6 @@ export const chartOptions = {
       legend: {
         position: 'top'
       }
-      // No zoom settings for pie chart
     }
   },
   doughnut: {
@@ -85,7 +84,6 @@ export const chartOptions = {
       legend: {
         position: 'top'
       }
-      // No zoom settings for doughnut chart
     }
   }
 };
