@@ -5,6 +5,7 @@ import i18n from 'i18n';
 import Routers from 'routers';
 import AuthContextProvider from 'context/authContext';
 import './index.scss';
+import './constants/config';
 
 function App() {
   useEffect(() => {

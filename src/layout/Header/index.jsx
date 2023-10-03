@@ -50,7 +50,7 @@ export default function CustomHeader() {
   };
 
   return (
-    <Header className="px-2">
+    <Header className="header px-2">
       <Row justify={'space-between'} align="middle">
         <img src="/assets/images/logo.png" className="home-screen-logo" alt="mainlogo" />
         <Row align="middle" gutter={[16, 0]}>
