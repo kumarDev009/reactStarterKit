@@ -69,9 +69,6 @@ const Login = () => {
         </Row>
         <Row justify="space-between">
           <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
-          {/* <Button className="px-0" type="link" onClick={handleForgot}>
-            {t('login.forgotPassword')}
-          </Button> */}
           <Link href={FORGOT_PASSWORD_PATH}>{t('login.forgotPassword')}</Link>
         </Row>
         <Row>
