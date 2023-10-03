@@ -10,6 +10,10 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    detection: {
+      order: ['querystring', 'cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag'],
+      caches: ['localStorage']
+    },
     resources: {
       en: {
         translation: require('./locales/en-US.json')
