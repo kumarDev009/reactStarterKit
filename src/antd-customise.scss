@@ -20,13 +20,3 @@
     @extend .h-100;
   }
 }
-
-.menu-wrapper {
-  .ant-menu.ant-menu-inline-collapsed {
-    width: 80% !important;
-  }
-
-  .ant-menu.ant-menu-inline {
-    width: 200px !important;
-  }
-}

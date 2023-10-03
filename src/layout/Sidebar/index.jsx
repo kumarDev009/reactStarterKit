@@ -41,15 +41,13 @@ export default function CustomSidebar() {
       }}
       onCollapse={setCollapsed}
     >
-      <div className="menu-wrapper position-fixed">
-        <Menu
-          collapsed={collapsed}
-          selectedKeys={currentMenu}
-          menuItems={sidebarMenu}
-          onClick={handleSidebarMenu}
-          menuPlacement="right"
-        />
-      </div>
+      <Menu
+        collapsed={collapsed}
+        selectedKeys={currentMenu}
+        menuItems={sidebarMenu}
+        onClick={handleSidebarMenu}
+        menuPlacement="right"
+      />
     </AntdSider>
   );
 }
