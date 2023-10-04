@@ -10,6 +10,7 @@ import Loader from 'components/Loader';
 import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
+import OpenNotification from 'components/Notification';
 import Card from 'components/Card';
 import Switch from 'components/Switch';
 import TextArea from 'components/TextArea';
@@ -19,6 +20,9 @@ const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorBoudary, setErrorBoudary] = useState([]);
+  const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
+
+  const notificationTypes = ['success', 'error', 'info', 'warning'];
 
   const { t } = useTranslation();
 
@@ -47,6 +51,16 @@ const KitchenSink = () => {
 
   const handleThrowError = () => {
     setErrorBoudary(null);
+  };
+
+  const handleNotification = () => {
+    const currentType = notificationTypes[currentTypeIndex];
+    OpenNotification({
+      type: currentType,
+      message: `This is a ${currentType} notification`,
+      description: `Details of the ${currentType} notification go here.`
+    });
+    setCurrentTypeIndex(prev => (prev + 1) % notificationTypes.length);
   };
 
   return (
@@ -110,6 +124,11 @@ const KitchenSink = () => {
           <Button onClick={handleThrowError}>{t('buttons.throwError')}</Button>
           {errorBoudary[0]}
         </ErrorBoundary>
+      </Card>
+      <Card title="Notification" size="middle" className="border border-dark">
+        <Button onClick={handleNotification} htmlType="button">
+          {`Show ${notificationTypes[currentTypeIndex]} Notification`}
+        </Button>
       </Card>
       <Card title={t('components.textArea')} size="middle" className="border border-dark">
         <Form name="switch_form" onFinish={onFinish}>

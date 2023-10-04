@@ -8,6 +8,7 @@ import { ThemeContext } from 'context/themeContext';
 import { getThemeConfig } from 'constants/themeConfig';
 
 import './index.scss';
+import './constants/config';
 
 function App() {
   const { isDarkMode } = useContext(ThemeContext);

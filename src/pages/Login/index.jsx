@@ -7,9 +7,10 @@ import CheckBox from 'components/CheckBox';
 import Input from 'components/Input';
 import Title from 'components/Title';
 import AuthLayout from 'components/Auth';
+import Link from 'components/Link';
 
 import { STATIC_LOGIN_CREDENTIALS } from 'constants/login';
-import { HOME_PATH, SIGNUP_PATH } from 'constants/route';
+import { HOME_PATH, SIGNUP_PATH, FORGOT_PASSWORD_PATH } from 'constants/route';
 
 import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';
@@ -38,17 +39,10 @@ const Login = () => {
     }
   };
 
-  const navigateToRegister = () => {
-    navigate(SIGNUP_PATH);
-  };
-
   return (
     <AuthLayout>
       <Row justify="space-between">
         <Title level={3}>{t('login.login')}</Title>
-        <Button className="px-0" type="link" onClick={navigateToRegister}>
-          {t('login.dontHaveAccount')}
-        </Button>
       </Row>
 
       <Form name="login_form" layout="vertical" onFinish={onFinish}>
@@ -75,9 +69,7 @@ const Login = () => {
         </Row>
         <Row justify="space-between">
           <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
-          <Button className="px-0" type="link">
-            {t('login.forgotPassword')}
-          </Button>
+          <Link href={FORGOT_PASSWORD_PATH}>{t('login.forgotPassword')}</Link>
         </Row>
         <Row>
           <Col span={24}>
@@ -85,6 +77,9 @@ const Login = () => {
               Login
             </Button>
           </Col>
+        </Row>
+        <Row justify="center" align={'center'} className="mb-2">
+          {t('login.dontHaveAccount')} &nbsp;<Link href={SIGNUP_PATH}>Register</Link>
         </Row>
         <Row justify="center" align={'center'}>
           Version {process.env.REACT_APP_VERSION}
