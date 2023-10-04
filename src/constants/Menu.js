@@ -39,8 +39,8 @@ export const getSidebarMenu = t => [
       },
       {
         label: t('pages.sub-submenu4'),
-        key: '/Sub-submenu-4',
-        icon: <SettingOutlined />
+        key: '/home',
+        icon: <HomeOutlined />
       }
       // ... We can add more submenu menu here
     ]

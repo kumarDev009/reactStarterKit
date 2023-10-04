@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import CustomMenu from 'components/Menu';
+import Menu from 'components/Menu';
 import { getSidebarMenu } from 'constants/Menu';
 import './index.scss';
 
@@ -41,15 +41,13 @@ export default function CustomSidebar() {
       }}
       onCollapse={setCollapsed}
     >
-      <div className="vh-100">
-        <CustomMenu
-          collapsed={collapsed}
-          selectedKeys={currentMenu}
-          menuItems={sidebarMenu}
-          onClick={handleSidebarMenu}
-          placement="right"
-        />
-      </div>
+      <Menu
+        collapsed={collapsed}
+        selectedKeys={currentMenu}
+        menuItems={sidebarMenu}
+        onClick={handleSidebarMenu}
+        menuPlacement="right"
+      />
     </AntdSider>
   );
 }
