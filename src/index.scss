@@ -1,11 +1,8 @@
-@import './pages/login';
-@import './pages/layout';
-@import './pages/layout/header';
-@import './pages/layout/content';
-@import './pages/layout/sidebar';
-@import './pages/layout/footer';
+@import 'layout/Header';
+@import 'layout';
+@import 'bootstrap/scss/bootstrap';
 @import './antd-customise.scss';
 
-.cursor-pointer{
-    cursor:pointer;
+.cursor-pointer {
+  cursor: pointer;
 }

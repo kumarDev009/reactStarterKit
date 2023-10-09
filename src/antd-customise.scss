@@ -1,1 +1,22 @@
 /* For customize the ANTD library inbuilt CSS */
+.ant-select-selector {
+  cursor: pointer !important;
+}
+// .header {
+// .anticon-user {
+//   color: #000000;
+// }
+// .ant-avatar {
+//   background-color: #ffffff;
+// }
+// }
+/* TODO: Need to find an alternate way for the above theme issue. */
+/* TODO: Need to review the actual issue */
+.header {
+  .anticon {
+    @extend .d-flex;
+    @extend .justify-content-center;
+    @extend .align-items-center;
+    @extend .h-100;
+  }
+}
