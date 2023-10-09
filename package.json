@@ -28,7 +28,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run pretty",
-      "post-merge": "npm run build"
+      "post-merge": "npm i && npm run build"
     }
   },
   "eslintConfig": {
