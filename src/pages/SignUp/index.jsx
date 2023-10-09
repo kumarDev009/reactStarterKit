@@ -9,7 +9,7 @@ import AuthLayout from 'components/Auth';
 import Password from 'components/Password';
 import PhoneInputField from 'components/PhoneInput';
 import { LOGIN_PATH } from 'constants/route';
-import { useRegister } from 'reactQuery/customHooks';
+import { useRegister } from 'services/query/auth';
 
 import './index.scss';
 
@@ -130,7 +130,7 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <Button block htmlType="submit">
+              <Button loading={registerMutation.isLoading} block htmlType="submit">
                 Sign Up
               </Button>
             </Col>

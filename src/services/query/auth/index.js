@@ -1,5 +1,5 @@
 import { useMutation } from 'react-query';
-import { registerUser } from 'services/API';
+import { registerUser } from 'services/api/auth';
 
 export const useRegister = () => {
   return useMutation(registerUser, {
