@@ -1,16 +1,16 @@
 import { useMutation } from 'react-query';
 
 import { loginUser, registerUser, verifyRegisteredUser } from 'services/api/auth';
-import { ToastMessage } from 'components/Toast';
+import { handleToast } from 'utils';
 
 export const useRegister = onRegisterSuccess => {
   return useMutation(registerUser, {
     onError: err => {
-      ToastMessage({ type: 'error', content: `${err?.message}` });
+      handleToast('error', err);
     },
     onSuccess: response => {
       if (response) {
-        ToastMessage({ type: 'info', content: `${response?.message}` });
+        handleToast('info', response);
         onRegisterSuccess();
       }
     }
@@ -26,15 +26,15 @@ export const useLoginUser = onLoginSuccess => {
     onSuccess: response => {
       const token = response?.data?.token;
       if (token) {
-        ToastMessage({ type: 'success', content: `Login successful! ${response?.message}` });
+        handleToast('success', response);
         onLoginSuccess(token);
       } else {
-        ToastMessage({ content: `${response?.message}` });
+        handleToast('info', response);
         onLoginSuccess();
       }
     },
     onError: err => {
-      ToastMessage({ type: 'error', content: `Login failed! ${err.message}` });
+      handleToast('error', err);
     }
   });
 };
