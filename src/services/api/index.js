@@ -44,7 +44,7 @@ const request = options => {
 
 export const get = (url, params) => request({ url, method: 'get', params });
 
-export const post = (url, data) => request({ url, method: 'post', data: qs.stringify(data) });
+export const post = (url, data) => request({ url, method: 'post', data });
 
 export const put = (url, data) => request({ url, method: 'put', data: qs.stringify(data) });
 

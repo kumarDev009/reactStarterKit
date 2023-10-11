@@ -4,7 +4,7 @@ import { getStorage } from 'services/storage';
 export const AuthContext = createContext({});
 
 const AuthContextProvider = ({ children }) => {
-  const [hasStorage, setHasStorage] = useState(getStorage('username'));
+  const [hasStorage, setHasStorage] = useState(getStorage('token'));
   return <AuthContext.Provider value={{ hasStorage, setHasStorage }}>{children}</AuthContext.Provider>;
 };
 

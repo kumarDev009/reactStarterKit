@@ -1,15 +1,40 @@
 import { useMutation } from 'react-query';
-import { registerUser } from 'services/api/auth';
 
-export const useRegister = () => {
+import { loginUser, registerUser, verifyRegisteredUser } from 'services/api/auth';
+import { ToastMessage } from 'components/Toast';
+
+export const useRegister = onRegisterSuccess => {
   return useMutation(registerUser, {
-    onError: error => {
-      console.error('Error during registration:', error);
+    onError: err => {
+      ToastMessage({ type: 'error', content: `${err?.message}` });
     },
-    onSuccess: data => {
-      if (data) {
-        console.log('Registration successful:', data);
+    onSuccess: response => {
+      if (response) {
+        ToastMessage({ type: 'info', content: `${response?.message}` });
+        onRegisterSuccess();
       }
+    }
+  });
+};
+
+export const useVerifyUser = () => {
+  return useMutation(verifyRegisteredUser);
+};
+
+export const useLoginUser = onLoginSuccess => {
+  return useMutation(loginUser, {
+    onSuccess: response => {
+      const token = response?.data?.token;
+      if (token) {
+        ToastMessage({ type: 'success', content: `Login successful! ${response?.message}` });
+        onLoginSuccess(token);
+      } else {
+        ToastMessage({ content: `${response?.message}` });
+        onLoginSuccess();
+      }
+    },
+    onError: err => {
+      ToastMessage({ type: 'error', content: `Login failed! ${err.message}` });
     }
   });
 };
