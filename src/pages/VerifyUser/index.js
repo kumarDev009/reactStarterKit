@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Col, Row, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,31 +7,27 @@ import Button from 'components/Button';
 import Title from 'components/Title';
 import { useVerifyUser } from 'services/query/auth';
 import { LOGIN_PATH } from 'constants/route';
-import { handleToast } from 'utils';
 
-const VerifyUser = ({ email, onBackToRegister }) => {
+const VerifyUser = ({ email, onBackToRegister, login = false }) => {
   const verifyMutation = useVerifyUser();
 
   const navigate = useNavigate();
 
-  const onFinish = value => {
-    verifyMutation.mutate(
-      {
-        email,
-        userVerificationCode: Number(value.verificationCode)
-      },
-      {
-        onSuccess: response => {
-          if (response?.message) {
-            handleToast('success', response);
-            navigate(LOGIN_PATH);
-          }
-        },
-        onError: err => {
-          handleToast('error', err);
-        }
+  useEffect(() => {
+    if (verifyMutation.isSuccess) {
+      if (login) {
+        onBackToRegister();
+      } else {
+        navigate(LOGIN_PATH);
       }
-    );
+    }
+  }, [verifyMutation.isSuccess, onBackToRegister, navigate, login]);
+
+  const onFinish = value => {
+    verifyMutation.mutate({
+      email,
+      userVerificationCode: Number(value.verificationCode)
+    });
   };
 
   return (

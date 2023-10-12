@@ -16,20 +16,15 @@ import VerifyUser from 'pages/VerifyUser';
 import './index.scss';
 
 const SignUp = () => {
-  const [registrationComplete, setRegistrationComplete] = useState({});
+  const [verifyEmail, setVerifyEmail] = useState('');
+  const [initialFormValues, setInitialFormValues] = useState({});
 
-  const onRegisterSuccess = () => {
-    setRegistrationComplete(prev => ({
-      ...prev,
-      isRegistered: true
-    }));
-  };
-
-  const registerMutation = useRegister(onRegisterSuccess);
+  const registerMutation = useRegister();
 
   const onFinish = values => {
     console.log('values', { ...values });
-    setRegistrationComplete(prev => ({ ...prev, email: values.email }));
+    setVerifyEmail(values.email);
+    setInitialFormValues(values);
     const userDetails = {
       email: values.email,
       password: values.password,
@@ -48,10 +43,7 @@ const SignUp = () => {
   };
 
   const handleBackToRegister = () => {
-    setRegistrationComplete({
-      isRegistered: false,
-      email: ''
-    });
+    registerMutation.reset();
   };
 
   const checkboxValidator = (_, value) => {
@@ -63,8 +55,8 @@ const SignUp = () => {
 
   return (
     <AuthLayout>
-      {registrationComplete?.isRegistered ? (
-        <VerifyUser email={registrationComplete?.email} onBackToRegister={handleBackToRegister} />
+      {registerMutation.isSuccess ? (
+        <VerifyUser email={verifyEmail} onBackToRegister={handleBackToRegister} />
       ) : (
         <div className="sign-up-screen">
           <Row>
@@ -80,7 +72,7 @@ const SignUp = () => {
             onFinish={onFinish}
             requiredMark={true}
             className="form"
-            initialValues={{ country: 'IN +91' }}
+            initialValues={{ country: 'IN +91', ...initialFormValues }}
           >
             <Row>
               <Col span={24}>

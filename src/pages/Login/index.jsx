@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Col, Form, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -20,28 +20,28 @@ import { useLoginUser } from 'services/query/auth';
 import './index.scss';
 
 const Login = () => {
-  const { setHasStorage } = useContext(AuthContext);
-
-  const [showVerify, setShowVerify] = useState(false);
   const [emailToVerify, setEmailToVerify] = useState('');
+  const [initialFormValues, setInitialFormValues] = useState({});
 
+  const { setHasStorage } = useContext(AuthContext);
   const { t } = useTranslation();
-
   const navigate = useNavigate();
 
-  const onLoginSuccess = token => {
-    if (token) {
-      setStorage('token', token);
-      setHasStorage(token);
-      navigate(HOME_PATH);
-    } else {
-      setShowVerify(true);
-    }
-  };
+  const loginMutation = useLoginUser();
 
-  const loginMutation = useLoginUser(onLoginSuccess);
+  useEffect(() => {
+    if (loginMutation.isSuccess) {
+      const token = loginMutation.data?.data?.token;
+      if (token) {
+        setStorage('token', token);
+        setHasStorage(token);
+        navigate(HOME_PATH);
+      }
+    }
+  }, [loginMutation.isSuccess, loginMutation.data, navigate, setHasStorage]);
 
   const onFinish = values => {
+    setInitialFormValues(values);
     setEmailToVerify(values.email);
     loginMutation.mutate({
       email: values.email,
@@ -50,20 +50,19 @@ const Login = () => {
   };
 
   const handleBackToRegister = () => {
-    setShowVerify(false);
+    loginMutation.reset();
   };
 
   return (
     <AuthLayout>
-      {showVerify ? (
-        <VerifyUser email={emailToVerify} onBackToRegister={handleBackToRegister} />
+      {loginMutation?.isSuccess && !loginMutation.data?.data?.token ? (
+        <VerifyUser email={emailToVerify} onBackToRegister={handleBackToRegister} login />
       ) : (
         <>
           <Row justify="space-between">
             <Title level={3}>{t('login.login')}</Title>
           </Row>
-
-          <Form name="login_form" layout="vertical" onFinish={onFinish}>
+          <Form name="login_form" layout="vertical" initialValues={initialFormValues} onFinish={onFinish}>
             <Row>
               <Col span={24}>
                 <Input

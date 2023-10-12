@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { loginUser, registerUser, verifyRegisteredUser } from 'services/api/auth';
 import { handleToast } from 'utils';
 
-export const useRegister = onRegisterSuccess => {
+export const useRegister = () => {
   return useMutation(registerUser, {
     onError: err => {
       handleToast('error', err);
@@ -11,26 +11,32 @@ export const useRegister = onRegisterSuccess => {
     onSuccess: response => {
       if (response) {
         handleToast('info', response);
-        onRegisterSuccess();
       }
     }
   });
 };
 
 export const useVerifyUser = () => {
-  return useMutation(verifyRegisteredUser);
+  return useMutation(verifyRegisteredUser, {
+    onSuccess: response => {
+      if (response?.message) {
+        handleToast('success', response);
+      }
+    },
+    onError: err => {
+      handleToast('error', err);
+    }
+  });
 };
 
-export const useLoginUser = onLoginSuccess => {
+export const useLoginUser = () => {
   return useMutation(loginUser, {
     onSuccess: response => {
       const token = response?.data?.token;
       if (token) {
         handleToast('success', response);
-        onLoginSuccess(token);
       } else {
         handleToast('info', response);
-        onLoginSuccess();
       }
     },
     onError: err => {
