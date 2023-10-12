@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { ConfigProvider } from 'antd';
 
 import Routers from 'routers';
@@ -10,18 +11,22 @@ import { getThemeConfig } from 'constants/themeConfig';
 import './index.scss';
 import './constants/config';
 
+const queryClient = new QueryClient();
+
 function App() {
   const { isDarkMode } = useContext(ThemeContext);
   const themeConfig = getThemeConfig(isDarkMode);
 
   return (
-    <BrowserRouter>
-      <AuthContextProvider>
-        <ConfigProvider theme={themeConfig}>
-          <Routers />
-        </ConfigProvider>
-      </AuthContextProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AuthContextProvider>
+          <ConfigProvider theme={themeConfig}>
+            <Routers />
+          </ConfigProvider>
+        </AuthContextProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
