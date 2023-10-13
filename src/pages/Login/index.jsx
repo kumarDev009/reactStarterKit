@@ -33,7 +33,7 @@ const Login = () => {
     if (loginMutation.isSuccess) {
       const token = loginMutation.data?.data?.token;
       if (token) {
-        setStorage('token', token);
+        setStorage('authToken', token);
         setHasStorage(token);
         navigate(HOME_PATH);
       }

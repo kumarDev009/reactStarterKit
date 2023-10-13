@@ -26,7 +26,7 @@ export default function CustomHeader() {
           return (
             <div
               onClick={() => {
-                removeStorage('token');
+                removeStorage('authToken');
                 setHasStorage(null);
               }}
               key={index}

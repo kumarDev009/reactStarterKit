@@ -5,9 +5,6 @@ import { handleToast } from 'utils';
 
 export const useRegister = () => {
   return useMutation(registerUser, {
-    onError: err => {
-      handleToast('error', err);
-    },
     onSuccess: response => {
       if (response) {
         handleToast('info', response);
@@ -22,9 +19,6 @@ export const useVerifyUser = () => {
       if (response?.message) {
         handleToast('success', response);
       }
-    },
-    onError: err => {
-      handleToast('error', err);
     }
   });
 };
@@ -38,9 +32,6 @@ export const useLoginUser = () => {
       } else {
         handleToast('info', response);
       }
-    },
-    onError: err => {
-      handleToast('error', err);
     }
   });
 };
