@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getStorage, removeStorage, setStorage } from 'services/storage/index.js';
 import i18n from 'i18n';
-import { getMenuArr } from 'constants/Menu';
+import { getMenuArr, notifications } from 'constants/header';
 import { EN_US, ES_ES } from 'constants/locale';
 import CustomTitle from 'components/Title';
 import { AuthContext } from 'context/authContext';
@@ -14,21 +14,6 @@ import { AuthContext } from 'context/authContext';
 const { Header } = Layout;
 const { Option } = Select;
 const { Text } = Typography;
-
-const notifications = [
-  {
-    title: 'Congratulations, Flora!',
-    message: 'Your order has been placed successfully',
-    timestamp: 'Just now',
-    avatarColor: '#87d068'
-  },
-  {
-    title: 'Reminder for Meeting',
-    message: 'Your meeting with Alex starts in 30 minutes',
-    timestamp: '15 minutes ago',
-    avatarColor: '#ff4d4f'
-  }
-];
 
 export default function CustomHeader() {
   const [locale, setLocale] = useState(() => getStorage('locale') || EN_US);
@@ -74,6 +59,14 @@ export default function CustomHeader() {
     } else navigate(path);
   };
 
+  const handleBellClick = () => {
+    setPopoverVisible(prevState => !prevState);
+  };
+
+  const clearNotification = id => {
+    setNotificationData(prev => [...prev.filter((_, index) => index !== id)]);
+  };
+
   const headerProfileIcon = () => {
     return (
       <Card className="shadow-1" bodyStyle={{ padding: '15px' }}>
@@ -82,8 +75,8 @@ export default function CustomHeader() {
             <Avatar size={50} icon={'AV'} />
           </Col>
           <Col className="mx-2 d-flex flex-column">
-            <Text className="profile-name">Anika Visser</Text>
-            <Text className="profile-email">demo@devias.io</Text>
+            <Text className="fs-6 fw-bold">Anika Visser</Text>
+            <Text className="text-secondary">demo@devias.io</Text>
           </Col>
         </Row>
         <Divider className="my-2" />
@@ -108,24 +101,20 @@ export default function CustomHeader() {
     );
   };
 
-  const clearNotification = id => {
-    setNotificationData(prev => [...prev.filter((_, index) => index !== id)]);
-  };
-
   const NotificationItem = ({ notification, onClear }) => {
     return (
       <>
         <Col span={24} className="d-flex justify-content-between align-items-center">
           <Avatar size={50} icon={'AV'} style={{ backgroundColor: notification.avatarColor }} />
-          <div className="notification-content">
+          <div className="d-flex flex-column flex-grow-1 ms-3">
             <div className="d-flex justify-content-between align-items-center">
               <div>
-                <div style={{ fontWeight: 'bold' }}>{notification.title}</div>
+                <div className="fw-bold">{notification.title}</div>
                 <div>{notification.message}</div>
               </div>
-              <CloseOutlined className="cursor-pointer" onClick={onClear} style={{ fontSize: '1.2rem' }} />
+              <CloseOutlined className="cursor-pointer fs-5" onClick={onClear} />
             </div>
-            <Text className="timestamp">{notification.timestamp}</Text>
+            <Text className="text-black-50">{notification.timestamp}</Text>
           </div>
         </Col>
         <Col span={24}>
@@ -149,7 +138,7 @@ export default function CustomHeader() {
           </div>
         }
       >
-        <Row gutter={[16, 16]} className="notification-row">
+        <Row gutter={[16, 16]} justify="center">
           {notificationData.length ? (
             notificationData.map((notification, index) => (
               <NotificationItem key={index} notification={notification} onClear={() => clearNotification(index)} />
@@ -162,17 +151,13 @@ export default function CustomHeader() {
     );
   };
 
-  const handleBellClick = () => {
-    setPopoverVisible(prevState => !prevState);
-  };
-
   return (
     <Header className="header px-2">
       <Row justify={'space-between'} align="middle">
         <img src="/assets/images/logo.png" className="home-screen-logo" alt="mainlogo" />
         <Row align="middle" gutter={[16, 0]}>
           <Col ref={bellRef} onClick={handleBellClick}>
-            <BellOutlined style={{ color: 'white', marginRight: '1rem', cursor: 'pointer', fontSize: '1.5rem' }} />
+            <BellOutlined className="text-white cursor-pointer fs-3" />
             {popoverVisible && <div className="custom-popover-content">{<NotificationContent />}</div>}
           </Col>
           <Col>
@@ -195,12 +180,7 @@ export default function CustomHeader() {
               content={headerProfileIcon}
               trigger="click"
             >
-              <Avatar
-                size={40}
-                style={{ border: '1px solid #ffff', background: '#1677ff' }}
-                className="cursor-pointer"
-                icon={'AV'}
-              />
+              <Avatar size={40} className="cursor-pointer bg-primary" icon={'AV'} />
             </Popover>
           </Col>
         </Row>

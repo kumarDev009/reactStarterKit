@@ -69,3 +69,18 @@ export const getMenuArr = t => [
     path: '/logout'
   }
 ];
+
+export const notifications = [
+  {
+    title: 'Congratulations, Flora!',
+    message: 'Your order has been placed successfully',
+    timestamp: 'Just now',
+    avatarColor: '#87d068'
+  },
+  {
+    title: 'Reminder for Meeting',
+    message: 'Your meeting with Alex starts in 30 minutes',
+    timestamp: '15 minutes ago',
+    avatarColor: '#ff4d4f'
+  }
+];

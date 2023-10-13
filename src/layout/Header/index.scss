@@ -3,15 +3,14 @@ img.home-screen-logo {
   filter: brightness(1.5);
 }
 
-.profile-info {
-  .profile-name {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .profile-email {
-    font-size: 0.9rem;
-    color: #777;
+.header {
+  position: relative;
+  .custom-popover-content {
+    padding: 0;
+    position: absolute;
+    top: 1rem;
+    right: -5rem;
+    z-index: 1000;
   }
 }
 
@@ -19,34 +18,8 @@ img.home-screen-logo {
   &.cursor-pointer:hover {
     background-color: #f5f5f5;
   }
-
-  .menu-label {
-    padding-left: 0.5rem;
-    font-size: 1rem;
-  }
-}
-
-.notification-item {
-  padding: 8px 0;
-}
-
-.notification-content {
-  display: flex;
-  flex-direction: column;
 }
 
 .notification-divider {
   margin: 0;
-}
-
-.notification-row {
-  .notification-content {
-    margin-left: 1rem;
-    flex: 1;
-  }
-
-  .timestamp {
-    color: #a5a5a5;
-    font-size: 0.9rem;
-  }
 }

@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import Menu from 'components/Menu';
-import { getSidebarMenu } from 'constants/Menu';
+import { getSidebarMenu } from 'constants/header';
 import './index.scss';
 
 const { Sider: AntdSider } = Layout;

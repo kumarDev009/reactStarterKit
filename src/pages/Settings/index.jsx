@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
 
-import { Avatar, Tabs, Form, Row, Card, Upload, Col } from 'antd';
+import { Avatar, Tabs, Form, Row, Card, Col } from 'antd';
 import { UserOutlined, UnlockOutlined } from '@ant-design/icons';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
 import CustomTitle from 'components/Title';
+import Password from 'components/Password';
 
 import './index.scss';
-import Password from 'components/Password';
 
 const { TabPane } = Tabs;
 
-const AccountSettings = ({ uploadedImage, handleImageUpload, handImageReset }) => (
+const AccountSettings = () => (
   <Card className="accountTab shadow-1 mb-2">
     <div className="d-flex">
       <div>
-        <Avatar icon={<UserOutlined />} src={uploadedImage} shape="square" size={100} className="object-cover" />
+        <Avatar /* need to update this Avatar with custom user upload component once it's ready. */
+          icon={<UserOutlined />}
+          shape="square"
+          size={100}
+          className="object-cover"
+        />
       </div>
-      <Upload showUploadList={false} onChange={handleImageUpload} className="mx-3 mt-3">
-        <Button className="btn">UPLOAD NEW PHOTO</Button>
-      </Upload>
-      <Button type="default" className="mt-3" style={{ height: '2.5rem' }} onClick={handImageReset}>
-        Reset
-      </Button>
     </div>
     <Form layout="vertical" className="mt-3">
       <FormFields />
       <div className="d-flex align-items-center">
-        <Button className="btn mt-4">Save Changes</Button>
-        <Button type="default" className="mt-3 mx-3" style={{ height: '2.5rem' }}>
+        <Button className="btn">Save Changes</Button>
+        <Button type="default" className=" mx-3 input-height">
           Reset
         </Button>
       </div>
@@ -41,22 +40,42 @@ const SecuritySettings = () => (
   <Card className="shadow-1">
     <CustomTitle level={3}>Change Password</CustomTitle>
     <Form layout="vertical">
-      <Row gutter={[16, 16]}>
+      <Row gutter={[16, 0]}>
         <Col span={12}>
-          <Input label="Current Password" className="input-height" style={{ height: '2.5rem' }} />
+          <Input
+            type="password"
+            name="password"
+            label="Current Password"
+            placeholder="Current Password"
+            className="input-height"
+          />
         </Col>
         <Col span={12}></Col>
         <Col span={12}>
           <Password
-            name="password"
+            name="newPassword"
             label="Password"
             type="password"
             placeholder="Password"
-            style={{ height: '2.5rem' }}
+            className="input-height"
           />
         </Col>
         <Col span={12}>
-          <Input label="Confirm New Password" type="password" className="input-height" style={{ height: '2.5rem' }} />
+          <Input
+            name="confirmPwd"
+            label="Confirm New Password"
+            placeholder="Confirm New Password"
+            type="password"
+            className="input-height"
+          />
+        </Col>
+        <Col>
+          <div className="d-flex align-items-center">
+            <Button className="btn">Save Changes</Button>
+            <Button type="default" className="mx-3 input-height">
+              Reset
+            </Button>
+          </div>
         </Col>
       </Row>
     </Form>
@@ -65,23 +84,25 @@ const SecuritySettings = () => (
 
 const FormFields = () => {
   const formItems = [
-    { label: 'First Name' },
-    { label: 'Last Name' },
-    { label: 'Email' },
-    { label: 'Organization' },
-    { label: 'Phone Number' },
-    { label: 'Address' },
-    { label: 'State' },
-    { label: 'Zip Code' },
-    { label: 'Country' },
-    { label: 'Language' }
+    { label: 'First Name', name: 'firstName' },
+    { label: 'Last Name', name: 'lastName' },
+    { label: 'Email', name: 'email' },
+    { label: 'Password', name: 'password' },
+    { label: 'Phone Number', name: 'phone' },
+    { label: 'Address 1', name: 'address1' },
+    { label: 'Address 2', name: 'address2' },
+    { label: 'City', name: 'city' },
+    { label: 'State', name: 'state' },
+    { label: 'Country', name: 'country' },
+    { label: 'Zip Code', name: 'zip_code' },
+    { label: 'Admin', name: 'role' }
   ];
 
   return (
-    <Row gutter={[16, 16]}>
+    <Row gutter={[16, 0]}>
       {formItems.map(item => (
         <Col span={12} key={item.label}>
-          <Input label={item.label} name={item.label} className="input-height" style={{ height: '2.5rem' }} />
+          <Input label={item.label} name={item.name} placeholder={item.label} className="input-height" />
         </Col>
       ))}
     </Row>
@@ -97,35 +118,18 @@ const TabLabel = ({ icon: Icon, label, isSelected }) => (
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('1');
-  const [uploadedImage, setUploadedImage] = useState(null);
-
-  const handleImageUpload = info => {
-    const reader = new FileReader();
-    reader.onload = e => setUploadedImage(e.target?.result);
-    if (info?.file?.originFileObj) reader.readAsDataURL(info.file.originFileObj);
-  };
-
-  const handImageReset = () => {
-    setUploadedImage(null);
-  };
 
   const handleOnchange = key => setActiveTab(key);
 
   return (
-    <div>
-      <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={handleOnchange}>
-        <TabPane tab={<TabLabel icon={UserOutlined} label="ACCOUNT" isSelected={activeTab === '1'} />} key="1">
-          <AccountSettings
-            uploadedImage={uploadedImage}
-            handleImageUpload={handleImageUpload}
-            handImageReset={handImageReset}
-          />
-        </TabPane>
-        <TabPane tab={<TabLabel icon={UnlockOutlined} label="SECURITY" isSelected={activeTab === '2'} />} key="2">
-          <SecuritySettings />
-        </TabPane>
-      </Tabs>
-    </div>
+    <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={handleOnchange}>
+      <TabPane tab={<TabLabel icon={UserOutlined} label="ACCOUNT" isSelected={activeTab === '1'} />} key="1">
+        <AccountSettings />
+      </TabPane>
+      <TabPane tab={<TabLabel icon={UnlockOutlined} label="SECURITY" isSelected={activeTab === '2'} />} key="2">
+        <SecuritySettings />
+      </TabPane>
+    </Tabs>
   );
 };
 

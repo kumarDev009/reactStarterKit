@@ -14,16 +14,6 @@
 /* TODO: Need to review the actual issue */
 
 .header {
-  position: relative;
-
-  .custom-popover-content {
-    padding: 0;
-    position: absolute;
-    top: 1rem;
-    right: -5rem;
-    z-index: 1000;
-  }
-
   .ant-card-body {
     padding: 12px;
   }
