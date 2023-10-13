@@ -9,12 +9,29 @@ import AuthLayout from 'components/Auth';
 import Password from 'components/Password';
 import PhoneInputField from 'components/PhoneInput';
 import { LOGIN_PATH } from 'constants/route';
+import { useRegister } from 'services/query/auth';
 
 import './index.scss';
 
 const SignUp = () => {
+  const registerMutation = useRegister();
+
   const onFinish = values => {
     console.log('values', { ...values });
+    registerMutation.mutate({
+      email: values.email,
+      password: values.password,
+      firstName: 'kumar',
+      lastName: 'user',
+      phone: '123456789',
+      address1: '57',
+      address2: 'street name',
+      city: 'Kovilpatti',
+      state: 'TamilNadu',
+      country: values.country.split(' ')[0],
+      zip_code: '628501',
+      role: 'User'
+    });
   };
 
   const checkboxValidator = (_, value) => {
@@ -113,7 +130,7 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <Button block htmlType="submit">
+              <Button loading={registerMutation.isLoading} block htmlType="submit">
                 Sign Up
               </Button>
             </Col>
