@@ -14,7 +14,7 @@ const client = axios.create({
 const request = options => {
   if (hasStorage('authToken')) {
     const token = getStorage('authToken');
-    client.defaults.headers.common['authorization'] = token;
+    client.defaults.headers.common['authorization'] = `Bearer ${token}`;
   } else {
     delete client.defaults.headers.common['authorization'];
   }
