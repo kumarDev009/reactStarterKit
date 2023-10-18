@@ -12,6 +12,7 @@ import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
 import OpenNotification from 'components/Notification';
 import Card from 'components/Card';
+import Switch from 'components/Switch';
 import TextArea from 'components/TextArea';
 import ProgressBar from 'components/ProgressBar';
 
@@ -110,10 +111,12 @@ const KitchenSink = () => {
       </Card>
       <Card title={t('components.customRichEditor')} size="middle" className="border border-dark">
         <Form name="sample_form" onFinish={onFinish}>
-          <Editor name="description" />
-          <Button htmlType="submit" className="mt-5">
-            {t('buttons.submit')}
-          </Button>
+          <Space className="w-100" direction="vertical" size="middle">
+            <Editor name="description" />
+            <Button htmlType="submit" className="mt-3">
+              {t('buttons.submit')}
+            </Button>
+          </Space>
         </Form>
       </Card>
       <Card title={t('components.errorBoundary')} size="middle" className="border border-dark">
@@ -128,6 +131,14 @@ const KitchenSink = () => {
         </Button>
       </Card>
       <Card title={t('components.textArea')} size="middle" className="border border-dark">
+        <Form name="switch_form" onFinish={onFinish}>
+          <Switch name="toggle" valuePropName="checked" />
+          <Button htmlType="submit" className="mt-3">
+            Submit
+          </Button>
+        </Form>
+      </Card>
+      <Card title="TextArea" size="middle" className="border border-dark">
         <Form name="sample_textArea" onFinish={onFinish}>
           <TextArea name="textArea" showCount rows={6} maxLength={100} />
           <Button htmlType="submit">{t('buttons.submit')}</Button>
