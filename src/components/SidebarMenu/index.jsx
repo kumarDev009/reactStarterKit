@@ -6,12 +6,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 export default function SidebarMenu({
   menuItems = [],
   mode = 'inline',
+  collapsed = false,
   menuPlacement = 'right',
-  onCollapse = () => {},
   ...rest
 }) {
   const [selectedKeys, setSelectedKeys] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,7 +61,6 @@ export default function SidebarMenu({
       mode={mode}
       onClick={handleSidebarMenu}
       items={listOfItems}
-      onCollapse={setCollapsed}
       {...rest}
     />
   );
