@@ -9,6 +9,14 @@ const PhoneInputField = ({ phoneName = '', countryName = '', label = '', optionL
       e.preventDefault();
     }
   };
+  const filteredCountryList = (input, option) => {
+    try {
+      const [, , countryName] = option?.children;
+      return countryName?.toLowerCase().includes(input?.toLowerCase());
+    } catch (error) {
+      console.log('error', error); //TODO: Need to update the error boundary API
+    }
+  };
 
   return (
     <Input
@@ -20,10 +28,7 @@ const PhoneInputField = ({ phoneName = '', countryName = '', label = '', optionL
           showSearch
           isCustomValues={true}
           options={countryCodeList}
-          filterOption={(input, option) => {
-            const [, , countryName] = option.children;
-            return countryName.toLowerCase().includes(input.toLowerCase());
-          }}
+          filterOption={(input, option) => filteredCountryList(input, option)}
           noStyle
           popupClassName="w-auto"
           optionLabelProp={optionLabelProp}

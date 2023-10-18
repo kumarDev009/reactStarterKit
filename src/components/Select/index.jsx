@@ -13,7 +13,7 @@ const Select = ({
   options = [],
   ...rest
 }) => {
-  let countryLabelList;
+  let countryLabelList = null;
   let additionalProps = {};
   if (isCustomValues) {
     countryLabelList = options.map((country, index) => {
