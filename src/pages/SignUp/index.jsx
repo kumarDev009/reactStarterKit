@@ -112,7 +112,12 @@ const SignUp = () => {
           </Row>
           <Row>
             <Col span={24}>
-              <PhoneInputField phoneName="phoneNumber" countryName="country" label="Phone Number" />
+              <PhoneInputField
+                phoneName="phoneNumber"
+                countryName="country"
+                label="Phone Number"
+                optionLabelProp="label"
+              />
             </Col>
           </Row>
           <Row>

@@ -1,36 +1,22 @@
-import { useMemo } from 'react';
-
 import Select from 'components/Select';
 import Input from 'components/Input';
 import countryCodeList from 'constants/countryCodeList';
 import { phoneNumberValidation } from 'utils/phoneNumberValidation';
 
-import './index.scss';
-
-const PhoneInputField = ({ phoneName = '', countryName = '', label = '', optionLabelProp = 'value', ...rest }) => {
+const PhoneInputField = ({ phoneName = '', countryName = '', label = '', optionLabelProp = '', ...rest }) => {
   const handleKeyPress = e => {
     if (e.target.id.endsWith(`_${phoneName}`) && !/^[0-9]+$/.test(e.key)) {
       e.preventDefault();
     }
   };
-
-  const countries = useMemo(() => {
-    const updatedCountryList = countryCodeList.map(country => {
-      const getShortName = () => {
-        return (
-          <>
-            <span className="country-short-name">{country.short}</span>
-            {` ${country.label} +${country.phoneCode}`}
-          </>
-        );
-      };
-      return {
-        label: getShortName(),
-        value: `${country.short} +${country.phoneCode}`
-      };
-    });
-    return updatedCountryList;
-  }, []);
+  const filteredCountryList = (input, option) => {
+    try {
+      const [, , countryName] = option?.children;
+      return countryName?.toLowerCase().includes(input?.toLowerCase());
+    } catch (error) {
+      console.log('error', error); //TODO: Need to update the error boundary API
+    }
+  };
 
   return (
     <Input
@@ -40,7 +26,9 @@ const PhoneInputField = ({ phoneName = '', countryName = '', label = '', optionL
         <Select
           name={countryName}
           showSearch
-          options={countries}
+          isCustomValues={true}
+          options={countryCodeList}
+          filterOption={(input, option) => filteredCountryList(input, option)}
           noStyle
           popupClassName="w-auto"
           optionLabelProp={optionLabelProp}
