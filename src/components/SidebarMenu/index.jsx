@@ -3,8 +3,15 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { Menu as AntdMenu, Tooltip } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function Menu({ menuItems = [], mode = 'inline', collapsed = false, menuPlacement = 'right', ...rest }) {
+export default function SidebarMenu({
+  menuItems = [],
+  mode = 'inline',
+  menuPlacement = 'right',
+  onCollapse = () => {},
+  ...rest
+}) {
   const [selectedKeys, setSelectedKeys] = useState([]);
+  const [collapsed, setCollapsed] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,7 +41,7 @@ export default function Menu({ menuItems = [], mode = 'inline', collapsed = fals
   const constructMenuItems = useCallback(
     (items, isNested = false) => {
       return items.map(({ key, icon, label, submenu }) => {
-        const hasSubmenu = submenu && submenu?.length;
+        const hasSubmenu = submenu?.length;
         return {
           key,
           icon,
@@ -55,6 +62,7 @@ export default function Menu({ menuItems = [], mode = 'inline', collapsed = fals
       mode={mode}
       onClick={handleSidebarMenu}
       items={listOfItems}
+      onCollapse={setCollapsed}
       {...rest}
     />
   );
