@@ -1,16 +1,28 @@
-import { useMemo, useCallback } from 'react';
-import { Menu as AntdMenu, Tooltip } from 'antd';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 
-export default function Menu({
+import { Menu as AntdMenu, Tooltip } from 'antd';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+export default function SidebarMenu({
   menuItems = [],
   mode = 'inline',
-  theme = 'dark',
-  selectedKeys = [],
   collapsed = false,
-  onClick = () => {},
   menuPlacement = 'right',
   ...rest
 }) {
+  const [selectedKeys, setSelectedKeys] = useState([]);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setSelectedKeys([location.pathname]);
+  }, [location]);
+
+  const handleSidebarMenu = item => {
+    navigate(item.key);
+  };
+
   const renderMenuLabel = useCallback(
     (label, hasSubmenu) => {
       if (!collapsed && hasSubmenu) {
@@ -28,7 +40,7 @@ export default function Menu({
   const constructMenuItems = useCallback(
     (items, isNested = false) => {
       return items.map(({ key, icon, label, submenu }) => {
-        const hasSubmenu = submenu && submenu?.length;
+        const hasSubmenu = submenu?.length;
         return {
           key,
           icon,
@@ -46,9 +58,8 @@ export default function Menu({
     <AntdMenu
       key={collapsed ? 'collapsed' : 'expand'}
       selectedKeys={selectedKeys}
-      theme={theme}
       mode={mode}
-      onClick={onClick}
+      onClick={handleSidebarMenu}
       items={listOfItems}
       {...rest}
     />

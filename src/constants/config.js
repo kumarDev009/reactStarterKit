@@ -1,7 +1,7 @@
 import { notification, message } from 'antd';
 
 const notificationConfig = {
-  placement: 'top',
+  placement: 'topRight',
   top: 30,
   duration: 4
 };
