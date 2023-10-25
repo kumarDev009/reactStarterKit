@@ -1,9 +1,16 @@
-import { notification } from 'antd';
+import { notification as AntdNotification } from 'antd';
 
-const OpenNotification =
+const openNotification =
   type =>
   (message = '', description = '') => {
-    notification[type]({ message, description });
+    AntdNotification[type]({ message, description });
   };
 
-export default OpenNotification;
+const notification = {
+  info: openNotification('info'),
+  error: openNotification('error'),
+  success: openNotification('success'),
+  warn: openNotification('warning')
+};
+
+export default notification;

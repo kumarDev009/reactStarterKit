@@ -14,7 +14,7 @@ import Card from 'components/Card';
 import Switch from 'components/Switch';
 import TextArea from 'components/TextArea';
 import ProgressBar from 'components/ProgressBar';
-import { notification } from 'constants/notification';
+import notification from 'components/Notification';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
