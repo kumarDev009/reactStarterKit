@@ -10,11 +10,11 @@ import Loader from 'components/Loader';
 import Editor from 'components/Editor';
 import Title from 'components/Title';
 import ErrorBoundary from 'components/ErrorBoundary';
-import OpenNotification from 'components/Notification';
 import Card from 'components/Card';
 import Switch from 'components/Switch';
 import TextArea from 'components/TextArea';
 import ProgressBar from 'components/ProgressBar';
+import notification from 'components/Notification';
 
 const KitchenSink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +22,7 @@ const KitchenSink = () => {
   const [errorBoudary, setErrorBoudary] = useState([]);
   const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
 
-  const notificationTypes = ['success', 'error', 'info', 'warning'];
+  const notificationTypes = ['success', 'error', 'info', 'warn'];
 
   const { t } = useTranslation();
 
@@ -55,11 +55,7 @@ const KitchenSink = () => {
 
   const handleNotification = () => {
     const currentType = notificationTypes[currentTypeIndex];
-    OpenNotification({
-      type: currentType,
-      message: `This is a ${currentType} notification`,
-      description: `Details of the ${currentType} notification go here.`
-    });
+    notification[currentType](`This is a ${currentType} notification`);
     setCurrentTypeIndex(prev => (prev + 1) % notificationTypes.length);
   };
 
