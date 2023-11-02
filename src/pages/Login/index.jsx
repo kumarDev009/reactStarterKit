@@ -1,47 +1,30 @@
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Col, Form, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'components/Button';
 import CheckBox from 'components/CheckBox';
 import Input from 'components/Input';
 import Title from 'components/Title';
 import AuthLayout from 'components/Auth';
-import Link from 'components/Link';
-import VerifyUser from 'pages/VerifyUser';
+import VerifyUser from 'pages/SignUp/components/verifyUser';
 
-import { HOME_PATH, SIGNUP_PATH, FORGOT_PASSWORD_PATH } from 'constants/route';
+import { SIGNUP_PATH, FORGOT_PASSWORD_PATH } from 'constants/route';
 
-import { AuthContext } from 'context/authContext';
-import { setStorage } from 'services/storage';
 import { useLoginUser } from 'services/query/auth';
 
 import './index.scss';
 
 const Login = () => {
   const [emailToVerify, setEmailToVerify] = useState('');
-  const [initialFormValues, setInitialFormValues] = useState({});
 
-  const { setHasStorage } = useContext(AuthContext);
-  const { t } = useTranslation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const loginMutation = useLoginUser();
 
-  useEffect(() => {
-    if (loginMutation.isSuccess) {
-      const token = loginMutation.data?.data?.token;
-      if (token) {
-        setStorage('authToken', token);
-        setHasStorage(token);
-        navigate(HOME_PATH);
-      }
-    }
-  }, [loginMutation.isSuccess, loginMutation.data, navigate, setHasStorage]);
-
   const onFinish = values => {
-    setInitialFormValues(values);
     setEmailToVerify(values.email);
     loginMutation.mutate({
       email: values.email,
@@ -56,37 +39,39 @@ const Login = () => {
   return (
     <AuthLayout>
       {loginMutation?.isSuccess && !loginMutation.data?.data?.token ? (
-        <VerifyUser email={emailToVerify} onBackToRegister={handleBackToRegister} login />
+        <VerifyUser email={emailToVerify} onBackToRegister={handleBackToRegister} btnTitle="Back to Login" login />
       ) : (
         <>
           <Row justify="space-between">
             <Title level={3}>{t('login.login')}</Title>
           </Row>
-          <Form name="login_form" layout="vertical" initialValues={initialFormValues} onFinish={onFinish}>
+          <Form name="login_form" layout="vertical" onFinish={onFinish}>
             <Row>
               <Col span={24}>
                 <Input
                   name="email"
                   autoFocus={true}
                   label={t('labels.emailLabel')}
-                  rules={[{ required: true, message: 'Please enter your Email!' }]}
+                  rules={[
+                    { required: true, message: 'Please enter your Email!' },
+                    {
+                      type: 'email',
+                      message: 'The input is not valid E-mail!'
+                    }
+                  ]}
                 />
               </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <Input
-                  name="password"
-                  label={t('labels.passwordLabel')}
-                  type="password"
-                  placeholder="Password"
-                  rules={[{ required: true, message: 'Please enter your Password!' }]}
-                />
+                <Input name="password" label={t('labels.passwordLabel')} type="password" placeholder="Password" />
               </Col>
             </Row>
             <Row justify="space-between" className="align-items-baseline">
               <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
-              <Link href={FORGOT_PASSWORD_PATH}>{t('login.forgotPassword')}</Link>
+              <Button type="link" onClick={() => navigate(FORGOT_PASSWORD_PATH)}>
+                {t('login.forgotPassword')}
+              </Button>
             </Row>
             <Row>
               <Col span={24}>
@@ -95,8 +80,11 @@ const Login = () => {
                 </Button>
               </Col>
             </Row>
-            <Row justify="center" align={'center'} className="mb-2">
-              {t('login.dontHaveAccount')} &nbsp;<Link href={SIGNUP_PATH}>Register</Link>
+            <Row justify="center" align={'center'} className="mb-2 align-items-baseline">
+              {t('login.dontHaveAccount')}
+              <Button type="link" onClick={() => navigate(SIGNUP_PATH)}>
+                Register
+              </Button>
             </Row>
             <Row justify="center" align={'center'}>
               Version {process.env.REACT_APP_VERSION}

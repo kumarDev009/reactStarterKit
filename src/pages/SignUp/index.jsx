@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Col, Form, Row } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import Link from 'components/Link';
 import Title from 'components/Title';
@@ -11,7 +12,7 @@ import Password from 'components/Password';
 import PhoneInputField from 'components/PhoneInput';
 import { LOGIN_PATH } from 'constants/route';
 import { useRegister } from 'services/query/auth';
-import VerifyUser from 'pages/VerifyUser';
+import VerifyUser from './components/verifyUser';
 
 import './index.scss';
 
@@ -19,6 +20,7 @@ const SignUp = () => {
   const [verifyEmail, setVerifyEmail] = useState('');
   const [initialFormValues, setInitialFormValues] = useState({});
 
+  const navigate = useNavigate();
   const registerMutation = useRegister();
 
   const onFinish = values => {
@@ -56,7 +58,7 @@ const SignUp = () => {
   return (
     <AuthLayout>
       {registerMutation.isSuccess ? (
-        <VerifyUser email={verifyEmail} onBackToRegister={handleBackToRegister} />
+        <VerifyUser email={verifyEmail} onBackToRegister={handleBackToRegister} btnTitle="Back to Register" />
       ) : (
         <div className="sign-up-screen">
           <Row>
@@ -150,8 +152,11 @@ const SignUp = () => {
                 </Button>
               </Col>
             </Row>
-            <Row justify="center" align={'center'} className="mb-2">
-              Already have an account? &nbsp;<Link href={LOGIN_PATH}> Login </Link>
+            <Row justify="center" align={'center'} className="mb-2 align-items-baseline">
+              Already have an account?{' '}
+              <Button type="link" onClick={() => navigate(LOGIN_PATH)}>
+                Login
+              </Button>
             </Row>
             <Row justify="center" align={'center'}>
               Version {process.env.REACT_APP_VERSION}

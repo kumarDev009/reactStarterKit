@@ -50,7 +50,7 @@ export const columns = [
     key: 'country'
   },
   {
-    title: 'Zip_code',
+    title: 'Zip code',
     dataIndex: 'zip_code',
     key: 'zip_code'
   },
