@@ -33,7 +33,7 @@ export const useVerifyUser = () => {
       }
     },
     onError: error => {
-      notification.error(`Registration Failed : ${error.message}`);
+      notification.error(`Verification Failed : ${error.message}`);
     }
   });
 };

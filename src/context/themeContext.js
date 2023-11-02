@@ -1,9 +1,9 @@
 import { useState, useEffect, createContext } from 'react';
 import { notification as AntdNotification } from 'antd';
 
+import { setStorage, getStorage } from '../services/storage';
 import { DARK_THEME, LIGHT_THEME } from 'constants/theme';
 import { getThemeConfig } from 'constants/themeConfig';
-import { getStorage, setStorage } from 'services/storage';
 
 export const ThemeContext = createContext();
 
