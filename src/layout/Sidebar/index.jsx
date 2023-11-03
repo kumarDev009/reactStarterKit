@@ -1,53 +1,33 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import Menu from 'components/Menu';
 import { getSidebarMenu } from 'constants/header';
+import SidebarMenu from 'components/SidebarMenu';
+
 import './index.scss';
 
 const { Sider: AntdSider } = Layout;
 
-export default function CustomSidebar() {
+export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
-  const [currentMenu, setCurrentMenu] = useState([]);
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const { t } = useTranslation();
 
   const sidebarMenu = getSidebarMenu(t);
-
-  useEffect(() => {
-    setCurrentMenu([location.pathname]);
-  }, [location]);
-
-  const handleSidebarMenu = item => {
-    navigate(item.key);
-    setCurrentMenu([item.key]);
-  };
 
   return (
     <AntdSider
       collapsible
       collapsed={collapsed}
-      className="sidebar"
       breakpoint="lg"
+      className="sider"
       collapsedWidth="80"
       onBreakpoint={broken => {
         console.log(broken);
       }}
       onCollapse={setCollapsed}
     >
-      <Menu
-        collapsed={collapsed}
-        selectedKeys={currentMenu}
-        menuItems={sidebarMenu}
-        onClick={handleSidebarMenu}
-        menuPlacement="right"
-      />
+      <SidebarMenu menuItems={sidebarMenu} collapsed={collapsed} />
     </AntdSider>
   );
 }
