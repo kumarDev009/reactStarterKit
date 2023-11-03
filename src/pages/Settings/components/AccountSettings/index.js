@@ -1,7 +1,6 @@
 import { Avatar, Form, Card } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
-import Button from 'components/Button';
 import FormFields from '../FormFields';
 
 const accountFormItems = [
@@ -32,13 +31,7 @@ const AccountSettings = () => (
       </div>
     </div>
     <Form layout="vertical" className="mt-3">
-      <FormFields formItems={accountFormItems} size={12} />
-      <div className="d-flex align-items-center mt-3">
-        <Button className="btn">Save Changes</Button>
-        <Button type="default" className=" mx-3 input-height">
-          Reset
-        </Button>
-      </div>
+      <FormFields formItems={accountFormItems} size={12} gap={10} />
     </Form>
   </Card>
 );
