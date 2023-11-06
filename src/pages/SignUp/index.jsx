@@ -1,5 +1,5 @@
+import { Link as NavLink } from 'react-router-dom';
 import { Col, Form, Row } from 'antd';
-
 import Link from 'components/Link';
 import Title from 'components/Title';
 import Input from 'components/Input';
@@ -141,7 +141,11 @@ const SignUp = () => {
             </Col>
           </Row>
           <Row justify="center" align={'center'} className="mb-2">
-            Already have an account? &nbsp;<Link href={LOGIN_PATH}> Login </Link>
+            Already have an account? &nbsp;
+            <NavLink to={LOGIN_PATH} className="remove-border">
+              {' '}
+              Login{' '}
+            </NavLink>
           </Row>
           <Row justify="center" align={'center'}>
             Version {process.env.REACT_APP_VERSION}

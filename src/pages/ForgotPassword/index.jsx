@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { Link as NavLink } from 'react-router-dom';
 import { Form, Row, Col } from 'antd';
 
 import AuthLayout from 'components/Auth';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Title from 'components/Title';
-import Link from 'components/Link';
 import VerifyOtp from '../../components/VerifyOtp';
 import { LOGIN_PATH } from 'constants/route';
 import { emailRegex } from 'constants';
@@ -55,7 +55,9 @@ const ForgotPassword = () => {
             </Row>
             <Row>
               <Col>
-                <Link href={LOGIN_PATH}>Back to Login</Link>
+                <NavLink to={LOGIN_PATH} className="remove-border">
+                  Back to Login
+                </NavLink>
               </Col>
             </Row>
           </Form>

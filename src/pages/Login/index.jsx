@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as NavLink } from 'react-router-dom';
 import { Col, Form, Row } from 'antd';
 
 import Button from 'components/Button';
@@ -7,7 +7,6 @@ import CheckBox from 'components/CheckBox';
 import Input from 'components/Input';
 import Title from 'components/Title';
 import AuthLayout from 'components/Auth';
-import Link from 'components/Link';
 
 import { STATIC_LOGIN_CREDENTIALS } from 'constants/login';
 import { HOME_PATH, SIGNUP_PATH, FORGOT_PASSWORD_PATH } from 'constants/route';
@@ -69,7 +68,9 @@ const Login = () => {
         </Row>
         <Row justify="space-between">
           <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
-          <Link href={FORGOT_PASSWORD_PATH}>{t('login.forgotPassword')}</Link>
+          <NavLink to={FORGOT_PASSWORD_PATH} className="remove-border">
+            {t('login.forgotPassword')}
+          </NavLink>
         </Row>
         <Row>
           <Col span={24}>
@@ -79,7 +80,10 @@ const Login = () => {
           </Col>
         </Row>
         <Row justify="center" align={'center'} className="mb-2">
-          {t('login.dontHaveAccount')} &nbsp;<Link href={SIGNUP_PATH}>Register</Link>
+          {t('login.dontHaveAccount')} &nbsp;{' '}
+          <NavLink to={SIGNUP_PATH} className="remove-border">
+            Register
+          </NavLink>
         </Row>
         <Row justify="center" align={'center'}>
           Version {process.env.REACT_APP_VERSION}
