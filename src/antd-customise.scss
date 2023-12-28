@@ -21,4 +21,13 @@
     @extend .align-items-center;
     @extend .h-100;
   }
+  .ant-form-item {
+    @extend .mb-0;
+  }
+}
+
+.sider {
+  .ant-layout-sider-trigger {
+    @extend .bg-transparent;
+  }
 }
