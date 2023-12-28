@@ -68,7 +68,7 @@ const VerifyOtp = ({ otpVerification = () => {}, emailId = '' }) => {
           </Row>
           <Row>
             <Col span={24} className="mt-2">
-              <Button htmlType="submit" block disabled={!otpValue}>
+              <Button block htmlType="submit" disabled={!otpValue}>
                 Verify OTP
               </Button>
             </Col>

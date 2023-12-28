@@ -1,11 +1,18 @@
 import { useTranslation } from 'react-i18next';
+import { Row } from 'antd';
+
+import Content from 'components/Content';
+import Title from 'components/Title';
 
 const Home = () => {
   const { t } = useTranslation();
+
   return (
-    <div className="d-flex justify-content-between p-5">
-      <h3>{t('pages.welcomeHome')}</h3>
-    </div>
+    <Row>
+      <Content>
+        <Title>{t('pages.welcomeHome')}</Title>
+      </Content>
+    </Row>
   );
 };
 

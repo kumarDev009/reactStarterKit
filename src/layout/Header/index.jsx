@@ -2,12 +2,14 @@ import { useContext, useState } from 'react';
 import { Avatar, Layout, Popover, Select, Row, Col, Form } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18n';
 
 import { AuthContext } from 'context/authContext';
-import { getStorage, removeStorage, setStorage } from 'services/storage/index.js';
-import i18n from 'i18n';
+import { getStorage, setStorage, removeStorage } from 'services/storage/index.js';
 import { getMenuArr } from 'constants/Menu';
 import { EN_US, ES_ES } from 'constants/locale';
+import { ThemeContext } from 'context/themeContext';
+import Switch from 'components/Switch';
 
 const { Header } = Layout;
 const { Option } = Select;
@@ -15,9 +17,12 @@ const { Option } = Select;
 export default function CustomHeader() {
   const [locale, setLocale] = useState(() => getStorage('locale') || EN_US);
   const { setHasStorage } = useContext(AuthContext);
+
   const { t } = useTranslation();
 
   const menuArr = getMenuArr(t);
+
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   const headerProfileIcon = () => {
     return (
@@ -65,6 +70,16 @@ export default function CustomHeader() {
                 <Option value={EN_US}>English</Option>
                 <Option value={ES_ES}>Spanish</Option>
               </Select>
+            </Form>
+          </Col>
+          <Col>
+            <Form initialValues={{ theme: isDarkMode }} name="theme_form">
+              <Switch
+                name="theme"
+                checkedChildren={<span className="toggle-icon">🌜</span>}
+                unCheckedChildren={<span className="toggle-icon">🌞</span>}
+                onChange={toggleTheme}
+              />
             </Form>
           </Col>
           <Col>
