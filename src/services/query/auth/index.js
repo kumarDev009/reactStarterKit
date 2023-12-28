@@ -5,7 +5,14 @@ import { useContext } from 'react';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { loginUser, registerUser, verifyRegisteredUser } from 'services/api/auth';
+import {
+  loginUser,
+  registerUser,
+  verifyRegisteredUser,
+  generateOtp,
+  newPasswordUpdate,
+  verifyOtp
+} from 'services/api/auth';
 import { setStorage } from 'services/storage';
 
 export const useRegister = () => {
@@ -57,6 +64,45 @@ export const useLoginUser = () => {
     },
     onError: error => {
       notification.error(`Login Failed : ${error.message}`);
+    }
+  });
+};
+
+export const useGenerateOtp = () => {
+  return useMutation(generateOtp, {
+    onError: error => {
+      console.log('Error in generateOTP', error);
+    },
+    onSuccess: data => {
+      if (data) {
+        console.log('generate OTP Successfully', data);
+      }
+    }
+  });
+};
+
+export const useVerifyOtp = () => {
+  return useMutation(verifyOtp, {
+    onError: error => {
+      console.log('Error in otp verification', error);
+    },
+    onSuccess: data => {
+      if (data) {
+        console.log('OTP verification successfully', data);
+      }
+    }
+  });
+};
+
+export const usePasswordUpdate = () => {
+  return useMutation(newPasswordUpdate, {
+    onError: error => {
+      console.log('Error in new password update', error);
+    },
+    onSuccess: data => {
+      if (data) {
+        console.log('Successfully updated the new password', data);
+      }
     }
   });
 };

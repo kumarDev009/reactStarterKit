@@ -12,9 +12,10 @@
 // }
 /* TODO: Need to find an alternate way for the above theme issue. */
 /* TODO: Need to review the actual issue */
-
+.nivoChart,
 .header {
-  .anticon {
+  .anticon,
+  .ant-btn-icon {
     @extend .d-flex;
     @extend .justify-content-center;
     @extend .align-items-center;

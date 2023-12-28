@@ -6,26 +6,37 @@ import Title from 'components/Title';
 import Button from 'components/Button';
 import useTimer from 'customHooks/useTimer';
 import { OTP_RESEND_TIMER_IN_SECS } from 'constants/forgot_password';
+import { useGenerateOtp, useVerifyOtp } from 'services/query/auth';
+import { handleKeyPress } from 'utils';
 
-const VerifyOtp = ({ otpVerification = () => {} }) => {
+const VerifyOtp = ({ otpVerification = () => {}, emailId = '' }) => {
   const [otpValue, setOtpValue] = useState();
 
+  const generateOtpMutation = useGenerateOtp();
+  const verifyOtpMutation = useVerifyOtp();
   const { timeInSeconds, countDown, handleResetCounter } = useTimer(OTP_RESEND_TIMER_IN_SECS);
 
   const handleOtpValue = e => {
     setOtpValue(e.target.value);
   };
 
-  const handleKeyPress = e => {
-    if (!/^[0-9]+$/.test(e.key)) {
-      e.preventDefault();
-    }
+  const handleResendOtp = () => {
+    generateOtpMutation.mutate({ email: emailId });
+    handleResetCounter();
   };
+
   const onFinish = values => {
-    console.log('values', values);
-    if (otpValue.length >= 2) {
-      return otpVerification(true);
-    }
+    verifyOtpMutation.mutate(
+      {
+        email: emailId,
+        passwordResetCode: Number(values.Otp)
+      },
+      {
+        onSuccess: () => {
+          otpVerification(true);
+        }
+      }
+    );
   };
   return (
     <>
@@ -42,7 +53,7 @@ const VerifyOtp = ({ otpVerification = () => {} }) => {
               onChange={handleOtpValue}
               onKeyPress={e => handleKeyPress(e)}
               autoFocus={true}
-              min={1}
+              max={6}
             />
           </Col>
           <Row justify="space-between">
@@ -50,7 +61,7 @@ const VerifyOtp = ({ otpVerification = () => {} }) => {
               Time Remaining : <span style={{ color: '#f50206' }}>{countDown}</span>
             </Col>
             <Col>
-              <Button type="link" disabled={timeInSeconds > 0} onClick={handleResetCounter}>
+              <Button type="link" disabled={timeInSeconds > 0} onClick={handleResendOtp}>
                 Resend OTP
               </Button>
             </Col>
