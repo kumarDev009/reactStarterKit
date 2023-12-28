@@ -10,7 +10,8 @@ import AuthLayout from 'components/Auth';
 import Link from 'components/Link';
 
 import { STATIC_LOGIN_CREDENTIALS } from 'constants/login';
-import { HOME_PATH, SIGNUP_PATH, FORGOT_PASSWORD_PATH } from 'constants/route';
+
+import { SIGNUP_PATH, FORGOT_PASSWORD_PATH, DASHBOARD_PATH } from 'constants/route';
 
 import { AuthContext } from 'context/authContext';
 import { setStorage } from 'services/storage';
@@ -33,7 +34,7 @@ const Login = () => {
       let submittedData = JSON.stringify(values);
       setStorage('username', values.email);
       setHasStorage(submittedData);
-      navigate(HOME_PATH);
+      navigate(DASHBOARD_PATH, { replace: true });
     } else {
       alert('Enter the valid email and password');
     }
