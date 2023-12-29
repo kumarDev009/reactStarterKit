@@ -55,8 +55,8 @@ export default function CustomHeader() {
     if (path === LOGIN_PATH) {
       removeStorage('authToken');
       setHasStorage(false);
-      navigate(LOGIN_PATH);
-    } else navigate(path);
+    }
+    navigate(path);
   };
 
   const handleBellClick = () => {
