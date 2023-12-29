@@ -9,7 +9,13 @@ import ThemeProvider, { ThemeContext } from 'context/themeContext';
 import './index.scss';
 import './constants/config';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false //To disable refetching behavior when the component refocused(disable this behavior globally)
+    }
+  }
+});
 
 function App() {
   return (

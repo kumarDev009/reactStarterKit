@@ -6,7 +6,7 @@ export const INDEX_PATH = '/*';
 export const ACCESS_DENIED = '/no-access';
 export const WILD_CARD_PATH = '*';
 
-export const HOME_PATH = '/';
-export const DASHBOARD_PATH = '/dashboard';
+export const DASHBOARD_PATH = '/';
+export const HOME_PATH = '/home';
 export const SETTINGS_PATH = '/settings';
 export const KITCHEN_SINK_PATH = '/kitchen-sink';

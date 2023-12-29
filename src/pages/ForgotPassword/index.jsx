@@ -1,26 +1,34 @@
 import { useState } from 'react';
 import { Form, Row, Col } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import AuthLayout from 'components/Auth';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Title from 'components/Title';
-import Link from 'components/Link';
 import VerifyOtp from '../../components/VerifyOtp';
 import { LOGIN_PATH } from 'constants/route';
 import { emailRegex } from 'constants';
 
 import ResetPassword from 'pages/ResetPassword';
+import { useGenerateOtp } from 'services/query/auth';
 
 const ForgotPassword = () => {
-  const [otpStatus, setOtpStatus] = useState({ type: '', code: 0 });
   const [isSendOtp, setIsSendOtp] = useState(false);
   const [isVerify, setIsVerify] = useState(false);
+  const [emailId, setEmailId] = useState('');
+
+  const generateOtpMutation = useGenerateOtp();
+
+  const navigate = useNavigate();
 
   const onFinish = values => {
-    setOtpStatus({ type: 'success', code: 200 });
-    setIsSendOtp(true);
-    console.log('values', values);
+    setEmailId(values.email);
+    generateOtpMutation.mutate(values, {
+      onSuccess: () => {
+        setIsSendOtp(true);
+      }
+    });
   };
 
   return (
@@ -55,15 +63,17 @@ const ForgotPassword = () => {
             </Row>
             <Row>
               <Col>
-                <Link href={LOGIN_PATH}>Back to Login</Link>
+                <Button className="p-0" type="link" onClick={() => navigate(LOGIN_PATH)}>
+                  Back to Login
+                </Button>
               </Col>
             </Row>
           </Form>
         </>
-      ) : otpStatus.code === 200 && !isVerify ? ( //TODO: Need to update this condition when integrating the API.
-        <VerifyOtp otpVerification={setIsVerify} />
+      ) : isSendOtp && !isVerify ? (
+        <VerifyOtp otpVerification={setIsVerify} emailId={emailId} />
       ) : (
-        isVerify && <ResetPassword />
+        isVerify && <ResetPassword emailId={emailId} />
       )}
     </AuthLayout>
   );

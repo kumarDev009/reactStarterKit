@@ -4,13 +4,13 @@ import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined, Logi
 
 export const getSidebarMenu = t => [
   {
-    label: t('pages.home'),
-    key: HOME_PATH,
+    label: t('pages.dashboard'),
+    key: DASHBOARD_PATH,
     icon: <HomeOutlined />
   },
   {
-    label: t('pages.dashboard'),
-    key: DASHBOARD_PATH,
+    label: t('pages.home'),
+    key: HOME_PATH,
     icon: <DashboardOutlined />,
     submenu: [
       {
@@ -39,8 +39,8 @@ export const getSidebarMenu = t => [
       },
       {
         label: t('pages.sub-submenu4'),
-        key: '/Sub-submenu-4',
-        icon: <SettingOutlined />
+        key: '/home',
+        icon: <HomeOutlined />
       }
       // ... We can add more submenu menu here
     ]
