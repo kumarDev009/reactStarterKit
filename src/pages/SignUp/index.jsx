@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Col, Form, Row } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as NavLink } from 'react-router-dom';
 
 import Link from 'components/Link';
 import Title from 'components/Title';
@@ -153,10 +153,11 @@ const SignUp = () => {
               </Col>
             </Row>
             <Row justify="center" align={'center'} className="mb-2 align-items-baseline">
-              Already have an account?{' '}
-              <Button type="link" onClick={() => navigate(LOGIN_PATH)}>
-                Login
-              </Button>
+              Already have an account? &nbsp;
+              <NavLink to={LOGIN_PATH} className="remove-border">
+                {' '}
+                Login{' '}
+              </NavLink>
             </Row>
             <Row justify="center" align={'center'}>
               Version {process.env.REACT_APP_VERSION}

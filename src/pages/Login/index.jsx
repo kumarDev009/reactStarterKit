@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate, Link as NavLink } from 'react-router-dom';
 import { Col, Form, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -69,9 +70,9 @@ const Login = () => {
             </Row>
             <Row justify="space-between" className="align-items-baseline">
               <CheckBox name="remember_me" label={t('labels.keepMeSignedIn')} />
-              <Button type="link" onClick={() => navigate(FORGOT_PASSWORD_PATH)}>
+              <NavLink to={FORGOT_PASSWORD_PATH} className="remove-border">
                 {t('login.forgotPassword')}
-              </Button>
+              </NavLink>
             </Row>
             <Row>
               <Col span={24}>
@@ -81,10 +82,10 @@ const Login = () => {
               </Col>
             </Row>
             <Row justify="center" align={'center'} className="mb-2 align-items-baseline">
-              {t('login.dontHaveAccount')}
-              <Button type="link" onClick={() => navigate(SIGNUP_PATH)}>
+              {t('login.dontHaveAccount')} &nbsp;{' '}
+              <NavLink to={SIGNUP_PATH} className="remove-border">
                 Register
-              </Button>
+              </NavLink>
             </Row>
             <Row justify="center" align={'center'}>
               Version {process.env.REACT_APP_VERSION}

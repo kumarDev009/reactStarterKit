@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link as NavLink } from 'react-router-dom';
 import { Form, Row, Col } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
@@ -63,9 +64,9 @@ const ForgotPassword = () => {
             </Row>
             <Row>
               <Col>
-                <Button className="p-0" type="link" onClick={() => navigate(LOGIN_PATH)}>
+                <NavLink to={LOGIN_PATH} className="remove-border">
                   Back to Login
-                </Button>
+                </NavLink>
               </Col>
             </Row>
           </Form>

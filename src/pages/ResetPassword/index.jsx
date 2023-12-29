@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { Link as NavLink } from 'react-router-dom';
 
 import { Row, Col, Form } from 'antd';
 
 import Title from 'components/Title';
 import Input from 'components/Input';
 import Button from 'components/Button';
-import Link from 'components/Link';
 
 import { LOGIN_PATH } from 'constants/route';
 import Password from 'components/Password';
@@ -25,7 +25,10 @@ const ResetPassword = ({ emailId = '' }) => {
   return isSuccess ? (
     <>
       <p>Your Password has been updated Successfully!</p>
-      Login now? &nbsp; <Link href={LOGIN_PATH}>Login</Link>
+      Login now? &nbsp;{' '}
+      <NavLink to={LOGIN_PATH} className="remove-border">
+        Login
+      </NavLink>
     </>
   ) : (
     <>
