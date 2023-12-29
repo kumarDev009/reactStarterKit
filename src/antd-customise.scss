@@ -12,9 +12,21 @@
 // }
 /* TODO: Need to find an alternate way for the above theme issue. */
 /* TODO: Need to review the actual issue */
-
+.nivoChart,
 .header {
-  .anticon {
+  .ant-card-body {
+    padding: 12px;
+  }
+
+  .ant-divider {
+    margin: 0;
+  }
+}
+
+.header,
+.accountTab {
+  .anticon,
+  .ant-btn-icon {
     @extend .d-flex;
     @extend .justify-content-center;
     @extend .align-items-center;
@@ -29,4 +41,8 @@
   .ant-layout-sider-trigger {
     @extend .bg-transparent;
   }
+}
+
+.ant-tabs-ink-bar {
+  display: none;
 }

@@ -19,12 +19,12 @@ const Input = ({
   const renderInputField = type => {
     switch (type) {
       case 'password':
-        return <AntdInput.Password placeholder={placeholder} onChange={onChange} {...rest} />;
+        return <AntdInput.Password className={className} placeholder={placeholder} onChange={onChange} {...rest} />;
 
       default:
         return (
           <AntdInput
-            classNames={className}
+            className={className}
             onChange={onChange}
             autoFocus={autoFocus}
             min={min}

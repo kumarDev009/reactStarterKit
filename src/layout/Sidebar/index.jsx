@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Layout } from 'antd';
 import { useTranslation } from 'react-i18next';
 
+import { getSidebarMenu } from 'constants/header';
 import SidebarMenu from 'components/SidebarMenu';
-import { getSidebarMenu } from 'constants/Menu';
 
 import './index.scss';
 
