@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Col, Form, Row } from 'antd';
-import { useNavigate, Link as NavLink } from 'react-router-dom';
+import { Link as NavLink } from 'react-router-dom';
 
 import Link from 'components/Link';
 import Title from 'components/Title';
@@ -20,7 +20,6 @@ const SignUp = () => {
   const [verifyEmail, setVerifyEmail] = useState('');
   const [initialFormValues, setInitialFormValues] = useState({});
 
-  const navigate = useNavigate();
   const registerMutation = useRegister();
 
   const onFinish = values => {

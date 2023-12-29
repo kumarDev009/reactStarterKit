@@ -1,8 +1,7 @@
-import { useContext, useState } from 'react';
-import { useNavigate, Link as NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { Link as NavLink } from 'react-router-dom';
 import { Col, Form, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 
 import Button from 'components/Button';
 import CheckBox from 'components/CheckBox';
@@ -20,7 +19,6 @@ import './index.scss';
 const Login = () => {
   const [emailToVerify, setEmailToVerify] = useState('');
 
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const loginMutation = useLoginUser();

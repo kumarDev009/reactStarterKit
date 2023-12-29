@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link as NavLink } from 'react-router-dom';
 import { Form, Row, Col } from 'antd';
-import { useNavigate } from 'react-router-dom';
 
 import AuthLayout from 'components/Auth';
 import Button from 'components/Button';
@@ -20,8 +19,6 @@ const ForgotPassword = () => {
   const [emailId, setEmailId] = useState('');
 
   const generateOtpMutation = useGenerateOtp();
-
-  const navigate = useNavigate();
 
   const onFinish = values => {
     setEmailId(values.email);
