@@ -14,6 +14,17 @@
 /* TODO: Need to review the actual issue */
 .nivoChart,
 .header {
+  .ant-card-body {
+    padding: 12px;
+  }
+
+  .ant-divider {
+    margin: 0;
+  }
+}
+
+.header,
+.accountTab {
   .anticon,
   .ant-btn-icon {
     @extend .d-flex;
@@ -30,4 +41,8 @@
   .ant-layout-sider-trigger {
     @extend .bg-transparent;
   }
+}
+
+.ant-tabs-ink-bar {
+  display: none;
 }

@@ -1,6 +1,7 @@
 import { TwitterOutlined, GoogleOutlined, FacebookOutlined } from '@ant-design/icons';
 import { Bar, Line, Pie, Doughnut } from 'react-chartjs-2';
 
+// TODO: Revisit later for PR #50
 //Chart JS constants
 export const cards = [
   {

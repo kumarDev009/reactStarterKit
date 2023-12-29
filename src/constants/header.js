@@ -1,6 +1,6 @@
-import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
+import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH, LOGIN_PATH } from 'constants/route';
 
-import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined, LogoutOutlined } from '@ant-design/icons';
+import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined, LoginOutlined } from '@ant-design/icons';
 
 export const getSidebarMenu = t => [
   {
@@ -59,7 +59,28 @@ export const getSidebarMenu = t => [
 
 export const getMenuArr = t => [
   {
+    icon: <SettingOutlined />,
+    label: 'Settings',
+    path: SETTINGS_PATH
+  },
+  {
+    icon: <LoginOutlined />,
     label: t('labels.logOut'),
-    icon: LogoutOutlined
+    path: LOGIN_PATH
+  }
+];
+
+export const notifications = [
+  {
+    title: 'Congratulations, Flora!',
+    message: 'Your order has been placed successfully',
+    timestamp: 'Just now',
+    avatarColor: '#87d068'
+  },
+  {
+    title: 'Reminder for Meeting',
+    message: 'Your meeting with Alex starts in 30 minutes',
+    timestamp: '15 minutes ago',
+    avatarColor: '#ff4d4f'
   }
 ];
