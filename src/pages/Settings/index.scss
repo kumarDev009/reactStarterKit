@@ -1,0 +1,23 @@
+// TODO: Revisit later for padding, bgc and other styles
+.btn {
+  padding: 0.46875rem 1.375rem;
+  background-color: #1677ff;
+  color: #ffff;
+  font-weight: 500;
+  height: 2.5rem;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #1677ff;
+    color: #fff !important;
+  }
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.input-height {
+  height: 2.5rem !important;
+}

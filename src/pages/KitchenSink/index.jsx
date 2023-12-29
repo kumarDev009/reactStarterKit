@@ -14,6 +14,9 @@ import Card from 'components/Card';
 import Switch from 'components/Switch';
 import TextArea from 'components/TextArea';
 import ProgressBar from 'components/ProgressBar';
+import Table from 'components/Table';
+import { useGetAllUsers } from 'services/query/user';
+import { columns } from 'constants/userTableColumns';
 import notification from 'components/Notification';
 
 const KitchenSink = () => {
@@ -21,6 +24,8 @@ const KitchenSink = () => {
   const [loading, setLoading] = useState(false);
   const [errorBoudary, setErrorBoudary] = useState([]);
   const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
+
+  const { data: user, isLoading: userTableLoading } = useGetAllUsers();
 
   const notificationTypes = ['success', 'error', 'info', 'warn'];
 
@@ -138,6 +143,11 @@ const KitchenSink = () => {
         <Form name="sample_textArea" onFinish={onFinish}>
           <TextArea name="textArea" showCount rows={6} maxLength={100} />
           <Button htmlType="submit">{t('buttons.submit')}</Button>
+        </Form>
+      </Card>
+      <Card title={'Table'} size="middle" className="border border-dark">
+        <Form name="sample_table">
+          <Table dataSource={[user]} columns={columns} loading={userTableLoading} />
         </Form>
       </Card>
     </Space>
