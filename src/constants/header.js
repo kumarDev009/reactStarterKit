@@ -1,4 +1,4 @@
-import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH } from 'constants/route';
+import { HOME_PATH, DASHBOARD_PATH, SETTINGS_PATH, KITCHEN_SINK_PATH, LOGIN_PATH } from 'constants/route';
 
 import { HomeOutlined, DashboardOutlined, SettingOutlined, AndroidOutlined, LoginOutlined } from '@ant-design/icons';
 
@@ -61,12 +61,12 @@ export const getMenuArr = t => [
   {
     icon: <SettingOutlined />,
     label: 'Settings',
-    path: '/settings'
+    path: SETTINGS_PATH
   },
   {
     icon: <LoginOutlined />,
     label: t('labels.logOut'),
-    path: '/logout'
+    path: LOGIN_PATH
   }
 ];
 

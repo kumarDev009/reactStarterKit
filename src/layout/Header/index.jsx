@@ -13,6 +13,7 @@ import NotificationContent from './components/NotificationContent';
 import ProfilePopoverContent from './components/ProfilePopoverContent';
 import { getMenuArr, notifications } from 'constants/header';
 import Switch from 'components/Switch';
+import { LOGIN_PATH } from 'constants/route';
 
 const { Header } = Layout;
 const { Option } = Select;
@@ -51,10 +52,10 @@ export default function CustomHeader() {
   };
 
   const handleMenuClick = path => {
-    if (path === '/logout') {
+    if (path === LOGIN_PATH) {
       removeStorage('authToken');
       setHasStorage(false);
-      navigate('/login');
+      navigate(LOGIN_PATH);
     } else navigate(path);
   };
 
